@@ -50,13 +50,13 @@ export default function SignUp() {
 
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <img src={authBackdropUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-[0.56]" />
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <img src={authBackdropUrl} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.56]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,247,209,0.52)_0%,rgba(223,247,255,0.44)_42%,rgba(239,226,255,0.52)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,216,77,0.14),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(0,194,255,0.12),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(140,82,255,0.12),transparent_36%)]" />
       </div>
 
-      <div className="mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[0.98fr_1.02fr]">
+      <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[0.98fr_1.02fr]">
         <section className="order-1">
           <div className="relative rounded-[2.2rem] border-4 border-white/70 bg-white/60 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.08)] backdrop-blur-md">
             <img src={lessonTalkUrl} alt="David and Goliath Rockidz lesson discussion page" className="w-full rounded-[1.7rem] object-cover" />

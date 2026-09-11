@@ -41,13 +41,13 @@ export default function SignIn() {
 
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <img src={authBackdropUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-[0.56]" />
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <img src={authBackdropUrl} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.56]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(223,247,255,0.56)_0%,rgba(255,247,209,0.42)_45%,rgba(255,229,241,0.5)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_16%,rgba(0,194,255,0.12),transparent_30%),radial-gradient(circle_at_85%_22%,rgba(140,82,255,0.1),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(255,216,77,0.14),transparent_35%)]" />
       </div>
 
-      <div className="mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[1.02fr_0.98fr]">
+      <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[1.02fr_0.98fr]">
         <section className="order-2 rounded-[2rem] border-4 border-white/70 bg-white/78 p-6 shadow-[0_22px_65px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-8 lg:order-1">
           <span className="inline-flex rounded-full bg-[#7ce8ff] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#005f75]">
             Welcome back
