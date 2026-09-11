@@ -36,6 +36,7 @@ export default function Teach() {
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false)
   const [thumbnailUploadProgress, setThumbnailUploadProgress] = useState(0)
   const [selectedThumbnailFile, setSelectedThumbnailFile] = useState(null)
+  const isSubmitting = creating || savingCourseId === editingCourseId
 
   function loadCourses() {
     api.get('/api/courses/mine').then(setCourses).catch((err) => setError(err.message))
@@ -222,15 +223,17 @@ export default function Teach() {
                   }
                   e.target.value = ''
                 }}
-                disabled={uploadingThumbnail}
+                disabled={uploadingThumbnail || isSubmitting}
                 className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
-                  !uploadingThumbnail
+                  !uploadingThumbnail && !isSubmitting
                     ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
                     : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
                 }`}
               />
               <span className="mt-1 block text-xs text-[#7b6d8a]">
-                {uploadingThumbnail
+                {isSubmitting && selectedThumbnailFile && !uploadingThumbnail
+                  ? 'Preparing your draft and cover image upload…'
+                  : uploadingThumbnail
                   ? `Uploading and optimizing image… ${thumbnailUploadProgress}%`
                   : editingCourseId
                     ? 'Uploads are resized and converted to WebP before being stored.'
@@ -261,8 +264,8 @@ export default function Teach() {
             )}
             <button
               type="submit"
-              disabled={creating || savingCourseId === editingCourseId}
-              className="rounded-full bg-[linear-gradient(120deg,#00c2ff_0%,#8c52ff_58%,#ff6fb5_100%)] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_18px_34px_rgba(140,82,255,0.32)] ring-2 ring-white/80 transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_42px_rgba(140,82,255,0.38)] disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={isSubmitting}
+              className="cursor-pointer rounded-full bg-[linear-gradient(120deg,#00c2ff_0%,#8c52ff_58%,#ff6fb5_100%)] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_18px_34px_rgba(140,82,255,0.32)] ring-2 ring-white/80 transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_42px_rgba(140,82,255,0.38)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {editingCourseId
                 ? savingCourseId === editingCourseId
