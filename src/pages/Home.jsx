@@ -10,7 +10,7 @@ export default function Home() {
   const firstName = user?.displayName?.trim()?.split(/\s+/)?.[0] || 'friend'
 
   return (
-    <div className="relative isolate overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.84)_0%,rgba(255,247,209,0.78)_28%,rgba(255,214,234,0.62)_62%,rgba(223,247,255,0.78)_100%)]">
+    <div className="relative isolate min-h-[calc(100vh-89px)] overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.84)_0%,rgba(255,247,209,0.78)_28%,rgba(255,214,234,0.62)_62%,rgba(223,247,255,0.78)_100%)]">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <img
           src={heroBackgroundUrl}
