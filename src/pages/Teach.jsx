@@ -33,6 +33,7 @@ export default function Teach() {
   const [slugTouched, setSlugTouched] = useState(false)
   const [creating, setCreating] = useState(false)
   const [savingCourseId, setSavingCourseId] = useState(null)
+  const [uploadingThumbnail, setUploadingThumbnail] = useState(false)
 
   function loadCourses() {
     api.get('/api/courses/mine').then(setCourses).catch((err) => setError(err.message))
@@ -101,6 +102,26 @@ export default function Teach() {
     setShowCreate(true)
   }
 
+  async function handleThumbnailUpload(file) {
+    if (!file) return
+    if (!editingCourseId) {
+      setError('Create the activity draft first, then upload its cover image.')
+      return
+    }
+
+    setError(null)
+    setUploadingThumbnail(true)
+    try {
+      const uploaded = await api.upload(`/api/courses/${editingCourseId}/thumbnail`, file)
+      setForm((current) => ({ ...current, thumbnailUrl: uploaded.url }))
+      loadCourses()
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setUploadingThumbnail(false)
+    }
+  }
+
   return (
     <ThemedPage variant="teach">
       <div className="mx-auto max-w-4xl px-6 py-16">
@@ -154,6 +175,35 @@ export default function Teach() {
               />
             </label>
             <FormField label="Thumbnail URL (optional)" value={form.thumbnailUrl} onChange={(value) => setForm((current) => ({ ...current, thumbnailUrl: value }))} />
+            <label className="block">
+              <span className="text-sm font-semibold text-[#5b2b86]">Activity cover image</span>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                onChange={(e) => {
+                  const file = e.target.files?.[0]
+                  if (file) {
+                    handleThumbnailUpload(file)
+                  }
+                  e.target.value = ''
+                }}
+                disabled={!editingCourseId || uploadingThumbnail}
+                className="mt-1.5 block w-full rounded-2xl border-4 border-dashed border-white bg-white/80 px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:bg-[#00c2ff] file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white disabled:cursor-not-allowed disabled:opacity-60"
+              />
+              <span className="mt-1 block text-xs text-[#7b6d8a]">
+                {editingCourseId
+                  ? uploadingThumbnail
+                    ? 'Uploading and optimizing image…'
+                    : 'Uploads are resized and converted to WebP before being stored.'
+                  : 'Save the draft first, then upload an optimized cover image.'}
+              </span>
+            </label>
+            {form.thumbnailUrl && (
+              <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
+                <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Current cover image</p>
+                <img src={form.thumbnailUrl} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
+              </div>
+            )}
             <button
               type="submit"
               disabled={creating || savingCourseId === editingCourseId}
