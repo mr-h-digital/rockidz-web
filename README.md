@@ -65,13 +65,13 @@ use `VITE_API_BASE_URL=https://rockidz-api.rockmission.co.za`.
 
 ## Deploying to GitHub Pages
 
-This repo currently builds correctly for the GitHub Pages project-site URL:
+This repo is now configured for the custom domain:
 
 ```text
-https://mr-h-digital.github.io/rockidz-web/
+https://rockidz.rockmission.co.za
 ```
 
-`vite.config.js` uses `/rockidz-web/` in production so assets load correctly from the repository Pages path. Once the custom domain is ready, switch the production `base` back to `/`.
+`vite.config.js` uses `/` in production so assets load correctly from the custom domain root.
 
 1. Push this repo to GitHub.
 2. Set the production API URL for the build with either a GitHub Actions
@@ -85,9 +85,8 @@ https://mr-h-digital.github.io/rockidz-web/
 4. In the repo's GitHub Pages settings, set the source to the `gh-pages`
    branch. GitHub Pages will pick up `CNAME` automatically once it's on that
    branch (it's copied from `public/` into `dist/` at build time).
-5. If you later move to a custom subdomain, add a CNAME
-   record — `rockidz` → `<your-github-username>.github.io` — and then update
-   the Vite production base to `/`.
+5. Add a CNAME record — `rockidz` → `<your-github-username>.github.io` — and
+   keep the Vite production base at `/` for custom-domain hosting.
 6. On the Railway backend, add a CNAME too: `api` → the Railway-provided
    domain, and set `CORS_ALLOWED_ORIGINS=https://rockidz.rockmission.co.za` in
    Railway's environment variables (replacing the localhost-only default).
@@ -96,8 +95,8 @@ https://mr-h-digital.github.io/rockidz-web/
 
 Add a button/nav link on rockmission.co.za pointing to:
 
-```
-https://mr-h-digital.github.io/rockidz-web/activities/{slug}?action=enroll
+```text
+https://rockidz.rockmission.co.za/activities/{slug}?action=enroll
 ```
 
 If the visitor isn't signed in, `ProtectedRoute` and the redirect-after-auth
