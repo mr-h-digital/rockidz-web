@@ -189,8 +189,23 @@ export default function ActivityBuilder() {
 function ModuleEditor({ module, index, onChanged, onDelete }) {
   const [showAddLesson, setShowAddLesson] = useState(false)
   const [lessonForm, setLessonForm] = useState({ title: '', videoRef: '', durationSeconds: '' })
+  const [editingModule, setEditingModule] = useState(false)
+  const [moduleTitle, setModuleTitle] = useState(module.title)
+  const [editingLessonId, setEditingLessonId] = useState(null)
   const [adding, setAdding] = useState(false)
   const [error, setError] = useState(null)
+
+  async function handleUpdateModule(e) {
+    e.preventDefault()
+    try {
+      setError(null)
+      await api.patch(`/api/courses/${module.courseId}/modules/${module.id}`, { title: moduleTitle })
+      setEditingModule(false)
+      onChanged()
+    } catch (err) {
+      setError(err.message)
+    }
+  }
 
   async function handleAddLesson(e) {
     e.preventDefault()
@@ -222,25 +237,122 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
     }
   }
 
+  async function handleUpdateLesson(e, lessonId) {
+    e.preventDefault()
+    try {
+      setError(null)
+      await api.patch(`/api/modules/${module.id}/lessons/${lessonId}`, {
+        title: lessonForm.title,
+        videoProvider: 'YOUTUBE',
+        videoRef: lessonForm.videoRef,
+        durationSeconds: lessonForm.durationSeconds ? Number(lessonForm.durationSeconds) : null,
+      })
+      setEditingLessonId(null)
+      setLessonForm({ title: '', videoRef: '', durationSeconds: '' })
+      onChanged()
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
   return (
     <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Step {String(index + 1).padStart(2, '0')}</p>
-          <h3 className="mt-1 font-display text-2xl text-[#5b2b86]">{module.title}</h3>
+          {editingModule ? (
+            <form onSubmit={handleUpdateModule} className="mt-2 flex flex-col gap-2 sm:flex-row">
+              <input
+                value={moduleTitle}
+                onChange={(e) => setModuleTitle(e.target.value)}
+                className="flex-1 rounded-full border-4 border-white bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+              />
+              <button type="submit" className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white">
+                Save
+              </button>
+            </form>
+          ) : (
+            <h3 className="mt-1 font-display text-2xl text-[#5b2b86]">{module.title}</h3>
+          )}
         </div>
-        <button onClick={onDelete} className="text-xs font-black uppercase tracking-wide text-[#d0467a] hover:underline">
-          Delete
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => {
+              setEditingModule((value) => !value)
+              setModuleTitle(module.title)
+            }}
+            className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
+          >
+            {editingModule ? 'Cancel' : 'Edit'}
+          </button>
+          <button onClick={onDelete} className="text-xs font-black uppercase tracking-wide text-[#d0467a] hover:underline">
+            Delete
+          </button>
+        </div>
       </div>
 
       <ul className="mt-4 space-y-2">
         {module.lessons.map((lesson) => (
           <li key={lesson.id} className="flex flex-col gap-2 rounded-2xl bg-white px-3.5 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-            <span className="text-[#5b5872]">{lesson.title}</span>
-            <button onClick={() => handleDeleteLesson(lesson.id)} className="text-xs font-black uppercase tracking-wide text-[#d0467a] hover:underline">
-              Remove
-            </button>
+            {editingLessonId === lesson.id ? (
+              <form onSubmit={(e) => handleUpdateLesson(e, lesson.id)} className="flex w-full flex-col gap-2">
+                <input
+                  value={lessonForm.title}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, title: e.target.value }))}
+                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                />
+                <input
+                  value={lessonForm.videoRef}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, videoRef: e.target.value }))}
+                  placeholder="YouTube video ID"
+                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                />
+                <input
+                  type="number"
+                  value={lessonForm.durationSeconds}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, durationSeconds: e.target.value }))}
+                  placeholder="Duration in seconds"
+                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                />
+                <div className="flex items-center gap-3">
+                  <button type="submit" className="text-xs font-black uppercase tracking-wide text-[#00a8b5] hover:underline">
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditingLessonId(null)
+                      setLessonForm({ title: '', videoRef: '', durationSeconds: '' })
+                    }}
+                    className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <>
+                <span className="text-[#5b5872]">{lesson.title}</span>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => {
+                      setEditingLessonId(lesson.id)
+                      setLessonForm({
+                        title: lesson.title || '',
+                        videoRef: lesson.videoRef || '',
+                        durationSeconds: lesson.durationSeconds?.toString() || '',
+                      })
+                    }}
+                    className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
+                  >
+                    Edit
+                  </button>
+                  <button onClick={() => handleDeleteLesson(lesson.id)} className="text-xs font-black uppercase tracking-wide text-[#d0467a] hover:underline">
+                    Remove
+                  </button>
+                </div>
+              </>
+            )}
           </li>
         ))}
         {module.lessons.length === 0 && <p className="text-sm text-[#5b5872]">No activity steps yet.</p>}
