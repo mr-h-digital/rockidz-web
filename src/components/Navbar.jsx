@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-const logoUrl = `${import.meta.env.BASE_URL}rockidz-logo-premium-vector-style.png`
+const logoUrl = `${import.meta.env.BASE_URL}rockidz-logo-transparent-bg.png`
 
 export default function Navbar() {
   const { user, logout, isAdmin, isEducator } = useAuth()
@@ -23,7 +23,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-10 border-b border-rock-border bg-rock-bg/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <a href="https://rockmission.co.za" className="flex items-center gap-3 font-display text-xl leading-none tracking-wide text-[#5b2b86] sm:text-2xl" rel="noopener noreferrer">
-          <img src={logoUrl} alt="Rockidz" className="h-10 w-10 rounded-full object-cover shadow-md" />
+          <img src={logoUrl} alt="Rockidz" className="h-12 w-auto drop-shadow-[0_10px_20px_rgba(140,82,255,0.18)]" />
           <span>
             ROCK<span className="text-[#ff6fb5]">IDZ</span>{' '}
             <span className="hidden align-middle font-body text-[10px] font-black uppercase tracking-[0.2em] text-[#5b5872] sm:inline">
