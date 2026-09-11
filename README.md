@@ -74,17 +74,12 @@ https://rockidz.rockmission.co.za
 `vite.config.js` uses `/` in production so assets load correctly from the custom domain root.
 
 1. Push this repo to GitHub.
-2. Set the production API URL for the build with either a GitHub Actions
-   repository variable named `VITE_API_BASE_URL` or a local `.env.production`
-   file before running `npm run build`.
-3. Build and publish:
-   ```bash
-   npm run build
-   npm run deploy   # runs gh-pages -d dist, pushes dist/ to the gh-pages branch
-   ```
-4. In the repo's GitHub Pages settings, set the source to the `gh-pages`
-   branch. GitHub Pages will pick up `CNAME` automatically once it's on that
-   branch (it's copied from `public/` into `dist/` at build time).
+2. Set the production API URL in **GitHub → Settings → Secrets and variables →
+   Actions → Variables** as `VITE_API_BASE_URL`.
+3. In the repo's **Pages** settings, set the source to **GitHub Actions**.
+4. Push to `main`. The workflow in `.github/workflows/deploy-pages.yml` will
+   build and deploy the site, and `public/CNAME` will keep the custom domain on
+   each release.
 5. Add a CNAME record — `rockidz` → `<your-github-username>.github.io` — and
    keep the Vite production base at `/` for custom-domain hosting.
 6. On the Railway backend, add a CNAME too: `api` → the Railway-provided
