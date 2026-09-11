@@ -63,46 +63,60 @@ export const api = {
   put: (path, body, opts) => request(path, { ...opts, method: 'PUT', body }),
   patch: (path, body, opts) => request(path, { ...opts, method: 'PATCH', body }),
   del: (path, opts) => request(path, { ...opts, method: 'DELETE' }),
-  upload: async (path, file, fieldName = 'file') => {
+  upload: (path, file, fieldName = 'file', { onProgress } = {}) =>
+    new Promise((resolve, reject) => {
     const token = getToken()
     if (!token) {
       clearStoredAuth()
       window.dispatchEvent(new Event('rockidz-auth-invalid'))
-      throw new Error('Your session has expired. Please sign in again.')
+      reject(new Error('Your session has expired. Please sign in again.'))
+      return
     }
 
     const formData = new FormData()
     formData.append(fieldName, file)
 
-    const res = await fetch(`${API_BASE_URL}${path}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    })
+      const xhr = new XMLHttpRequest()
+      xhr.open('POST', `${API_BASE_URL}${path}`)
+      xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-    if (res.status === 204) return null
-
-    const data = await res.json().catch(() => null)
-
-    if (!res.ok) {
-      if (res.status === 401) {
-        clearStoredAuth()
-        window.dispatchEvent(new Event('rockidz-auth-invalid'))
-        throw new Error('Your session has expired. Please sign in again.')
+      xhr.upload.onprogress = (event) => {
+        if (!event.lengthComputable || !onProgress) return
+        onProgress(Math.round((event.loaded / event.total) * 100))
       }
 
-      const fieldErrors = data?.fieldErrors
-        ? Object.values(data.fieldErrors)
-            .filter(Boolean)
-            .join(' | ')
-        : ''
+      xhr.onerror = () => reject(new Error('Upload failed. Please try again.'))
 
-      const message = fieldErrors || data?.message || `Request failed (${res.status})`
-      throw new Error(message)
-    }
+      xhr.onload = () => {
+        const data = xhr.responseText ? JSON.parse(xhr.responseText) : null
 
-    return data
-  },
+        if (xhr.status === 204) {
+          resolve(null)
+          return
+        }
+
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve(data)
+          return
+        }
+
+        if (xhr.status === 401) {
+          clearStoredAuth()
+          window.dispatchEvent(new Event('rockidz-auth-invalid'))
+          reject(new Error('Your session has expired. Please sign in again.'))
+          return
+        }
+
+        const fieldErrors = data?.fieldErrors
+          ? Object.values(data.fieldErrors)
+              .filter(Boolean)
+              .join(' | ')
+          : ''
+
+        const message = fieldErrors || data?.message || `Request failed (${xhr.status})`
+        reject(new Error(message))
+      }
+
+      xhr.send(formData)
+    }),
 }

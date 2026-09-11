@@ -34,6 +34,7 @@ export default function Teach() {
   const [creating, setCreating] = useState(false)
   const [savingCourseId, setSavingCourseId] = useState(null)
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false)
+  const [thumbnailUploadProgress, setThumbnailUploadProgress] = useState(0)
   const [selectedThumbnailFile, setSelectedThumbnailFile] = useState(null)
 
   function loadCourses() {
@@ -53,7 +54,13 @@ export default function Teach() {
     try {
       const createdCourse = await api.post('/api/courses', buildCoursePayload(form))
       if (selectedThumbnailFile) {
-        await api.upload(`/api/courses/${createdCourse.id}/thumbnail`, selectedThumbnailFile)
+        setUploadingThumbnail(true)
+        setThumbnailUploadProgress(0)
+        await api.upload(`/api/courses/${createdCourse.id}/thumbnail`, selectedThumbnailFile, 'file', {
+          onProgress: setThumbnailUploadProgress,
+        })
+        setUploadingThumbnail(false)
+        setThumbnailUploadProgress(100)
       }
       setForm({ title: '', slug: '', description: '', thumbnailUrl: '' })
       setSlugTouched(false)
@@ -63,7 +70,9 @@ export default function Teach() {
     } catch (err) {
       setError(err.message)
     } finally {
+      setUploadingThumbnail(false)
       setCreating(false)
+      setThumbnailUploadProgress(0)
     }
   }
 
@@ -84,7 +93,13 @@ export default function Teach() {
     try {
       await api.patch(`/api/courses/${editingCourseId}`, buildCoursePayload(form))
       if (selectedThumbnailFile) {
-        await api.upload(`/api/courses/${editingCourseId}/thumbnail`, selectedThumbnailFile)
+        setUploadingThumbnail(true)
+        setThumbnailUploadProgress(0)
+        await api.upload(`/api/courses/${editingCourseId}/thumbnail`, selectedThumbnailFile, 'file', {
+          onProgress: setThumbnailUploadProgress,
+        })
+        setUploadingThumbnail(false)
+        setThumbnailUploadProgress(100)
       }
       setForm({ title: '', slug: '', description: '', thumbnailUrl: '' })
       setSlugTouched(false)
@@ -95,7 +110,9 @@ export default function Teach() {
     } catch (err) {
       setError(err.message)
     } finally {
+      setUploadingThumbnail(false)
       setSavingCourseId(null)
+      setThumbnailUploadProgress(0)
     }
   }
 
@@ -120,14 +137,19 @@ export default function Teach() {
 
     setError(null)
     setUploadingThumbnail(true)
+    setThumbnailUploadProgress(0)
     try {
-      const uploaded = await api.upload(`/api/courses/${editingCourseId}/thumbnail`, file)
+      const uploaded = await api.upload(`/api/courses/${editingCourseId}/thumbnail`, file, 'file', {
+        onProgress: setThumbnailUploadProgress,
+      })
       setForm((current) => ({ ...current, thumbnailUrl: uploaded.url }))
+      setSelectedThumbnailFile(null)
       loadCourses()
     } catch (err) {
       setError(err.message)
     } finally {
       setUploadingThumbnail(false)
+      setThumbnailUploadProgress(0)
     }
   }
 
@@ -209,13 +231,21 @@ export default function Teach() {
               />
               <span className="mt-1 block text-xs text-[#7b6d8a]">
                 {uploadingThumbnail
-                  ? 'Uploading and optimizing image…'
+                  ? `Uploading and optimizing image… ${thumbnailUploadProgress}%`
                   : editingCourseId
                     ? 'Uploads are resized and converted to WebP before being stored.'
                     : selectedThumbnailFile
                       ? 'Your selected image will upload automatically when you create the draft.'
                       : 'Optional. Choose an image now, or add one later.'}
               </span>
+              {uploadingThumbnail && (
+                <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/80">
+                  <div
+                    className="h-full rounded-full bg-[linear-gradient(90deg,#00c2ff_0%,#8c52ff_60%,#ffd84d_100%)] transition-[width] duration-200"
+                    style={{ width: `${thumbnailUploadProgress}%` }}
+                  />
+                </div>
+              )}
             </label>
             {form.thumbnailUrl && (
               <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
