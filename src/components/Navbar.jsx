@@ -50,7 +50,7 @@ export default function Navbar() {
               </Link>
               {isEducator && (
                 <Link to="/teach" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
-                  Leaders
+                  {isAdmin ? 'Content' : 'Leaders'}
                 </Link>
               )}
               {isAdmin && (
@@ -130,7 +130,7 @@ export default function Navbar() {
                 </Link>
                 {isEducator && (
                   <Link to="/teach" onClick={closeMenu} className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
-                    Leaders
+                    {isAdmin ? 'Content' : 'Leaders'}
                   </Link>
                 )}
                 {isAdmin && (
