@@ -262,7 +262,7 @@ export default function Teach() {
             <button
               type="submit"
               disabled={creating || savingCourseId === editingCourseId}
-              className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(0,194,255,0.28)] transition-transform hover:-translate-y-0.5 hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-full bg-[linear-gradient(120deg,#00c2ff_0%,#8c52ff_58%,#ff6fb5_100%)] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_18px_34px_rgba(140,82,255,0.32)] ring-2 ring-white/80 transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_42px_rgba(140,82,255,0.38)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {editingCourseId
                 ? savingCourseId === editingCourseId
