@@ -25,7 +25,7 @@ export default function Navbar() {
         <a href="https://rockmission.co.za" className="flex items-center gap-3 font-display text-xl leading-none tracking-wide text-[#5b2b86] sm:text-2xl" rel="noopener noreferrer">
           <img src={logoUrl} alt="Rockidz" className="h-12 w-auto drop-shadow-[0_10px_20px_rgba(140,82,255,0.18)]" />
           <span>
-            ROCK<span className="text-[#ff6fb5]">IDZ</span>{' '}
+            ROCK<span className="text-[#00a8b5]">IDZ</span>{' '}
             <span className="hidden align-middle font-body text-[10px] font-black uppercase tracking-[0.2em] text-[#5b5872] sm:inline">
               Kids Corner
             </span>
@@ -74,7 +74,7 @@ export default function Navbar() {
               </Link>
               <Link
                 to="/sign-up"
-                className="rounded-full bg-[#ff6fb5] px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_26px_rgba(255,111,181,0.25)] transition-opacity hover:opacity-90"
+                className="rounded-full bg-[#8c52ff] px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_26px_rgba(140,82,255,0.24)] transition-opacity hover:opacity-90"
               >
                 Join now
               </Link>
@@ -154,7 +154,7 @@ export default function Navbar() {
                 <Link
                   to="/sign-up"
                   onClick={closeMenu}
-                  className="rounded-full bg-[#ff6fb5] px-5 py-2 text-center text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_26px_rgba(255,111,181,0.25)] transition-opacity hover:opacity-90"
+                  className="rounded-full bg-[#8c52ff] px-5 py-2 text-center text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_26px_rgba(140,82,255,0.24)] transition-opacity hover:opacity-90"
                 >
                   Join now
                 </Link>

@@ -25,7 +25,7 @@ export default function Home() {
               </p>
             )}
 
-            <span className="inline-flex -rotate-3 items-center rounded-full bg-[#ff6fb5] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_24px_rgba(255,111,181,0.3)]">
+            <span className="inline-flex -rotate-3 items-center rounded-full bg-[#8c52ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_24px_rgba(140,82,255,0.26)]">
               Rockidz Kids Corner
             </span>
 
@@ -96,7 +96,7 @@ export default function Home() {
 function Stat({ num, label }) {
   return (
     <div>
-      <div className="font-display text-3xl leading-none text-[#ff6fb5]">{num}</div>
+      <div className="font-display text-3xl leading-none text-[#8c52ff]">{num}</div>
       <div className="mt-1 text-[11px] font-black uppercase tracking-wide text-[#5b5872]">{label}</div>
     </div>
   )

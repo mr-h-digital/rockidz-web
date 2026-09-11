@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import FormField from '../components/FormField'
 
 const authBackdropUrl = `${import.meta.env.BASE_URL}images/auth-bg-designer-59.png`
+const lessonTalkUrl = `${import.meta.env.BASE_URL}david-and-goliath-lesson-talk.png`
 
 export default function SignUp() {
   const { signup } = useAuth()
@@ -50,17 +51,40 @@ export default function SignUp() {
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <img src={authBackdropUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_16%,rgba(18,28,42,0.16),rgba(12,17,28,0.52)_60%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b1320]/28 via-[#0f1a2b]/40 to-[#101521]/56" />
+        <img src={authBackdropUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#fff7d1_0%,#dff7ff_42%,#efe2ff_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,216,77,0.2),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(0,194,255,0.16),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(140,82,255,0.18),transparent_36%)]" />
       </div>
 
-      <div className="mx-auto max-w-md px-6 py-20">
-        <div className="rounded-2xl border border-rock-border bg-[#0f1a2b]/58 p-6 backdrop-blur-md sm:p-8">
-          <h1 className="font-display text-5xl">Create your profile</h1>
-          <p className="mt-2 text-sm text-rock-muted">
-            Join Rockidz for colourful Bible stories, games, and joyful activities.
+      <div className="mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[0.98fr_1.02fr]">
+        <section className="order-1">
+          <div className="relative rounded-[2.2rem] border-4 border-white/70 bg-white/60 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.08)] backdrop-blur-md">
+            <img src={lessonTalkUrl} alt="David and Goliath Rockidz lesson discussion page" className="w-full rounded-[1.7rem] object-cover" />
+            <div className="absolute -left-3 top-8 rounded-2xl bg-[#00c2ff] px-4 py-3 text-white shadow-xl">
+              <div className="font-display text-3xl leading-none">+</div>
+              <div className="text-[10px] font-black uppercase tracking-[0.2em]">Join in</div>
+            </div>
+            <div className="absolute -right-3 bottom-8 rounded-2xl bg-[#8c52ff] px-4 py-3 text-white shadow-xl">
+              <div className="font-display text-3xl leading-none">✓</div>
+              <div className="text-[10px] font-black uppercase tracking-[0.2em]">Learn & play</div>
+            </div>
+          </div>
+        </section>
+
+        <section className="order-2 rounded-[2rem] border-4 border-white/70 bg-white/80 p-6 shadow-[0_22px_65px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-8">
+          <span className="inline-flex rounded-full bg-[#fff1a8] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">
+            Join Rockidz
+          </span>
+          <h1 className="mt-5 font-display text-5xl text-[#5b2b86] sm:text-6xl">Create your fun profile</h1>
+          <p className="mt-3 max-w-md text-base text-[#5b5872]">
+            Start your colourful Bible journey with stories, games, memory verses, and activity packs made for kids.
           </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <InfoCard title="Stories" tone="bg-[#dff7ff] text-[#007e8c]" />
+            <InfoCard title="Verses" tone="bg-[#fff1a8] text-[#8a4b00]" />
+            <InfoCard title="Rewards" tone="bg-[#efe2ff] text-[#6f33c7]" />
+          </div>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <FormField
@@ -85,7 +109,7 @@ export default function SignUp() {
               onChange={(v) => setForm({ ...form, password: v })}
               autoComplete="new-password"
               minLength={8}
-              hint="At least 8 chars, including upper/lowercase, number and symbol"
+              hint="Use 8+ characters with upper/lowercase, a number, and a symbol"
               allowReveal
               required
             />
@@ -99,25 +123,29 @@ export default function SignUp() {
               required
             />
 
-            {error && <p className="text-sm text-rock-ember">{error}</p>}
+            {error && <p className="rounded-2xl bg-[#ffe3ec] px-4 py-3 text-sm font-semibold text-[#c2376d]">{error}</p>}
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-full bg-grad-gold px-6 py-3.5 text-sm font-extrabold uppercase tracking-wide text-[#0b1220] hover:opacity-90 transition-opacity disabled:opacity-60"
+              className="w-full rounded-full bg-[linear-gradient(120deg,#00c2ff_0%,#8c52ff_50%,#ffd84d_100%)] px-6 py-3.5 text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(140,82,255,0.2)] transition-transform hover:-translate-y-0.5 disabled:opacity-60"
             >
-              {submitting ? 'Creating account…' : 'Create account'}
+              {submitting ? 'Creating account…' : 'Create my profile'}
             </button>
           </form>
 
-          <p className="mt-6 text-sm text-rock-muted">
+          <p className="mt-6 text-sm text-[#5b5872]">
             Already have a profile?{' '}
-            <Link to="/sign-in" className="text-rock-gold hover:underline">
+            <Link to="/sign-in" className="font-bold text-[#00a8b5] hover:underline">
               Sign in
             </Link>
           </p>
-        </div>
+        </section>
       </div>
     </div>
   )
+}
+
+function InfoCard({ title, tone }) {
+  return <div className={`rounded-[1.3rem] px-4 py-3 text-center text-xs font-black uppercase tracking-[0.16em] ${tone}`}>{title}</div>
 }
