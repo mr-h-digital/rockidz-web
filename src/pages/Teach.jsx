@@ -34,6 +34,7 @@ export default function Teach() {
   const [creating, setCreating] = useState(false)
   const [savingCourseId, setSavingCourseId] = useState(null)
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false)
+  const [selectedThumbnailFile, setSelectedThumbnailFile] = useState(null)
 
   function loadCourses() {
     api.get('/api/courses/mine').then(setCourses).catch((err) => setError(err.message))
@@ -50,10 +51,14 @@ export default function Teach() {
     setError(null)
     setCreating(true)
     try {
-      await api.post('/api/courses', buildCoursePayload(form))
+      const createdCourse = await api.post('/api/courses', buildCoursePayload(form))
+      if (selectedThumbnailFile) {
+        await api.upload(`/api/courses/${createdCourse.id}/thumbnail`, selectedThumbnailFile)
+      }
       setForm({ title: '', slug: '', description: '', thumbnailUrl: '' })
       setSlugTouched(false)
       setShowCreate(false)
+      setSelectedThumbnailFile(null)
       loadCourses()
     } catch (err) {
       setError(err.message)
@@ -78,10 +83,14 @@ export default function Teach() {
     setSavingCourseId(editingCourseId)
     try {
       await api.patch(`/api/courses/${editingCourseId}`, buildCoursePayload(form))
+      if (selectedThumbnailFile) {
+        await api.upload(`/api/courses/${editingCourseId}/thumbnail`, selectedThumbnailFile)
+      }
       setForm({ title: '', slug: '', description: '', thumbnailUrl: '' })
       setSlugTouched(false)
       setEditingCourseId(null)
       setShowCreate(false)
+      setSelectedThumbnailFile(null)
       loadCourses()
     } catch (err) {
       setError(err.message)
@@ -137,6 +146,7 @@ export default function Teach() {
                 setEditingCourseId(null)
                 setForm({ title: '', slug: '', description: '', thumbnailUrl: '' })
                 setSlugTouched(false)
+                setSelectedThumbnailFile(null)
                 return
               }
               setShowCreate(true)
@@ -183,29 +193,40 @@ export default function Teach() {
                 onChange={(e) => {
                   const file = e.target.files?.[0]
                   if (file) {
-                    handleThumbnailUpload(file)
+                    setSelectedThumbnailFile(file)
+                    if (editingCourseId) {
+                      handleThumbnailUpload(file)
+                    }
                   }
                   e.target.value = ''
                 }}
-                disabled={!editingCourseId || uploadingThumbnail}
+                disabled={uploadingThumbnail}
                 className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
-                  editingCourseId && !uploadingThumbnail
+                  !uploadingThumbnail
                     ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
                     : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
                 }`}
               />
               <span className="mt-1 block text-xs text-[#7b6d8a]">
-                {editingCourseId
-                  ? uploadingThumbnail
-                    ? 'Uploading and optimizing image…'
-                    : 'Uploads are resized and converted to WebP before being stored.'
-                  : 'Save the draft first, then upload an optimized cover image.'}
+                {uploadingThumbnail
+                  ? 'Uploading and optimizing image…'
+                  : editingCourseId
+                    ? 'Uploads are resized and converted to WebP before being stored.'
+                    : selectedThumbnailFile
+                      ? 'Your selected image will upload automatically when you create the draft.'
+                      : 'Optional. Choose an image now, or add one later.'}
               </span>
             </label>
             {form.thumbnailUrl && (
               <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
                 <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Current cover image</p>
                 <img src={form.thumbnailUrl} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
+              </div>
+            )}
+            {!form.thumbnailUrl && selectedThumbnailFile && (
+              <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
+                <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Selected cover image</p>
+                <p className="mt-3 text-sm text-[#5b5872]">{selectedThumbnailFile.name}</p>
               </div>
             )}
             <button
