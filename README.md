@@ -49,7 +49,7 @@ All tokens live in `tailwind.config.js`.
 ## Local development
 
 ```bash
-cp .env.example .env
+copy .env.example .env
 npm install
 npm run dev
 ```
@@ -58,6 +58,10 @@ Make sure the Spring Boot API is running locally (`http://localhost:8080` by
 default) and that `CORS_ALLOWED_ORIGINS` on the backend includes
 `http://localhost:5173` (Vite's default dev port) — it already does in the
 backend's `application.yml`.
+
+`src/api/client.js` already reads `VITE_API_BASE_URL`, so local development can
+use `.env` with `VITE_API_BASE_URL=http://localhost:8080` while production can
+use `VITE_API_BASE_URL=https://rockidz-api.rockmission.co.za`.
 
 ## Deploying to GitHub Pages
 
@@ -70,9 +74,9 @@ https://mr-h-digital.github.io/rockidz-web/
 `vite.config.js` uses `/rockidz-web/` in production so assets load correctly from the repository Pages path. Once the custom domain is ready, switch the production `base` back to `/`.
 
 1. Push this repo to GitHub.
-2. Set the production API URL for the build. Easiest: add a GitHub Actions
-   workflow (or a `.env.production` file, not committed with secrets) that
-   sets `VITE_API_BASE_URL=https://rockidz-api.rockmission.co.za` before `npm run build`.
+2. Set the production API URL for the build with either a GitHub Actions
+   repository variable named `VITE_API_BASE_URL` or a local `.env.production`
+   file before running `npm run build`.
 3. Build and publish:
    ```bash
    npm run build
