@@ -13,6 +13,17 @@ function slugify(text) {
     .replace(/-+/g, '-')
 }
 
+function buildCoursePayload(form) {
+  const thumbnailUrl = form.thumbnailUrl.trim()
+
+  return {
+    title: form.title.trim(),
+    slug: form.slug.trim(),
+    description: form.description.trim(),
+    thumbnailUrl: thumbnailUrl || null,
+  }
+}
+
 export default function Teach() {
   const [courses, setCourses] = useState(null)
   const [error, setError] = useState(null)
@@ -38,7 +49,7 @@ export default function Teach() {
     setError(null)
     setCreating(true)
     try {
-      await api.post('/api/courses', form)
+      await api.post('/api/courses', buildCoursePayload(form))
       setForm({ title: '', slug: '', description: '', thumbnailUrl: '' })
       setSlugTouched(false)
       setShowCreate(false)
@@ -65,7 +76,7 @@ export default function Teach() {
     setError(null)
     setSavingCourseId(editingCourseId)
     try {
-      await api.patch(`/api/courses/${editingCourseId}`, form)
+      await api.patch(`/api/courses/${editingCourseId}`, buildCoursePayload(form))
       setForm({ title: '', slug: '', description: '', thumbnailUrl: '' })
       setSlugTouched(false)
       setEditingCourseId(null)
