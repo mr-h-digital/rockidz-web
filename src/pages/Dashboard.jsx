@@ -17,85 +17,59 @@ export default function Dashboard() {
       .catch((err) => setError(err.message))
   }, [])
 
-  const coursesCompleted = enrollments?.filter((e) => e.status === 'COMPLETED').length ?? 0
-  const activeEnrollments = enrollments?.filter((e) => e.status !== 'COMPLETED') ?? []
+  const activitiesCompleted = enrollments?.filter((item) => item.status === 'COMPLETED').length ?? 0
+  const activeEnrollments = enrollments?.filter((item) => item.status !== 'COMPLETED') ?? []
   const nextUp = activeEnrollments[0] || null
   const recentActivity = buildRecentActivity(enrollments)
 
   return (
     <ThemedPage variant="dashboard">
       <div className="mx-auto max-w-5xl px-6 py-16">
-        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-rock-gold">
-          Welcome back, {user?.displayName?.split(' ')[0]}
-        </p>
-        <h1 className="mt-2 font-display text-5xl">Your learning path</h1>
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">Welcome back, {user?.displayName?.split(' ')[0]}</p>
+        <h1 className="mt-2 font-display text-5xl text-[#5b2b86]">Your fun faith journey</h1>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <QuickActionCard
-            title="Keep learning"
-            description="Jump back into the catalog and keep your momentum going."
-            ctaLabel="Browse courses"
-            to="/courses"
-          />
-
-          {isEducator && (
-            <QuickActionCard
-              title="Teach"
-              description="Manage your courses, publish content, and view learner progress."
-              ctaLabel="Open teach hub"
-              to="/teach"
-            />
-          )}
-
-          {isAdmin && (
-            <QuickActionCard
-              title="Admin"
-              description="Promote users, manage roles, and support your ministry team."
-              ctaLabel="Open admin"
-              to="/admin"
-            />
-          )}
+          <QuickActionCard title="Play again" description="Jump into more Bible activities, stories, and games." ctaLabel="Browse activities" to="/activities" />
+          {isEducator && <QuickActionCard title="Leader hub" description="Manage story packs, publish content, and view progress." ctaLabel="Open leader hub" to="/teach" />}
+          {isAdmin && <QuickActionCard title="Admin" description="Support leaders, manage access, and help the ministry team." ctaLabel="Open admin" to="/admin" />}
         </div>
 
         {enrollments && enrollments.length > 0 && (
           <div className="mt-6 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-2xl border border-rock-border bg-rock-panel p-5">
-              <p className="text-xs font-bold uppercase tracking-wide text-rock-gold">Continue where you left off</p>
+            <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Continue your adventure</p>
               {nextUp ? (
                 <>
-                  <h2 className="mt-2 font-display text-3xl">{nextUp.courseTitle}</h2>
-                  <p className="mt-2 text-sm text-rock-muted">Pick up your next lesson and keep your streak alive.</p>
+                  <h2 className="mt-2 font-display text-3xl text-[#5b2b86]">{nextUp.courseTitle}</h2>
+                  <p className="mt-2 text-sm text-[#5b5872]">Pick up your next activity and keep your badge trail growing.</p>
                   <div className="mt-4">
                     <ProgressPath completed={nextUp.completedLessons} total={nextUp.totalLessons} />
                   </div>
                   <Link
-                    to={`/courses/${nextUp.courseSlug}/learn`}
-                    className="mt-5 inline-block rounded-full bg-grad-gold px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-[#0b1220] transition-opacity hover:opacity-90"
+                    to={`/activities/${nextUp.courseSlug}/play`}
+                    className="mt-5 inline-block rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white"
                   >
                     Continue now
                   </Link>
                 </>
               ) : (
                 <>
-                  <h2 className="mt-2 font-display text-3xl">All current courses complete</h2>
-                  <p className="mt-2 text-sm text-rock-muted">Great momentum. Start a new path to keep growing.</p>
-                  <Link
-                    to="/courses"
-                    className="mt-5 inline-block rounded-full border-2 border-rock-gold px-6 py-3 text-xs font-bold uppercase tracking-wide transition-colors hover:bg-rock-gold/10"
-                  >
-                    Start another course
+                  <h2 className="mt-2 font-display text-3xl text-[#5b2b86]">You finished your current adventures</h2>
+                  <p className="mt-2 text-sm text-[#5b5872]">Amazing work. Pick a new Bible activity to keep learning.</p>
+                  <Link to="/activities" className="mt-5 inline-block rounded-full bg-[#ffd84d] px-6 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+                    Start another activity
                   </Link>
                 </>
               )}
             </div>
 
-            <div className="rounded-2xl border border-rock-border bg-rock-panel p-5">
-              <p className="text-xs font-bold uppercase tracking-wide text-rock-gold">Recent activity</p>
+            <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-[#ff6fb5]">Recent fun</p>
               <ul className="mt-3 space-y-3">
-                {recentActivity.map((item, idx) => (
-                  <li key={`${item.title}-${idx}`} className="rounded-xl border border-white/10 bg-white/[0.02] px-3.5 py-2.5">
-                    <p className="text-sm text-rock-cream">{item.title}</p>
-                    <p className="mt-1 text-xs text-rock-muted">{item.meta}</p>
+                {recentActivity.map((item, index) => (
+                  <li key={`${item.title}-${index}`} className="rounded-2xl bg-white px-4 py-3">
+                    <p className="text-sm font-semibold text-[#5b2b86]">{item.title}</p>
+                    <p className="mt-1 text-xs text-[#5b5872]">{item.meta}</p>
                   </li>
                 ))}
               </ul>
@@ -105,48 +79,37 @@ export default function Dashboard() {
 
         {enrollments && enrollments.length > 0 && (
           <div className="mt-6 flex gap-8">
-            <StatChip num={enrollments.length} label="Enrolled" />
-            <StatChip num={coursesCompleted} label="Completed" />
+            <StatChip num={enrollments.length} label="Joined" />
+            <StatChip num={activitiesCompleted} label="Completed" />
           </div>
         )}
 
-        {error && <p className="mt-8 text-sm text-rock-ember">{error}</p>}
+        {error && <p className="mt-8 text-sm text-[#d0467a]">{error}</p>}
 
         {enrollments && enrollments.length === 0 && (
-          <div className="mt-10 rounded-2xl border border-dashed border-rock-border p-10 text-center">
-            <p className="text-rock-muted">You haven't enrolled in a course yet.</p>
-            <Link
-              to="/courses"
-              className="mt-4 inline-block rounded-full bg-grad-gold px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-[#0b1220] hover:opacity-90 transition-opacity"
-            >
-              Browse courses
+          <div className="mt-10 rounded-[2rem] border-4 border-dashed border-white bg-white/50 p-10 text-center">
+            <p className="text-[#5b5872]">You haven&apos;t joined an activity yet.</p>
+            <Link to="/activities" className="mt-4 inline-block rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white">
+              Browse activities
             </Link>
           </div>
         )}
 
         {enrollments && enrollments.length > 0 && (
           <div className="mt-10 space-y-4">
-            {enrollments.map((e) => (
-              <div
-                key={e.enrollmentId}
-                className="flex items-center justify-between rounded-2xl border border-rock-border bg-rock-panel p-6"
-              >
+            {enrollments.map((item) => (
+              <div key={item.enrollmentId} className="flex items-center justify-between rounded-[2rem] border-4 border-white/70 bg-white/70 p-6">
                 <div>
-                  <h3 className="font-display text-2xl">{e.courseTitle}</h3>
+                  <h3 className="font-display text-2xl text-[#5b2b86]">{item.courseTitle}</h3>
                   <div className="mt-2">
-                    <ProgressPath completed={e.completedLessons} total={e.totalLessons} />
+                    <ProgressPath completed={item.completedLessons} total={item.totalLessons} />
                   </div>
                 </div>
 
-                {e.status === 'COMPLETED' ? (
-                  <span className="rounded-full bg-rock-gold/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-rock-goldlight">
-                    Completed
-                  </span>
+                {item.status === 'COMPLETED' ? (
+                  <span className="rounded-full bg-[#fff1a8] px-4 py-1.5 text-xs font-black uppercase tracking-wide text-[#8a4b00]">Completed</span>
                 ) : (
-                  <Link
-                    to={`/courses/${e.courseSlug}/learn`}
-                    className="rounded-full border-2 border-rock-gold px-5 py-2.5 text-xs font-bold uppercase tracking-wide hover:bg-rock-gold/10 transition-colors"
-                  >
+                  <Link to={`/activities/${item.courseSlug}/play`} className="rounded-full bg-[#ff6fb5] px-5 py-2.5 text-xs font-black uppercase tracking-wide text-white">
                     Continue
                   </Link>
                 )}
@@ -162,21 +125,18 @@ export default function Dashboard() {
 function StatChip({ num, label }) {
   return (
     <div>
-      <div className="font-display text-3xl leading-none text-rock-gold">{num}</div>
-      <div className="mt-1 text-[11px] uppercase tracking-wide text-rock-muted">{label}</div>
+      <div className="font-display text-3xl leading-none text-[#ff6fb5]">{num}</div>
+      <div className="mt-1 text-[11px] font-black uppercase tracking-wide text-[#5b5872]">{label}</div>
     </div>
   )
 }
 
 function QuickActionCard({ title, description, ctaLabel, to }) {
   return (
-    <div className="rounded-2xl border border-rock-border bg-rock-panel p-5">
-      <h2 className="font-display text-2xl">{title}</h2>
-      <p className="mt-2 text-sm text-rock-muted">{description}</p>
-      <Link
-        to={to}
-        className="mt-4 inline-block rounded-full border-2 border-rock-gold px-4 py-2 text-xs font-bold uppercase tracking-wide hover:bg-rock-gold/10 transition-colors"
-      >
+    <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
+      <h2 className="font-display text-2xl text-[#5b2b86]">{title}</h2>
+      <p className="mt-2 text-sm text-[#5b5872]">{description}</p>
+      <Link to={to} className="mt-4 inline-block rounded-full bg-[#ffd84d] px-4 py-2 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
         {ctaLabel}
       </Link>
     </div>
@@ -185,27 +145,18 @@ function QuickActionCard({ title, description, ctaLabel, to }) {
 
 function buildRecentActivity(enrollments) {
   if (!enrollments || enrollments.length === 0) {
-    return [
-      {
-        title: 'No activity yet',
-        meta: 'Enroll in a course to start your learning timeline.',
-      },
-    ]
+    return [{ title: 'No activity yet', meta: 'Join a Rockidz activity to begin your adventure.' }]
   }
 
-  const items = enrollments.slice(0, 4).map((e) => {
-    if (e.status === 'COMPLETED') {
-      return {
-        title: `Completed ${e.courseTitle}`,
-        meta: `${e.completedLessons}/${e.totalLessons} lessons finished`,
-      }
-    }
-
-    return {
-      title: `In progress: ${e.courseTitle}`,
-      meta: `${e.completedLessons}/${e.totalLessons} lessons completed`,
-    }
-  })
-
-  return items
+  return enrollments.slice(0, 4).map((item) =>
+    item.status === 'COMPLETED'
+      ? {
+          title: `Completed ${item.courseTitle}`,
+          meta: `${item.completedLessons}/${item.totalLessons} activity steps finished`,
+        }
+      : {
+          title: `In progress: ${item.courseTitle}`,
+          meta: `${item.completedLessons}/${item.totalLessons} activity steps completed`,
+        },
+  )
 }

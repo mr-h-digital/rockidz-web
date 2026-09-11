@@ -35,8 +35,8 @@ export default function SignUp() {
     setSubmitting(true)
     try {
       await signup(form.email.trim(), form.password, form.displayName.trim())
-      const redirect = sessionStorage.getItem('rm_redirect_after_auth')
-      sessionStorage.removeItem('rm_redirect_after_auth')
+      const redirect = sessionStorage.getItem('rockidz_redirect_after_auth')
+      sessionStorage.removeItem('rockidz_redirect_after_auth')
       navigate(redirect || '/dashboard')
     } catch (err) {
       setError(err.message)
@@ -62,7 +62,7 @@ export default function SignUp() {
         <div className="rounded-2xl border border-rock-border bg-[#0f1a2b]/58 p-6 backdrop-blur-md sm:p-8">
           <h1 className="font-display text-5xl">Create your profile</h1>
           <p className="mt-2 text-sm text-rock-muted">
-            Join Rock Mission's Bible study courses — free for the whole congregation.
+            Join Rockidz for colourful Bible stories, games, and joyful activities.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">

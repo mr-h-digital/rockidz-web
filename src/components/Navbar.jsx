@@ -20,62 +20,61 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-10 border-b border-rock-border bg-rock-bg/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-        <a
-          href="https://rockmission.co.za"
-          className="font-display text-xl leading-none tracking-wide sm:text-2xl"
-          rel="noopener noreferrer"
-        >
-          ROCK<span className="text-rock-gold">MISSION</span>{' '}
-          <span className="hidden align-middle font-body text-[10px] font-bold uppercase tracking-[0.2em] text-rock-muted sm:inline">
-            Bible Study
+        <a href="https://rockmission.co.za" className="flex items-center gap-3 font-display text-xl leading-none tracking-wide text-[#5b2b86] sm:text-2xl" rel="noopener noreferrer">
+          <img src="/rockidz-logo-premium-vector-style.png" alt="Rockidz" className="h-10 w-10 rounded-full object-cover shadow-md" />
+          <span>
+            ROCK<span className="text-[#ff6fb5]">IDZ</span>{' '}
+            <span className="hidden align-middle font-body text-[10px] font-black uppercase tracking-[0.2em] text-[#5b5872] sm:inline">
+              Kids Corner
+            </span>
           </span>
         </a>
 
         <nav className="hidden items-center gap-6 font-body text-sm md:flex">
-          <Link to="/" className="text-rock-muted hover:text-rock-gold transition-colors">
+          <Link to="/" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
             Home
           </Link>
-          <Link to="/courses" className="text-rock-muted hover:text-rock-gold transition-colors">
-            Courses
+          <Link to="/activities" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
+            Activities
           </Link>
 
           {user ? (
             <>
-              <Link to="/dashboard" className="text-rock-muted hover:text-rock-gold transition-colors">
-                My learning
+              <Link to="/dashboard" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
+                My fun
               </Link>
-              <Link to="/settings" className="text-rock-muted hover:text-rock-gold transition-colors">
+              <Link to="/settings" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
                 Settings
               </Link>
               {isEducator && (
-                <Link to="/teach" className="text-rock-muted hover:text-rock-gold transition-colors">
-                  Teach
+                <Link to="/teach" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
+                  Leaders
                 </Link>
               )}
               {isAdmin && (
-                <Link to="/admin" className="text-rock-muted hover:text-rock-gold transition-colors">
+                <Link to="/admin" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
                   Admin
                 </Link>
               )}
-              <span className="text-white/20">|</span>
-              <span className="text-rock-cream/80">{user.displayName}</span>
+              <span className="text-[#d9bfd1]">|</span>
+              <span className="text-[#5b2b86]">{user.displayName}</span>
               <button
                 onClick={handleLogout}
-                className="rounded-full border border-rock-border px-3 py-1.5 text-xs text-rock-cream transition-colors hover:border-rock-gold hover:text-rock-gold"
+                className="rounded-full border-2 border-white bg-white/70 px-3 py-1.5 text-xs font-bold text-[#5b2b86] transition-colors hover:border-[#ffd84d] hover:bg-[#fff6c8]"
               >
                 Sign out
               </button>
             </>
           ) : (
             <>
-              <Link to="/sign-in" className="text-rock-muted hover:text-rock-gold transition-colors">
+              <Link to="/sign-in" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
                 Sign in
               </Link>
               <Link
                 to="/sign-up"
-                className="rounded-full bg-grad-gold px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-[#0b1220] shadow-[0_10px_26px_rgba(32,227,207,0.28)] hover:opacity-90 transition-opacity"
+                className="rounded-full bg-[#ff6fb5] px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_26px_rgba(255,111,181,0.25)] transition-opacity hover:opacity-90"
               >
-                Get started
+                Join now
               </Link>
             </>
           )}
@@ -86,7 +85,7 @@ export default function Navbar() {
           aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-rock-border text-rock-cream md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border-2 border-white bg-white/70 text-[#5b2b86] md:hidden"
         >
           <span className="sr-only">Menu</span>
           <span className="flex w-5 flex-col gap-1.5">
@@ -104,11 +103,11 @@ export default function Navbar() {
       {menuOpen && (
         <nav className="border-t border-rock-border bg-rock-bg/95 md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 font-body text-sm sm:px-6">
-            <Link to="/" onClick={closeMenu} className="text-rock-muted hover:text-rock-gold transition-colors">
+            <Link to="/" onClick={closeMenu} className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
               Home
             </Link>
-            <Link to="/courses" onClick={closeMenu} className="text-rock-muted hover:text-rock-gold transition-colors">
-              Courses
+            <Link to="/activities" onClick={closeMenu} className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
+              Activities
             </Link>
 
             {user ? (
@@ -116,46 +115,46 @@ export default function Navbar() {
                 <Link
                   to="/dashboard"
                   onClick={closeMenu}
-                  className="text-rock-muted hover:text-rock-gold transition-colors"
+                  className="text-[#5b5872] transition-colors hover:text-[#00a8b5]"
                 >
-                  My learning
+                  My fun
                 </Link>
                 <Link
                   to="/settings"
                   onClick={closeMenu}
-                  className="text-rock-muted hover:text-rock-gold transition-colors"
+                  className="text-[#5b5872] transition-colors hover:text-[#00a8b5]"
                 >
                   Settings
                 </Link>
                 {isEducator && (
-                  <Link to="/teach" onClick={closeMenu} className="text-rock-muted hover:text-rock-gold transition-colors">
-                    Teach
+                  <Link to="/teach" onClick={closeMenu} className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
+                    Leaders
                   </Link>
                 )}
                 {isAdmin && (
-                  <Link to="/admin" onClick={closeMenu} className="text-rock-muted hover:text-rock-gold transition-colors">
+                  <Link to="/admin" onClick={closeMenu} className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
                     Admin
                   </Link>
                 )}
-                <span className="truncate text-xs uppercase tracking-wide text-rock-muted">{user.displayName}</span>
+                <span className="truncate text-xs font-black uppercase tracking-wide text-[#8f7f9d]">{user.displayName}</span>
                 <button
                   onClick={handleLogout}
-                  className="w-full rounded-full border border-rock-border px-3 py-2 text-left text-xs text-rock-cream transition-colors hover:border-rock-gold hover:text-rock-gold"
+                  className="w-full rounded-full border-2 border-white bg-white/70 px-3 py-2 text-left text-xs font-bold text-[#5b2b86] transition-colors hover:border-[#ffd84d] hover:bg-[#fff6c8]"
                 >
                   Sign out
                 </button>
               </>
             ) : (
               <>
-                <Link to="/sign-in" onClick={closeMenu} className="text-rock-muted hover:text-rock-gold transition-colors">
+                <Link to="/sign-in" onClick={closeMenu} className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
                   Sign in
                 </Link>
                 <Link
                   to="/sign-up"
                   onClick={closeMenu}
-                  className="rounded-full bg-grad-gold px-5 py-2 text-center text-xs font-extrabold uppercase tracking-wide text-[#0b1220] shadow-[0_10px_26px_rgba(32,227,207,0.28)] hover:opacity-90 transition-opacity"
+                  className="rounded-full bg-[#ff6fb5] px-5 py-2 text-center text-xs font-black uppercase tracking-wide text-white shadow-[0_10px_26px_rgba(255,111,181,0.25)] transition-opacity hover:opacity-90"
                 >
-                  Get started
+                  Join now
                 </Link>
               </>
             )}

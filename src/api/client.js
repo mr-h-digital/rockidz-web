@@ -1,14 +1,14 @@
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
-  (import.meta.env.PROD ? 'https://api.rockmission.co.za' : 'http://localhost:8080')
+  (import.meta.env.PROD ? 'https://rockidz-api.rockmission.co.za' : 'http://localhost:8080')
 
 function getToken() {
-  return localStorage.getItem('rm_token')
+  return localStorage.getItem('rockidz_token')
 }
 
 function clearStoredAuth() {
-  localStorage.removeItem('rm_token')
-  localStorage.removeItem('rm_user')
+  localStorage.removeItem('rockidz_token')
+  localStorage.removeItem('rockidz_user')
 }
 
 async function request(path, { method = 'GET', body, auth = true } = {}) {
@@ -19,13 +19,12 @@ async function request(path, { method = 'GET', body, auth = true } = {}) {
     const token = getToken()
     if (!token) {
       clearStoredAuth()
-      window.dispatchEvent(new Event('rm-auth-invalid'))
+      window.dispatchEvent(new Event('rockidz-auth-invalid'))
       throw new Error('Your session has expired. Please sign in again.')
     }
-    if (token) {
-      hadToken = true
-      headers.Authorization = `Bearer ${token}`
-    }
+
+    hadToken = true
+    headers.Authorization = `Bearer ${token}`
   }
 
   const res = await fetch(`${API_BASE_URL}${path}`, {
@@ -39,18 +38,15 @@ async function request(path, { method = 'GET', body, auth = true } = {}) {
   const data = await res.json().catch(() => null)
 
   if (!res.ok) {
-    // Matches the shape returned by GlobalExceptionHandler on the backend.
     const fieldErrors = data?.fieldErrors
       ? Object.values(data.fieldErrors)
           .filter(Boolean)
           .join(' | ')
       : ''
 
-    const shouldResetSession = auth && hadToken && res.status === 401
-
-    if (shouldResetSession) {
+    if (auth && hadToken && res.status === 401) {
       clearStoredAuth()
-      window.dispatchEvent(new Event('rm-auth-invalid'))
+      window.dispatchEvent(new Event('rockidz-auth-invalid'))
       throw new Error('Your session has expired. Please sign in again.')
     }
 

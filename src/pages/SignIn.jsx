@@ -26,8 +26,8 @@ export default function SignIn() {
     setSubmitting(true)
     try {
       await login(form.email.trim(), form.password)
-      const redirect = sessionStorage.getItem('rm_redirect_after_auth')
-      sessionStorage.removeItem('rm_redirect_after_auth')
+      const redirect = sessionStorage.getItem('rockidz_redirect_after_auth')
+      sessionStorage.removeItem('rockidz_redirect_after_auth')
       navigate(redirect || '/dashboard')
     } catch (err) {
       setError(err.message)
@@ -52,7 +52,7 @@ export default function SignIn() {
       <div className="mx-auto max-w-md px-6 py-20">
         <div className="rounded-2xl border border-rock-border bg-[#0f1a2b]/58 p-6 backdrop-blur-md sm:p-8">
           <h1 className="font-display text-5xl">Welcome back</h1>
-          <p className="mt-2 text-sm text-rock-muted">Sign in to continue your studies.</p>
+          <p className="mt-2 text-sm text-rock-muted">Sign in to continue the fun.</p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <FormField
@@ -93,7 +93,7 @@ export default function SignIn() {
           <p className="mt-6 text-sm text-rock-muted">
             New here?{' '}
             <Link to="/sign-up" className="text-rock-gold hover:underline">
-              Create a profile
+              Create a Rockidz profile
             </Link>
           </p>
         </div>

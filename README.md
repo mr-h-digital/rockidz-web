@@ -1,7 +1,7 @@
-# Rock Mission Ministries — Bible Study Learning Web App
+# Rock Mission Ministries — Kids Corner Learning Web App
 
 React (Vite) frontend for the Bible study learning platform, talking to the
-Spring Boot API (`rock-mission-learn-api`) on Railway.
+Spring Boot API (`rockidz-api`) on Railway.
 
 ## Design system
 
@@ -59,16 +59,16 @@ default) and that `CORS_ALLOWED_ORIGINS` on the backend includes
 `http://localhost:5173` (Vite's default dev port) — it already does in the
 backend's `application.yml`.
 
-## Deploying to GitHub Pages at learn.rockmission.co.za
+## Deploying to GitHub Pages at rockidz.rockmission.co.za
 
 This repo is set up for a **custom subdomain**, not a `github.io/repo-name`
 path — `vite.config.js` uses `base: '/'` and `public/CNAME` already contains
-`learn.rockmission.co.za`.
+`rockidz.rockmission.co.za`.
 
 1. Push this repo to GitHub.
 2. Set the production API URL for the build. Easiest: add a GitHub Actions
    workflow (or a `.env.production` file, not committed with secrets) that
-   sets `VITE_API_BASE_URL=https://api.rockmission.co.za` before `npm run build`.
+   sets `VITE_API_BASE_URL=https://rockidz-api.rockmission.co.za` before `npm run build`.
 3. Build and publish:
    ```bash
    npm run build
@@ -80,7 +80,7 @@ path — `vite.config.js` uses `base: '/'` and `public/CNAME` already contains
 5. On your DNS (Afrihost, where rockmission.co.za is hosted): add a CNAME
    record — `learn` → `<your-github-username>.github.io`.
 6. On the Railway backend, add a CNAME too: `api` → the Railway-provided
-   domain, and set `CORS_ALLOWED_ORIGINS=https://learn.rockmission.co.za` in
+   domain, and set `CORS_ALLOWED_ORIGINS=https://rockidz.rockmission.co.za` in
    Railway's environment variables (replacing the localhost-only default).
 
 ## Linking from the main ministry site
@@ -88,7 +88,7 @@ path — `vite.config.js` uses `base: '/'` and `public/CNAME` already contains
 Add a button/nav link on rockmission.co.za pointing to:
 
 ```
-https://learn.rockmission.co.za/courses/{slug}?action=enroll
+https://rockidz.rockmission.co.za/courses/{slug}?action=enroll
 ```
 
 If the visitor isn't signed in, `ProtectedRoute` and the redirect-after-auth

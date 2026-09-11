@@ -1,7 +1,7 @@
 /**
  * ProgressPath — the app's signature visual motif.
  * Renders progress through a course as a row of stepping stones, lighting
- * up teal (completed) with the current lesson marked in ember, rather than
+ * up bright blue (completed) with the current lesson marked in pink, rather than
  * a generic progress bar — a path being walked.
  */
 export default function ProgressPath({ completed, total, size = 'md' }) {
@@ -22,15 +22,15 @@ export default function ProgressPath({ completed, total, size = 'md' }) {
             key={i}
             className={`${dimension} rounded-full transition-colors duration-500 ${
               state === 'lit'
-                ? 'bg-rock-gold shadow-[0_0_8px_rgba(32,227,207,0.7)]'
+                ? 'bg-[#00c2ff] shadow-[0_0_8px_rgba(0,194,255,0.6)]'
                 : state === 'ember'
-                  ? 'bg-rock-ember shadow-[0_0_8px_rgba(255,47,165,0.6)]'
-                  : 'bg-white/10'
+                  ? 'bg-[#ff6fb5] shadow-[0_0_8px_rgba(255,111,181,0.6)]'
+                  : 'bg-white/60'
             }`}
           />
         ))}
       </div>
-      <span className="font-body text-xs text-rock-muted whitespace-nowrap">
+      <span className="whitespace-nowrap font-body text-xs text-[#5b5872]">
         {completed}/{total}
       </span>
     </div>

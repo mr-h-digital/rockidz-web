@@ -1,35 +1,35 @@
 const BACKDROPS = {
   catalog: {
-    imageUrl: '/images/courses-bg-designer-60.png',
-    gradientClass: 'bg-gradient-to-b from-[#0a1220]/26 via-[#111a2d]/46 to-[#0e1524]/68',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#fff7d1_0%,#ffd6ea_48%,#dff7ff_100%)]',
   },
   detail: {
-    imageUrl: 'https://images.pexels.com/photos/84613/pexels-photo-84613.jpeg?auto=compress&cs=tinysrgb&w=2200',
-    gradientClass: 'bg-gradient-to-b from-[#0b1320]/24 via-[#132039]/44 to-[#0f1728]/68',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#dff7ff_0%,#ffe1f0_55%,#fff7d1_100%)]',
   },
   player: {
-    imageUrl: 'https://images.pexels.com/photos/2106037/pexels-photo-2106037.jpeg?auto=compress&cs=tinysrgb&w=2200',
-    gradientClass: 'bg-gradient-to-b from-[#091121]/26 via-[#101f34]/48 to-[#0a1220]/74',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#fff7d1_0%,#dff7ff_45%,#ffd6ea_100%)]',
   },
   dashboard: {
-    imageUrl: '/images/dashboard-bg-designer-62.png',
-    gradientClass: 'bg-gradient-to-b from-[#0b1321]/24 via-[#10223a]/42 to-[#0f1627]/70',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#ffe1f0_0%,#fff7d1_55%,#dff7ff_100%)]',
   },
   teach: {
-    imageUrl: '/images/teach-bg-designer-65.png',
-    gradientClass: 'bg-gradient-to-b from-[#0b1320]/22 via-[#15253e]/44 to-[#0e1628]/68',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#dff7ff_0%,#fff7d1_60%,#ffe1f0_100%)]',
   },
   builder: {
-    imageUrl: 'https://images.pexels.com/photos/1166209/pexels-photo-1166209.jpeg?auto=compress&cs=tinysrgb&w=2200',
-    gradientClass: 'bg-gradient-to-b from-[#0a1220]/24 via-[#14253f]/44 to-[#101827]/70',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#fff7d1_0%,#dff7ff_50%,#ffe1f0_100%)]',
   },
   admin: {
-    imageUrl: '/images/admin-bg-designer-66.png',
-    gradientClass: 'bg-gradient-to-b from-[#0a1220]/28 via-[#162640]/50 to-[#0c1525]/72',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#ffe1f0_0%,#dff7ff_45%,#fff7d1_100%)]',
   },
   settings: {
-    imageUrl: '/images/settings-bg-designer-63.png',
-    gradientClass: 'bg-gradient-to-b from-[#0a1220]/24 via-[#12233a]/44 to-[#0d1626]/68',
+    imageUrl: '',
+    gradientClass: 'bg-[linear-gradient(180deg,#fff7d1_0%,#ffe1f0_55%,#dff7ff_100%)]',
   },
 }
 
@@ -39,17 +39,8 @@ export default function ThemedPage({ variant = 'catalog', children }) {
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <img
-          src={backdrop.imageUrl}
-          alt=""
-          aria-hidden="true"
-          onError={(e) => {
-            e.currentTarget.onerror = null
-            e.currentTarget.src = '/images/home-bg-designer-58.png'
-          }}
-          className="h-full w-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(38,232,215,0.15),rgba(9,16,28,0.52)_58%)]" />
+        {backdrop.imageUrl ? <img src={backdrop.imageUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center" /> : null}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(255,111,181,0.18),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(0,194,255,0.16),transparent_34%),radial-gradient(circle_at_bottom,rgba(255,216,77,0.22),transparent_28%)]" />
         <div className={`absolute inset-0 ${backdrop.gradientClass}`} />
       </div>
 

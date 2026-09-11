@@ -17,24 +17,20 @@ export default function Catalog() {
 
   return (
     <ThemedPage variant="catalog">
-      <Marquee items={['New season dropping soon', 'Pick your path', 'Learn at your pace']} />
+      <Marquee items={['Story time adventures', 'Printable fun sheets', 'Memory verses and mini games']} />
 
       <div className="mx-auto max-w-6xl px-6 py-16">
-        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-rock-gold">Courses</p>
-        <h1 className="mt-2 font-display text-5xl">Bible study, at your pace</h1>
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">Activities</p>
+        <h1 className="mt-2 font-display text-5xl text-[#5b2b86]">Choose a fun Bible adventure</h1>
 
-        {error && <p className="mt-6 text-sm text-rock-ember">Couldn't load courses: {error}</p>}
-
-        {!courses && !error && <p className="mt-10 text-sm text-rock-muted">Loading courses…</p>}
-
-        {courses && courses.length === 0 && (
-          <p className="mt-10 text-sm text-rock-muted">No courses are published yet — check back soon.</p>
-        )}
+        {error && <p className="mt-6 text-sm text-[#d0467a]">Couldn't load activities: {error}</p>}
+        {!courses && !error && <p className="mt-10 text-sm text-[#5b5872]">Loading activities…</p>}
+        {courses && courses.length === 0 && <p className="mt-10 text-sm text-[#5b5872]">New Rockidz activities are coming soon.</p>}
 
         {courses && courses.length > 0 && (
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((c) => (
-              <CourseCard key={c.id} course={c} />
+            {courses.map((course) => (
+              <CourseCard key={course.id} course={course} />
             ))}
           </div>
         )}

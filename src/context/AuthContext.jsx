@@ -8,25 +8,25 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   function clearAuthState() {
-    localStorage.removeItem('rm_token')
-    localStorage.removeItem('rm_user')
+    localStorage.removeItem('rockidz_token')
+    localStorage.removeItem('rockidz_user')
     setUser(null)
   }
 
   useEffect(() => {
-    const stored = localStorage.getItem('rm_user')
-    const token = localStorage.getItem('rm_token')
+    const stored = localStorage.getItem('rockidz_user')
+    const token = localStorage.getItem('rockidz_token')
 
     function handleInvalidAuth() {
       clearAuthState()
     }
 
-    window.addEventListener('rm-auth-invalid', handleInvalidAuth)
+    window.addEventListener('rockidz-auth-invalid', handleInvalidAuth)
 
     if (!stored || !token) {
       clearAuthState()
       setLoading(false)
-      return () => window.removeEventListener('rm-auth-invalid', handleInvalidAuth)
+      return () => window.removeEventListener('rockidz-auth-invalid', handleInvalidAuth)
     }
 
     api
@@ -44,23 +44,22 @@ export function AuthProvider({ children }) {
       })
       .finally(() => setLoading(false))
 
-    return () => window.removeEventListener('rm-auth-invalid', handleInvalidAuth)
+    return () => window.removeEventListener('rockidz-auth-invalid', handleInvalidAuth)
   }, [])
 
   function persistUser(userInfo) {
-    localStorage.setItem('rm_user', JSON.stringify(userInfo))
+    localStorage.setItem('rockidz_user', JSON.stringify(userInfo))
     setUser(userInfo)
   }
 
   function persist(authResponse) {
-    localStorage.setItem('rm_token', authResponse.token)
-    const userInfo = {
+    localStorage.setItem('rockidz_token', authResponse.token)
+    persistUser({
       id: authResponse.userId,
       email: authResponse.email,
       displayName: authResponse.displayName,
       role: authResponse.role,
-    }
-    persistUser(userInfo)
+    })
   }
 
   async function signup(email, password, displayName) {
@@ -75,13 +74,12 @@ export function AuthProvider({ children }) {
 
   async function updateProfile(payload) {
     const res = await api.patch('/api/users/me', payload)
-    const userInfo = {
+    persistUser({
       id: res.userId,
       email: res.email,
       displayName: res.displayName,
       role: res.role,
-    }
-    persistUser(userInfo)
+    })
     return res
   }
 

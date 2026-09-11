@@ -1,5 +1,5 @@
 {
-  "name": "rock-mission-learn-web",
+  "name": "rockidz-web",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist --repo https://github.com/mr-h-digital/rock-mission-learn-web.git"
+    "deploy": "gh-pages -d dist --repo https://github.com/mr-h-digital/rockidz-web.git"
   },
   "dependencies": {
     "react": "^18.3.1",

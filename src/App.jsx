@@ -3,13 +3,13 @@ import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import Catalog from './pages/Catalog'
-import CourseDetail from './pages/CourseDetail'
-import CoursePlayer from './pages/CoursePlayer'
+import ActivityDetail from './pages/ActivityDetail'
+import ActivityPlayer from './pages/ActivityPlayer'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
 import Teach from './pages/Teach'
-import CourseBuilder from './pages/CourseBuilder'
+import ActivityBuilder from './pages/ActivityBuilder'
 import AdminUsers from './pages/AdminUsers'
 import Settings from './pages/Settings'
 import ForgotPassword from './pages/ForgotPassword'
@@ -22,13 +22,13 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/courses" element={<Catalog />} />
-          <Route path="/courses/:slug" element={<CourseDetail />} />
+          <Route path="/activities" element={<Catalog />} />
+          <Route path="/activities/:slug" element={<ActivityDetail />} />
           <Route
-            path="/courses/:slug/learn"
+            path="/activities/:slug/play"
             element={
               <ProtectedRoute>
-                <CoursePlayer />
+                <ActivityPlayer />
               </ProtectedRoute>
             }
           />
@@ -64,7 +64,7 @@ export default function App() {
             path="/teach/:slug"
             element={
               <ProtectedRoute requireEducator>
-                <CourseBuilder />
+                <ActivityBuilder />
               </ProtectedRoute>
             }
           />
