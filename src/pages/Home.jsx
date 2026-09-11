@@ -3,6 +3,7 @@ import Marquee from '../components/Marquee'
 import { useAuth } from '../context/AuthContext'
 
 const programCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.webp`
+const heroBackgroundUrl = `${import.meta.env.BASE_URL}rockidz-web-background-image.webp`
 
 export default function Home() {
   const { user } = useAuth()
@@ -10,8 +11,10 @@ export default function Home() {
 
   return (
     <div className="relative isolate overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(255,105,180,0.24),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(80,180,255,0.28),transparent_30%),radial-gradient(circle_at_bottom,rgba(255,205,86,0.2),transparent_28%)]">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#fff7d1_0%,#ffd6ea_38%,#dff7ff_100%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <img src={heroBackgroundUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-[0.34]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.84)_0%,rgba(255,247,209,0.78)_28%,rgba(255,214,234,0.62)_62%,rgba(223,247,255,0.78)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,105,180,0.12),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(80,180,255,0.16),transparent_30%),radial-gradient(circle_at_bottom,rgba(255,205,86,0.14),transparent_28%)]" />
       </div>
 
       <Marquee items={['Bible fun for little hearts', 'Games, songs and story time', 'New Sunday activities every week']} />
