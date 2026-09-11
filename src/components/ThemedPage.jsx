@@ -38,7 +38,7 @@ export default function ThemedPage({ variant = 'catalog', children }) {
 
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         {backdrop.imageUrl ? <img src={backdrop.imageUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-[0.3]" /> : null}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(255,111,181,0.18),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(0,194,255,0.16),transparent_34%),radial-gradient(circle_at_bottom,rgba(255,216,77,0.22),transparent_28%)]" />
         <div className={`absolute inset-0 ${backdrop.gradientClass}`} />
