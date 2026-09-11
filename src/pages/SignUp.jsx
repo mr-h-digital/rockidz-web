@@ -3,8 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import FormField from '../components/FormField'
 
-const authBackdropUrl = `${import.meta.env.BASE_URL}images/auth-bg-designer-59.png`
-const lessonTalkUrl = `${import.meta.env.BASE_URL}david-and-goliath-lesson-talk.png`
+const authBackdropUrl = `${import.meta.env.BASE_URL}images/auth-bg-designer-59.webp`
+const lessonTalkUrl = `${import.meta.env.BASE_URL}david-and-goliath-lesson-talk.webp`
 
 export default function SignUp() {
   const { signup } = useAuth()

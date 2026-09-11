@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Marquee from '../components/Marquee'
 import { useAuth } from '../context/AuthContext'
 
-const programCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.png`
+const programCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.webp`
 
 export default function Home() {
   const { user } = useAuth()

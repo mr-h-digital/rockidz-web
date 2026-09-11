@@ -4,8 +4,8 @@ import { api } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import ThemedPage from '../components/ThemedPage'
 
-const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.png`
-const lessonTalkUrl = `${import.meta.env.BASE_URL}david-and-goliath-lesson-talk.png`
+const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.webp`
+const lessonTalkUrl = `${import.meta.env.BASE_URL}david-and-goliath-lesson-talk.webp`
 
 export default function ActivityDetail() {
   const { slug } = useParams()

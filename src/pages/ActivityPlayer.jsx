@@ -4,8 +4,8 @@ import { api } from '../api/client'
 import ProgressPath from '../components/ProgressPath'
 import ThemedPage from '../components/ThemedPage'
 
-const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.png`
-const colouringPageUrl = `${import.meta.env.BASE_URL}david-colour-in-page.png`
+const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.webp`
+const colouringPageUrl = `${import.meta.env.BASE_URL}david-colour-in-page.webp`
 
 const GAME_TEMPLATES = [
   {

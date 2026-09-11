@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const davidCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.png`
+const davidCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.webp`
 
 export default function CourseCard({ course }) {
   const useProvidedArtwork = course.slug === 'david-and-goliath'

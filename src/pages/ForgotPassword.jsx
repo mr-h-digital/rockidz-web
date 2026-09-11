@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 import FormField from '../components/FormField'
 
-const authBackdropUrl = `${import.meta.env.BASE_URL}images/auth-bg-designer-59.png`
+const authBackdropUrl = `${import.meta.env.BASE_URL}images/auth-bg-designer-59.webp`
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('')
