@@ -59,11 +59,15 @@ default) and that `CORS_ALLOWED_ORIGINS` on the backend includes
 `http://localhost:5173` (Vite's default dev port) — it already does in the
 backend's `application.yml`.
 
-## Deploying to GitHub Pages at rockidz.rockmission.co.za
+## Deploying to GitHub Pages
 
-This repo is set up for a **custom subdomain**, not a `github.io/repo-name`
-path — `vite.config.js` uses `base: '/'` and `public/CNAME` already contains
-`rockidz.rockmission.co.za`.
+This repo currently builds correctly for the GitHub Pages project-site URL:
+
+```text
+https://mr-h-digital.github.io/rockidz-web/
+```
+
+`vite.config.js` uses `/rockidz-web/` in production so assets load correctly from the repository Pages path. Once the custom domain is ready, switch the production `base` back to `/`.
 
 1. Push this repo to GitHub.
 2. Set the production API URL for the build. Easiest: add a GitHub Actions
@@ -77,8 +81,9 @@ path — `vite.config.js` uses `base: '/'` and `public/CNAME` already contains
 4. In the repo's GitHub Pages settings, set the source to the `gh-pages`
    branch. GitHub Pages will pick up `CNAME` automatically once it's on that
    branch (it's copied from `public/` into `dist/` at build time).
-5. On your DNS (Afrihost, where rockmission.co.za is hosted): add a CNAME
-   record — `learn` → `<your-github-username>.github.io`.
+5. If you later move to a custom subdomain, add a CNAME
+   record — `rockidz` → `<your-github-username>.github.io` — and then update
+   the Vite production base to `/`.
 6. On the Railway backend, add a CNAME too: `api` → the Railway-provided
    domain, and set `CORS_ALLOWED_ORIGINS=https://rockidz.rockmission.co.za` in
    Railway's environment variables (replacing the localhost-only default).
@@ -88,7 +93,7 @@ path — `vite.config.js` uses `base: '/'` and `public/CNAME` already contains
 Add a button/nav link on rockmission.co.za pointing to:
 
 ```
-https://rockidz.rockmission.co.za/courses/{slug}?action=enroll
+https://mr-h-digital.github.io/rockidz-web/activities/{slug}?action=enroll
 ```
 
 If the visitor isn't signed in, `ProtectedRoute` and the redirect-after-auth

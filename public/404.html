@@ -7,7 +7,9 @@
     <script>
       (function () {
         var path = window.location.pathname + window.location.search + window.location.hash;
-        var target = '/?redirect=' + encodeURIComponent(path);
+        var base = '/rockidz-web/';
+        var relativePath = path.indexOf(base) === 0 ? path.slice(base.length - 1) : path;
+        var target = base + '?redirect=' + encodeURIComponent(relativePath);
         window.location.replace(target);
       })();
     </script>
