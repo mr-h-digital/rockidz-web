@@ -51,9 +51,9 @@ export default function SignUp() {
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <img src={authBackdropUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-20" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#fff7d1_0%,#dff7ff_42%,#efe2ff_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,216,77,0.2),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(0,194,255,0.16),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(140,82,255,0.18),transparent_36%)]" />
+        <img src={authBackdropUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-[0.56]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,247,209,0.52)_0%,rgba(223,247,255,0.44)_42%,rgba(239,226,255,0.52)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,216,77,0.14),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(0,194,255,0.12),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(140,82,255,0.12),transparent_36%)]" />
       </div>
 
       <div className="mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[0.98fr_1.02fr]">
