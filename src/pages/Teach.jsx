@@ -188,7 +188,11 @@ export default function Teach() {
                   e.target.value = ''
                 }}
                 disabled={!editingCourseId || uploadingThumbnail}
-                className="mt-1.5 block w-full rounded-2xl border-4 border-dashed border-white bg-white/80 px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:bg-[#00c2ff] file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
+                  editingCourseId && !uploadingThumbnail
+                    ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
+                    : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
+                }`}
               />
               <span className="mt-1 block text-xs text-[#7b6d8a]">
                 {editingCourseId
@@ -207,7 +211,7 @@ export default function Teach() {
             <button
               type="submit"
               disabled={creating || savingCourseId === editingCourseId}
-              className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white disabled:opacity-60"
+              className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(0,194,255,0.28)] transition-transform hover:-translate-y-0.5 hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {editingCourseId
                 ? savingCourseId === editingCourseId
