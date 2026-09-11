@@ -1,7 +1,7 @@
 const BACKDROPS = {
   catalog: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#fff7d1_0%,#ffd6ea_48%,#dff7ff_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-activities-page-background-image.webp`,
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(255,247,209,0.76)_0%,rgba(255,214,234,0.68)_48%,rgba(223,247,255,0.78)_100%)]',
   },
   detail: {
     imageUrl: '',
@@ -39,7 +39,7 @@ export default function ThemedPage({ variant = 'catalog', children }) {
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        {backdrop.imageUrl ? <img src={backdrop.imageUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center" /> : null}
+        {backdrop.imageUrl ? <img src={backdrop.imageUrl} alt="" aria-hidden="true" className="h-full w-full object-cover object-center opacity-[0.3]" /> : null}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(255,111,181,0.18),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(0,194,255,0.16),transparent_34%),radial-gradient(circle_at_bottom,rgba(255,216,77,0.22),transparent_28%)]" />
         <div className={`absolute inset-0 ${backdrop.gradientClass}`} />
       </div>
