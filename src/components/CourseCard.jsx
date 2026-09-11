@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 
+const davidCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.png`
+
 export default function CourseCard({ course }) {
+  const useProvidedArtwork = course.slug === 'david-and-goliath'
+
   return (
     <Link
       to={`/activities/${course.slug}`}
@@ -12,6 +16,8 @@ export default function CourseCard({ course }) {
         </div>
         {course.thumbnailUrl ? (
           <img src={course.thumbnailUrl} alt="" className="relative z-[1] h-full w-full object-cover" />
+        ) : useProvidedArtwork ? (
+          <img src={davidCoverUrl} alt="" className="relative z-[1] h-full w-full object-cover" />
         ) : (
           <span className="relative z-[1] text-6xl">{emojiForCourse(course.title)}</span>
         )}

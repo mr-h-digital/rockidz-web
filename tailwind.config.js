@@ -5,16 +5,20 @@ export default {
     extend: {
       colors: {
         rock: {
-          bg: '#101521',
-          panel: '#18263a',
-          panel2: '#223146',
-          border: 'rgba(120, 244, 233, 0.2)',
-          gold: '#20e3cf',
-          goldlight: '#9af9f2',
-          ember: '#ff2fa5',
-          emberlight: '#ff8fd0',
-          cream: '#f7fbff',
-          muted: 'rgba(222, 241, 255, 0.76)',
+          bg: '#fff8ef',
+          panel: '#ffffff',
+          panel2: '#fff4fb',
+          border: 'rgba(255, 111, 181, 0.2)',
+          gold: '#00c2ff',
+          goldlight: '#7ce8ff',
+          ember: '#ff6fb5',
+          emberlight: '#ff9fce',
+          cream: '#5b2b86',
+          muted: 'rgba(91, 88, 114, 0.88)',
+          yellow: '#ffd84d',
+          lime: '#c4f000',
+          violet: '#8c52ff',
+          coral: '#ff8a5b',
         },
       },
       fontFamily: {
@@ -23,9 +27,10 @@ export default {
         italic: ['"Playfair Display"', 'serif'],
       },
       backgroundImage: {
-        'grad-gold': 'linear-gradient(120deg, #20e3cf 0%, #30b7f2 50%, #ff2fa5 100%)',
+        'grad-gold': 'linear-gradient(120deg, #00c2ff 0%, #8c52ff 35%, #ff6fb5 65%, #ffd84d 100%)',
+        'grad-rainbow-soft': 'linear-gradient(135deg, rgba(0,194,255,0.18) 0%, rgba(140,82,255,0.14) 28%, rgba(255,111,181,0.18) 54%, rgba(255,216,77,0.2) 100%)',
         'hero-radial':
-          'radial-gradient(circle at 18% 12%, rgba(255,47,165,0.22) 0%, transparent 44%), radial-gradient(circle at 84% 24%, rgba(32,227,207,0.26) 0%, transparent 48%), radial-gradient(circle at 48% 92%, rgba(48,183,242,0.16) 0%, transparent 46%)',
+          'radial-gradient(circle at 18% 12%, rgba(255,111,181,0.22) 0%, transparent 44%), radial-gradient(circle at 84% 24%, rgba(0,194,255,0.22) 0%, transparent 48%), radial-gradient(circle at 52% 88%, rgba(255,216,77,0.18) 0%, transparent 44%), radial-gradient(circle at 66% 42%, rgba(140,82,255,0.14) 0%, transparent 40%)',
       },
     },
   },

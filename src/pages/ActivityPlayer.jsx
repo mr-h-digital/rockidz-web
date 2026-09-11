@@ -4,6 +4,9 @@ import { api } from '../api/client'
 import ProgressPath from '../components/ProgressPath'
 import ThemedPage from '../components/ThemedPage'
 
+const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.png`
+const colouringPageUrl = `${import.meta.env.BASE_URL}david-colour-in-page.png`
+
 const GAME_TEMPLATES = [
   {
     title: 'Memory verse puzzle',
@@ -99,11 +102,17 @@ export default function ActivityPlayer() {
                     God helps us be brave, kind, and full of faith. Read the story clue below, then play the mini game.
                   </p>
 
-                  <div className="mt-6 rounded-[1.5rem] bg-[linear-gradient(180deg,#76e4ff_0%,#ffd6ea_55%,#fff1a8_100%)] p-6">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">Story clue</p>
-                    <p className="mt-3 text-lg font-semibold text-[#5b2b86]">
-                      David trusted God more than he feared the giant. He knew the Lord would help him.
-                    </p>
+                  <div className="mt-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+                    <img src={storyPosterUrl} alt="David and Goliath Bible story sheet" className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg" />
+                    <div className="rounded-[1.5rem] bg-[linear-gradient(180deg,#76e4ff_0%,#ffd6ea_55%,#fff1a8_100%)] p-6">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">Story clue</p>
+                      <p className="mt-3 text-lg font-semibold text-[#5b2b86]">
+                        David trusted God more than he feared the giant. He knew the Lord would help him.
+                      </p>
+                      <p className="mt-4 text-sm text-[#5b5872]">
+                        Key verse: “The battle is the Lord&apos;s.” When big things feel scary, God gives us courage.
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -135,6 +144,11 @@ export default function ActivityPlayer() {
                   >
                     {progressByLesson[activeLesson.id] ? 'Activity complete' : 'Mark this activity complete'}
                   </button>
+
+                  <div className="mt-6 rounded-[1.5rem] bg-white p-4">
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">Bonus colouring page</p>
+                    <img src={colouringPageUrl} alt="David colouring page for kids" className="mt-3 w-full rounded-[1.25rem] border-4 border-[#f3ecff] object-cover" />
+                  </div>
                 </div>
               </>
             ) : (

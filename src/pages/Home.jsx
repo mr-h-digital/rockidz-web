@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import Marquee from '../components/Marquee'
 import { useAuth } from '../context/AuthContext'
 
+const programCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.png`
+
 export default function Home() {
   const { user } = useAuth()
   const firstName = user?.displayName?.trim()?.split(/\s+/)?.[0] || 'friend'
@@ -60,21 +62,16 @@ export default function Home() {
 
           <div className="relative">
             <div className="rounded-[2rem] border-4 border-white/70 bg-white/60 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-5">
-              <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-[1.5rem] bg-[linear-gradient(180deg,#76e4ff_0%,#8df3c4_45%,#fff1a8_100%)]">
-                <div className="absolute left-6 top-6 h-16 w-16 rounded-full bg-white/55" />
-                <div className="absolute right-10 top-16 h-8 w-8 rounded-full bg-white/55" />
-                <div className="absolute bottom-0 left-0 right-0 h-28 bg-[linear-gradient(180deg,#7ad97c_0%,#42b658_100%)]" />
-                <div className="relative z-[1] max-w-[18rem] rounded-[1.5rem] bg-white/75 p-5 text-center shadow-xl">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#ff6fb5] text-3xl">📖</div>
-                  <h2 className="mt-4 font-display text-3xl text-[#5b2b86]">David &amp; Goliath</h2>
-                  <p className="mt-2 text-sm text-[#5b5872]">Read the story, match the cards, and earn a brave heart badge.</p>
-                </div>
-              </div>
+              <img
+                src={programCoverUrl}
+                alt="David and Goliath Rockidz Sunday school program cover"
+                className="aspect-[4/5] w-full rounded-[1.5rem] object-cover"
+              />
             </div>
 
             <div className="absolute -right-3 -top-4 rotate-6 rounded-2xl bg-[#ff8a00] px-4 py-3 text-white shadow-xl">
-              <div className="font-display text-3xl leading-none">3</div>
-              <div className="text-[10px] font-black uppercase tracking-[0.2em]">New this week</div>
+              <div className="font-display text-3xl leading-none">1</div>
+              <div className="text-[10px] font-black uppercase tracking-[0.2em]">Featured story</div>
             </div>
           </div>
         </div>

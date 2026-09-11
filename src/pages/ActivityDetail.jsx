@@ -4,6 +4,9 @@ import { api } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import ThemedPage from '../components/ThemedPage'
 
+const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.png`
+const lessonTalkUrl = `${import.meta.env.BASE_URL}david-and-goliath-lesson-talk.png`
+
 export default function ActivityDetail() {
   const { slug } = useParams()
   const [searchParams] = useSearchParams()
@@ -94,6 +97,11 @@ export default function ActivityDetail() {
             <p className="mt-2 text-sm text-[#6b5a2c]">
               Read the Bible story, enjoy playful activities, learn a memory verse, and finish with a cheerful reward.
             </p>
+          </div>
+
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+            <img src={storyPosterUrl} alt="David and Goliath illustrated story page" className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg" />
+            <img src={lessonTalkUrl} alt="David and Goliath lesson discussion page" className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg" />
           </div>
 
           <div className="mt-8">
