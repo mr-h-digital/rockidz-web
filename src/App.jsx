@@ -19,7 +19,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main>
+      <main className="pt-[89px]">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/activities" element={<Catalog />} />
