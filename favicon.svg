@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rock Mission Kids Corner">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#20e3cf"/>
+      <stop offset="55%" stop-color="#30b7f2"/>
+      <stop offset="100%" stop-color="#ff2fa5"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#101521"/>
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="none" stroke="url(#g)" stroke-width="2"/>
+  <path d="M18 48V16h14c7.5 0 12 4.2 12 10.3 0 4.8-2.6 8-7.2 9.5L44 48h-7.1l-6.2-11.3H24V48zm6-16.7h7.2c3.7 0 5.8-1.8 5.8-4.8 0-3.1-2.1-4.9-5.8-4.9H24z" fill="url(#g)"/>
+</svg>
