@@ -22,7 +22,7 @@ export default function ActivityBuilder() {
   }, [actionSuccess])
 
   function loadCourse() {
-    api
+    return api
       .get(`/api/courses/${slug}`, { auth: false })
       .then((loadedCourse) => {
         setPageError(null)
@@ -33,7 +33,9 @@ export default function ActivityBuilder() {
       .catch((err) => setPageError(err.message))
   }
 
-  useEffect(loadCourse, [slug])
+  useEffect(() => {
+    loadCourse()
+  }, [slug])
 
   useEffect(() => {
     if (course) {
@@ -57,7 +59,7 @@ export default function ActivityBuilder() {
       await api.post(`/api/courses/${course.id}/modules`, { title })
       setNewModuleTitle('')
       setActionSuccess('Story step added successfully.')
-      loadCourse()
+      await loadCourse()
     } catch (err) {
       setActionSuccess(null)
       setActionError(err.message)
@@ -72,7 +74,7 @@ export default function ActivityBuilder() {
       setActionSuccess(null)
       await api.del(`/api/courses/${course.id}/modules/${moduleId}`)
       setActionSuccess('Story step removed successfully.')
-      loadCourse()
+      await loadCourse()
     } catch (err) {
       setActionSuccess(null)
       setActionError(err.message)
