@@ -214,6 +214,75 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
   const [adding, setAdding] = useState(false)
   const [error, setError] = useState(null)
 
+  function buildLessonPayload(form) {
+    const payload = {
+      title: form.title.trim(),
+      contentType: form.contentType,
+      content: form.content,
+      instructions: form.instructions,
+      questions: form.questions,
+      assetUrl: form.assetUrl,
+      downloadUrl: form.downloadUrl,
+      gameType: form.gameType,
+      gamePrompt: form.gamePrompt,
+      gameOptions: form.gameOptions,
+      gameAnswer: form.gameAnswer,
+      successMessage: form.successMessage,
+      retryMessage: form.retryMessage,
+      videoRef: form.videoRef,
+      durationSeconds: form.durationSeconds ? Number(form.durationSeconds) : null,
+    }
+
+    if (form.contentType !== 'GAME') {
+      payload.gameType = null
+      payload.gamePrompt = null
+      payload.gameOptions = null
+      payload.gameAnswer = null
+      payload.successMessage = null
+      payload.retryMessage = null
+    }
+
+    if (form.contentType !== 'VIDEO') {
+      payload.videoRef = null
+      payload.durationSeconds = null
+    }
+
+    if (form.contentType !== 'QUESTIONS') {
+      payload.questions = null
+    }
+
+    if (form.contentType !== 'COLOURING_PAGE') {
+      payload.assetUrl = form.contentType === 'DOWNLOAD' ? null : form.assetUrl
+    }
+
+    if (form.contentType !== 'DOWNLOAD' && form.contentType !== 'COLOURING_PAGE') {
+      payload.downloadUrl = null
+    }
+
+    return payload
+  }
+
+  function validateLessonForm(form) {
+    if (!form.title.trim()) return 'Please enter an activity title.'
+    if (form.contentType === 'VIDEO' && !form.videoRef.trim()) return 'Please enter a YouTube video ID for a video step.'
+    if (form.contentType === 'DOWNLOAD' && !form.downloadUrl.trim()) return 'Please enter a download URL for a download step.'
+    if (form.contentType === 'COLOURING_PAGE' && !form.assetUrl.trim() && !form.downloadUrl.trim()) {
+      return 'Please add an image URL, a printable download URL, or both for a colouring page.'
+    }
+    if (form.contentType === 'GAME') {
+      if (!form.gamePrompt.trim()) return 'Please enter a game prompt.'
+      if (!form.gameAnswer.trim()) return 'Please enter the correct answer.'
+      if (form.gameType === 'QUIZ') {
+        const options = form.gameOptions
+          .split('\n')
+          .map((item) => item.trim())
+          .filter(Boolean)
+        if (options.length < 2) return 'Please add at least two quiz options.'
+      }
+    }
+    return null
+  }
+
   async function handleUpdateModule(e) {
     e.preventDefault()
     try {
@@ -228,26 +297,15 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
 
   async function handleAddLesson(e) {
     e.preventDefault()
+    const validationError = validateLessonForm(lessonForm)
+    if (validationError) {
+      setError(validationError)
+      return
+    }
     setAdding(true)
     setError(null)
     try {
-      await api.post(`/api/modules/${module.id}/lessons`, {
-        title: lessonForm.title,
-        contentType: lessonForm.contentType,
-        content: lessonForm.content,
-        instructions: lessonForm.instructions,
-        questions: lessonForm.questions,
-        assetUrl: lessonForm.assetUrl,
-        downloadUrl: lessonForm.downloadUrl,
-        gameType: lessonForm.gameType,
-        gamePrompt: lessonForm.gamePrompt,
-        gameOptions: lessonForm.gameOptions,
-        gameAnswer: lessonForm.gameAnswer,
-        successMessage: lessonForm.successMessage,
-        retryMessage: lessonForm.retryMessage,
-        videoRef: lessonForm.videoRef,
-        durationSeconds: lessonForm.durationSeconds ? Number(lessonForm.durationSeconds) : null,
-      })
+      await api.post(`/api/modules/${module.id}/lessons`, buildLessonPayload(lessonForm))
       setLessonForm(emptyLessonForm)
       setShowAddLesson(false)
       onChanged()
@@ -269,25 +327,14 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
 
   async function handleUpdateLesson(e, lessonId) {
     e.preventDefault()
+    const validationError = validateLessonForm(lessonForm)
+    if (validationError) {
+      setError(validationError)
+      return
+    }
     try {
       setError(null)
-      await api.patch(`/api/modules/${module.id}/lessons/${lessonId}`, {
-        title: lessonForm.title,
-        contentType: lessonForm.contentType,
-        content: lessonForm.content,
-        instructions: lessonForm.instructions,
-        questions: lessonForm.questions,
-        assetUrl: lessonForm.assetUrl,
-        downloadUrl: lessonForm.downloadUrl,
-        gameType: lessonForm.gameType,
-        gamePrompt: lessonForm.gamePrompt,
-        gameOptions: lessonForm.gameOptions,
-        gameAnswer: lessonForm.gameAnswer,
-        successMessage: lessonForm.successMessage,
-        retryMessage: lessonForm.retryMessage,
-        videoRef: lessonForm.videoRef,
-        durationSeconds: lessonForm.durationSeconds ? Number(lessonForm.durationSeconds) : null,
-      })
+      await api.patch(`/api/modules/${module.id}/lessons/${lessonId}`, buildLessonPayload(lessonForm))
       setEditingLessonId(null)
       setLessonForm(emptyLessonForm)
       onChanged()
@@ -344,7 +391,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                 />
                 <select
                   value={lessonForm.contentType}
-                  onChange={(e) => setLessonForm((current) => ({ ...current, contentType: e.target.value }))}
+                  onChange={(e) => setLessonForm((current) => ({ ...emptyLessonForm, ...current, contentType: e.target.value, title: current.title }))}
                   className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
                 >
                   <option value="STORY">Story</option>
@@ -476,6 +523,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                     onClick={() => {
                       setEditingLessonId(lesson.id)
                       setLessonForm({
+                        ...emptyLessonForm,
                         title: lesson.title || '',
                         contentType: lesson.contentType || 'STORY',
                         content: lesson.content || '',
@@ -515,7 +563,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             <span className="text-sm font-semibold text-[#5b2b86]">Activity type</span>
             <select
               value={lessonForm.contentType}
-              onChange={(e) => setLessonForm((current) => ({ ...current, contentType: e.target.value }))}
+              onChange={(e) => setLessonForm((current) => ({ ...emptyLessonForm, ...current, contentType: e.target.value, title: current.title }))}
               className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
             >
               <option value="STORY">Story</option>

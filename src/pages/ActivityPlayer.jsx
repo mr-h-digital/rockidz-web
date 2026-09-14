@@ -98,6 +98,10 @@ export default function ActivityPlayer() {
                     </>
                   ) : activeLesson.contentType === 'GAME' ? (
                     <GamePanel lesson={activeLesson} guess={guess} setGuess={setGuess} guessFeedback={guessFeedback} onSubmit={submitGuess} />
+                  ) : activeLesson.contentType === 'ACTIVITY' ? (
+                    <ActivityPanel lesson={activeLesson} />
+                  ) : activeLesson.contentType === 'DOWNLOAD' ? (
+                    <DownloadPanel lesson={activeLesson} />
                   ) : activeLesson.contentType === 'COLOURING_PAGE' ? (
                     <>
                       <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Colouring page</p>
@@ -137,27 +141,7 @@ export default function ActivityPlayer() {
                       )}
                     </>
                   ) : (
-                    <>
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">{game.title}</p>
-                      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{game.prompt}</h3>
-
-                      <form onSubmit={submitGuess} className="mt-5 flex flex-col gap-3 sm:flex-row">
-                        <input
-                          value={guess}
-                          onChange={(e) => setGuess(e.target.value)}
-                          className="w-full rounded-full border-4 border-white bg-white px-5 py-3 text-sm text-[#5b2b86] outline-none"
-                          placeholder="Type your answer"
-                        />
-                        <button
-                          type="submit"
-                          className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white"
-                        >
-                          Check answer
-                        </button>
-                      </form>
-
-                      {guessFeedback && <p className="mt-4 text-sm font-semibold text-[#5b5872]">{guessFeedback}</p>}
-                    </>
+                    <StoryPanel lesson={activeLesson} />
                   )}
 
                   <button
@@ -252,6 +236,17 @@ function LessonContent({ lesson }) {
   )
 }
 
+function StoryPanel({ lesson }) {
+  return (
+    <>
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Story time</p>
+      <p className="mt-3 whitespace-pre-line text-sm text-[#5b5872]">
+        {lesson.instructions || lesson.content || 'Add story details or guidance to this step.'}
+      </p>
+    </>
+  )
+}
+
 function QuestionList({ questions }) {
   const items = (questions || '')
     .split('\n')
@@ -319,6 +314,40 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
       </form>
 
       {guessFeedback && <p className="mt-4 text-sm font-semibold text-[#5b5872]">{guessFeedback}</p>}
+    </>
+  )
+}
+
+function ActivityPanel({ lesson }) {
+  return (
+    <>
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Hands-on activity</p>
+      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{lesson.instructions || 'Try this activity together'}</h3>
+      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-[#5b5872]">{lesson.content}</p>}
+      {lesson.assetUrl && (
+        <img
+          src={resolveApiUrl(lesson.assetUrl)}
+          alt={lesson.title}
+          className="mt-4 w-full rounded-[1.25rem] border-4 border-[#f3ecff] object-cover"
+        />
+      )}
+    </>
+  )
+}
+
+function DownloadPanel({ lesson }) {
+  return (
+    <>
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Printable download</p>
+      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{lesson.instructions || 'Open the printable resource'}</h3>
+      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-[#5b5872]">{lesson.content}</p>}
+      {lesson.downloadUrl ? (
+        <a href={resolveApiUrl(lesson.downloadUrl)} target="_blank" rel="noreferrer" className="mt-5 inline-flex rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+          Download resource
+        </a>
+      ) : (
+        <p className="mt-4 text-sm text-[#5b5872]">No download has been added for this step yet.</p>
+      )}
     </>
   )
 }
