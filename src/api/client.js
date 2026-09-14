@@ -11,6 +11,12 @@ function clearStoredAuth() {
   localStorage.removeItem('rockidz_user')
 }
 
+function shouldInvalidateAuthFromResponse(status, data) {
+  if (status !== 401) return false
+  const message = typeof data?.message === 'string' ? data.message.toLowerCase() : ''
+  return message.includes('session has expired') || message.includes('sign in again') || message.includes('authentication required')
+}
+
 async function request(path, { method = 'GET', body, auth = true } = {}) {
   const headers = { 'Content-Type': 'application/json' }
   let hadToken = false
@@ -44,7 +50,7 @@ async function request(path, { method = 'GET', body, auth = true } = {}) {
           .join(' | ')
       : ''
 
-    if (auth && hadToken && res.status === 401) {
+    if (auth && hadToken && shouldInvalidateAuthFromResponse(res.status, data)) {
       clearStoredAuth()
       window.dispatchEvent(new Event('rockidz-auth-invalid'))
       throw new Error('Your session has expired. Please sign in again.')
@@ -100,7 +106,7 @@ export const api = {
           return
         }
 
-        if (xhr.status === 401) {
+        if (shouldInvalidateAuthFromResponse(xhr.status, data)) {
           clearStoredAuth()
           window.dispatchEvent(new Event('rockidz-auth-invalid'))
           reject(new Error('Your session has expired. Please sign in again.'))
