@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 
 const programCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.webp`
 const heroBackgroundUrl = `${import.meta.env.BASE_URL}rockidz-home-astro-background.webp`
-const heroLogoUrl = `${import.meta.env.BASE_URL}rockidz-logo-astro.webp`
+const heroLogoUrl = `${import.meta.env.BASE_URL}rockidz-logo-astro-transparent.webp`
 
 export default function Home() {
   const { user } = useAuth()
@@ -28,15 +28,15 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-14 pt-10 sm:px-6 sm:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="rounded-[2rem] border-4 border-white/20 bg-[linear-gradient(180deg,rgba(34,13,88,0.8)_0%,rgba(24,10,68,0.8)_100%)] p-5 text-white shadow-[0_28px_84px_rgba(9,9,34,0.38)] backdrop-blur-xl sm:p-8">
+            <div className="inline-flex max-w-[260px] -rotate-2 rounded-[1.5rem] border-4 border-white/18 bg-white/8 px-4 py-3 shadow-[0_20px_34px_rgba(0,0,0,0.22)] backdrop-blur-sm">
+              <img src={heroLogoUrl} alt="Rockidz Kids Ministry" className="h-auto w-full" />
+            </div>
+
             {user && (
-              <p className="mb-4 inline-flex items-center rounded-full bg-[#ffd233] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#7a4200] shadow-[0_12px_22px_rgba(255,210,51,0.28)]">
+              <p className="mt-5 inline-flex items-center rounded-full bg-[#ffd233] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#7a4200] shadow-[0_12px_22px_rgba(255,210,51,0.28)]">
                 Welcome back, {firstName}
               </p>
             )}
-
-            <div className="inline-flex max-w-[260px] -rotate-2 rounded-[1.5rem] border-4 border-white/25 bg-white/12 px-4 py-3 shadow-[0_20px_34px_rgba(0,0,0,0.28)] backdrop-blur-sm">
-              <img src={heroLogoUrl} alt="Rockidz Kids Ministry" className="h-auto w-full" />
-            </div>
 
             <p className="mt-4 text-sm font-black uppercase tracking-[0.24em] text-[#ffd233] sm:text-base">
               Launch into God&apos;s Word
