@@ -120,7 +120,7 @@ export default function ActivityBuilder() {
   if (pageError) {
     return (
       <ThemedPage variant="builder">
-        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-[#d0467a]">{pageError}</p>
+        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-[#ff8bc3]">{pageError}</p>
       </ThemedPage>
     )
   }
@@ -128,7 +128,7 @@ export default function ActivityBuilder() {
   if (!course) {
     return (
       <ThemedPage variant="builder">
-        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-[#5b5872]">Loading…</p>
+        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-white/72">Loading…</p>
       </ThemedPage>
     )
   }
@@ -136,13 +136,13 @@ export default function ActivityBuilder() {
   return (
     <ThemedPage variant="builder">
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-        <Link to="/teach" className="text-xs font-black uppercase tracking-wide text-[#5b5872] hover:text-[#00a8b5]">
+        <Link to="/teach" className="text-xs font-black uppercase tracking-wide text-white/66 hover:text-[#5fe7ff]">
           ← Your activity packs
         </Link>
 
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <div className="min-w-0">
-            <h1 className="font-display text-4xl text-[#5b2b86] break-words sm:text-5xl">{course.title}</h1>
+            <h1 className="font-display text-4xl text-white break-words sm:text-5xl">{course.title}</h1>
             <span className={`mt-2 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide ${course.status === 'PUBLISHED' ? 'bg-[#dff7ff] text-[#007e8c]' : 'bg-[#fff1a8] text-[#8a4b00]'}`}>
               {course.status}
             </span>
@@ -165,24 +165,24 @@ export default function ActivityBuilder() {
             value={newModuleTitle}
             onChange={(e) => setNewModuleTitle(e.target.value)}
             placeholder="New story step title"
-            className="flex-1 rounded-full border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+            className="flex-1 rounded-full border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
           />
           <button type="submit" disabled={addingModule} className="w-full rounded-full bg-[#00c2ff] px-5 py-3 text-xs font-black uppercase tracking-wide text-white disabled:opacity-50 sm:w-auto">
             {addingModule ? 'Adding…' : 'Add story step'}
           </button>
         </form>
-        {actionSuccess && <p className="mt-3 text-sm text-[#007e8c]">{actionSuccess}</p>}
-        {actionError && <p className="mt-3 text-sm text-[#d0467a]">{actionError}</p>}
+        {actionSuccess && <p className="mt-3 text-sm text-[#5fe7ff]">{actionSuccess}</p>}
+        {actionError && <p className="mt-3 text-sm text-[#ff8bc3]">{actionError}</p>}
 
         <div className="mt-14 border-t border-white/70 pt-8">
-          <h2 className="font-display text-3xl text-[#5b2b86]">Kids joined</h2>
-          {!roster && <p className="mt-4 text-sm text-[#5b5872]">Loading…</p>}
-          {roster && roster.length === 0 && <p className="mt-4 text-sm text-[#5b5872]">No children have joined this activity yet.</p>}
+          <h2 className="font-display text-3xl text-white">Kids joined</h2>
+          {!roster && <p className="mt-4 text-sm text-white/72">Loading…</p>}
+          {roster && roster.length === 0 && <p className="mt-4 text-sm text-white/72">No children have joined this activity yet.</p>}
           {roster && roster.length > 0 && (
             <div className="mt-4 overflow-x-auto">
               <table className="min-w-[560px] w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-white/70 text-xs font-black uppercase tracking-wide text-[#5b5872]">
+                  <tr className="border-b border-white/20 text-xs font-black uppercase tracking-wide text-white/58">
                     <th className="py-2 font-black">Child</th>
                     <th className="py-2 font-black">Status</th>
                     <th className="py-2 font-black">Progress</th>
@@ -190,13 +190,13 @@ export default function ActivityBuilder() {
                 </thead>
                 <tbody>
                   {roster.map((entry) => (
-                    <tr key={entry.userId} className="border-b border-white/60">
+                    <tr key={entry.userId} className="border-b border-white/12">
                       <td className="py-3">
-                        <div className="text-[#5b2b86]">{entry.displayName}</div>
-                        <div className="text-xs text-[#5b5872]">{entry.email}</div>
+                        <div className="text-white">{entry.displayName}</div>
+                        <div className="text-xs text-white/62">{entry.email}</div>
                       </td>
-                      <td className="py-3 text-[#5b5872]">{entry.enrollmentStatus}</td>
-                      <td className="py-3 text-xs font-bold text-[#00a8b5]">
+                      <td className="py-3 text-white/68">{entry.enrollmentStatus}</td>
+                      <td className="py-3 text-xs font-bold text-[#5fe7ff]">
                         {entry.completedLessons}/{entry.totalLessons}
                       </td>
                     </tr>
@@ -394,23 +394,23 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
   }
 
   return (
-    <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-4 sm:p-5">
+    <div className="rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.84)_0%,rgba(10,42,85,0.76)_100%)] p-4 text-white shadow-[0_18px_40px_rgba(4,4,28,0.2)] sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Step {String(index + 1).padStart(2, '0')}</p>
+          <p className="text-xs font-black uppercase tracking-wide text-[#5fe7ff]">Step {String(index + 1).padStart(2, '0')}</p>
           {editingModule ? (
             <form onSubmit={handleUpdateModule} className="mt-2 flex flex-col gap-2 sm:flex-row">
               <input
                 value={moduleTitle}
                 onChange={(e) => setModuleTitle(e.target.value)}
-                className="flex-1 rounded-full border-4 border-white bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                className="flex-1 rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none"
               />
               <button type="submit" className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white">
                 Save
               </button>
             </form>
           ) : (
-            <h3 className="mt-1 break-words font-display text-2xl text-[#5b2b86]">{module.title}</h3>
+            <h3 className="mt-1 break-words font-display text-2xl text-white">{module.title}</h3>
           )}
         </div>
         <div className="flex flex-wrap items-center gap-3">
@@ -419,11 +419,11 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
               setEditingModule((value) => !value)
               setModuleTitle(module.title)
             }}
-            className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
+            className="text-xs font-black uppercase tracking-wide text-[#ffd233] hover:underline"
           >
             {editingModule ? 'Cancel' : 'Edit'}
           </button>
-          <button onClick={onDelete} className="text-xs font-black uppercase tracking-wide text-[#d0467a] hover:underline">
+          <button onClick={onDelete} className="text-xs font-black uppercase tracking-wide text-[#ff8bc3] hover:underline">
             Delete
           </button>
         </div>
@@ -431,18 +431,18 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
 
       <ul className="mt-4 space-y-2">
         {module.lessons.map((lesson) => (
-          <li key={lesson.id} className="flex flex-col gap-2 rounded-2xl bg-white px-3.5 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+          <li key={lesson.id} className="flex flex-col gap-2 rounded-2xl border border-white/12 bg-white/10 px-3.5 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
             {editingLessonId === lesson.id ? (
               <form onSubmit={(e) => handleUpdateLesson(e, lesson.id)} className="flex w-full flex-col gap-2">
                 <input
                   value={lessonForm.title}
                   onChange={(e) => setLessonForm((current) => ({ ...current, title: e.target.value }))}
-                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 <select
                   value={lessonForm.contentType}
                   onChange={(e) => setLessonForm((current) => ({ ...EMPTY_LESSON_FORM, ...current, contentType: e.target.value, title: current.title }))}
-                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-full border-2 border-white/18 bg-[rgba(15,18,50,0.96)] px-4 py-2 text-sm text-white outline-none"
                 >
                   <option value="STORY">Story</option>
                   <option value="QUESTIONS">Questions</option>
@@ -457,31 +457,31 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   onChange={(e) => setLessonForm((current) => ({ ...current, content: e.target.value }))}
                   rows={3}
                   placeholder="Story, context, game intro, or main content"
-                  className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 <textarea
                   value={lessonForm.instructions}
                   onChange={(e) => setLessonForm((current) => ({ ...current, instructions: e.target.value }))}
                   rows={3}
                   placeholder="Instructions for the child, teacher, or parent"
-                  className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 <textarea
                   value={lessonForm.questions}
                   onChange={(e) => setLessonForm((current) => ({ ...current, questions: e.target.value }))}
                   rows={3}
                   placeholder="Questions, one per line"
-                  className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 <input
                   value={lessonForm.assetUrl}
                   onChange={(e) => setLessonForm((current) => ({ ...current, assetUrl: e.target.value }))}
                   placeholder="Activity or colouring image URL"
-                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 {lessonForm.contentType === 'COLOURING_PAGE' && (
                   <label className="block">
-                    <span className="text-sm font-semibold text-[#5b2b86]">Upload colouring image</span>
+                    <span className="text-sm font-semibold text-white">Upload colouring image</span>
                     <input
                       id={`lesson-asset-upload-${lesson.id}`}
                       type="file"
@@ -507,24 +507,24 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                     />
                     <label
                       htmlFor={`lesson-asset-upload-${lesson.id}`}
-                      className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-4 border-dashed px-4 py-4 text-sm text-[#5b2b86] shadow-[0_10px_24px_rgba(140,82,255,0.08)] transition duration-150 active:scale-[0.99] ${
+                      className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-2 border-dashed px-4 py-4 text-sm text-white shadow-[0_10px_24px_rgba(5,5,28,0.12)] transition duration-150 active:scale-[0.99] ${
                         !uploadingAsset
-                          ? 'border-[#7ce8ff] bg-white/90 hover:border-[#00c2ff] hover:bg-[#f5fdff]'
-                          : 'border-white bg-white/80 cursor-not-allowed opacity-75'
+                          ? 'border-[#7ce8ff]/70 bg-white/10 hover:border-[#00c2ff] hover:bg-white/14'
+                          : 'border-white/18 bg-white/10 cursor-not-allowed opacity-75'
                       }`}
                     >
                       <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
                         Choose file
                       </span>
-                      <span className="flex-1 truncate text-[#7b6d8a]">{selectedAssetFile?.name || 'No file chosen'}</span>
+                      <span className="flex-1 truncate text-white/64">{selectedAssetFile?.name || 'No file chosen'}</span>
                     </label>
-                    <span className="mt-1 block text-xs text-[#7b6d8a]">
+                    <span className="mt-1 block text-xs text-white/62">
                       {uploadingAsset
                         ? `Uploading and optimizing image… ${assetUploadProgress}%`
                         : 'PNG, JPG, WEBP, or GIF. This uploads the colouring page image and saves its lesson asset URL for you.'}
                     </span>
                     {uploadingAsset && (
-                      <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/80">
+                      <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/12">
                         <div
                           className="h-full rounded-full bg-[linear-gradient(90deg,#00c2ff_0%,#8c52ff_60%,#ffd84d_100%)] transition-[width] duration-200"
                           style={{ width: `${assetUploadProgress}%` }}
@@ -535,7 +535,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                       <img src={resolveApiUrl(lessonForm.assetUrl)} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
                     )}
                     {!lessonForm.assetUrl && selectedAssetFile && (
-                      <p className="mt-3 text-sm text-[#5b5872]">
+                      <p className="mt-3 text-sm text-white/74">
                         {selectedAssetFile.name} ({formatFileSize(selectedAssetFile.size)})
                       </p>
                     )}
@@ -545,14 +545,14 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   value={lessonForm.downloadUrl}
                   onChange={(e) => setLessonForm((current) => ({ ...current, downloadUrl: e.target.value }))}
                   placeholder="Printable or download URL"
-                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 {lessonForm.contentType === 'GAME' && (
                   <>
                     <select
                       value={lessonForm.gameType}
                       onChange={(e) => setLessonForm((current) => ({ ...current, gameType: e.target.value }))}
-                      className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                      className="rounded-full border-2 border-white/18 bg-[rgba(15,18,50,0.96)] px-4 py-2 text-sm text-white outline-none"
                     >
                       <option value="QUIZ">Quiz</option>
                       <option value="FILL_IN_THE_BLANK">Fill in the blank</option>
@@ -562,34 +562,34 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                       onChange={(e) => setLessonForm((current) => ({ ...current, gamePrompt: e.target.value }))}
                       rows={2}
                       placeholder="Game prompt"
-                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                     />
                     <textarea
                       value={lessonForm.gameOptions}
                       onChange={(e) => setLessonForm((current) => ({ ...current, gameOptions: e.target.value }))}
                       rows={3}
                       placeholder="Options, one per line"
-                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                     />
                     <input
                       value={lessonForm.gameAnswer}
                       onChange={(e) => setLessonForm((current) => ({ ...current, gameAnswer: e.target.value }))}
                       placeholder="Correct answer"
-                      className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                      className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
                     />
                     <textarea
                       value={lessonForm.successMessage}
                       onChange={(e) => setLessonForm((current) => ({ ...current, successMessage: e.target.value }))}
                       rows={2}
                       placeholder="Success message"
-                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                     />
                     <textarea
                       value={lessonForm.retryMessage}
                       onChange={(e) => setLessonForm((current) => ({ ...current, retryMessage: e.target.value }))}
                       rows={2}
                       placeholder="Try again message"
-                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                     />
                   </>
                 )}
@@ -597,17 +597,17 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   value={lessonForm.videoRef}
                   onChange={(e) => setLessonForm((current) => ({ ...current, videoRef: e.target.value }))}
                   placeholder="YouTube video ID"
-                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 <input
                   type="number"
                   value={lessonForm.durationSeconds}
                   onChange={(e) => setLessonForm((current) => ({ ...current, durationSeconds: e.target.value }))}
                   placeholder="Duration in seconds"
-                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
                 />
                 <div className="flex items-center gap-3">
-                  <button type="submit" className="text-xs font-black uppercase tracking-wide text-[#00a8b5] hover:underline">
+                  <button type="submit" className="text-xs font-black uppercase tracking-wide text-[#5fe7ff] hover:underline">
                     Save
                   </button>
                   <button
@@ -617,7 +617,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                       setLessonForm(EMPTY_LESSON_FORM)
                       setSelectedAssetFile(null)
                     }}
-                    className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
+                    className="text-xs font-black uppercase tracking-wide text-[#ffd233] hover:underline"
                   >
                     Cancel
                   </button>
@@ -626,8 +626,8 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             ) : (
               <>
                 <div className="min-w-0">
-                  <div className="break-words text-[#5b5872]">{lesson.title}</div>
-                  <div className="text-[11px] font-black uppercase tracking-wide text-[#8f7f9d]">
+                  <div className="break-words text-white/84">{lesson.title}</div>
+                  <div className="text-[11px] font-black uppercase tracking-wide text-white/50">
                     {formatContentTypeLabel(lesson.contentType)}
                   </div>
                 </div>
@@ -654,11 +654,11 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                         durationSeconds: lesson.durationSeconds?.toString() || '',
                       })
                     }}
-                    className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
+                    className="text-xs font-black uppercase tracking-wide text-[#ffd233] hover:underline"
                   >
                     Edit
                   </button>
-                  <button onClick={() => handleDeleteLesson(lesson.id)} className="text-xs font-black uppercase tracking-wide text-[#d0467a] hover:underline">
+                  <button onClick={() => handleDeleteLesson(lesson.id)} className="text-xs font-black uppercase tracking-wide text-[#ff8bc3] hover:underline">
                     Remove
                   </button>
                 </div>
@@ -666,18 +666,19 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             )}
           </li>
         ))}
-        {module.lessons.length === 0 && <p className="text-sm text-[#5b5872]">No activity steps yet.</p>}
+        {module.lessons.length === 0 && <p className="text-sm text-white/72">No activity steps yet.</p>}
+
       </ul>
 
       {showAddLesson ? (
-        <form onSubmit={handleAddLesson} className="mt-4 space-y-3 rounded-[1.5rem] bg-white p-4">
+        <form onSubmit={handleAddLesson} className="mt-4 space-y-3 rounded-[1.5rem] border border-white/14 bg-white/10 p-4 backdrop-blur-sm">
           <FormField label="Activity title" value={lessonForm.title} onChange={(value) => setLessonForm((current) => ({ ...current, title: value }))} required />
           <label className="block">
-            <span className="text-sm font-semibold text-[#5b2b86]">Activity type</span>
+            <span className="text-sm font-semibold text-white">Activity type</span>
             <select
               value={lessonForm.contentType}
               onChange={(e) => setLessonForm((current) => ({ ...EMPTY_LESSON_FORM, ...current, contentType: e.target.value, title: current.title }))}
-              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+              className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-[rgba(15,18,50,0.96)] px-4 py-3 text-sm text-white outline-none"
             >
               <option value="STORY">Story</option>
               <option value="QUESTIONS">Questions</option>
@@ -689,37 +690,37 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             </select>
           </label>
           <label className="block">
-            <span className="text-sm font-semibold text-[#5b2b86]">Story or content</span>
+            <span className="text-sm font-semibold text-white">Story or content</span>
             <textarea
               value={lessonForm.content}
               onChange={(e) => setLessonForm((current) => ({ ...current, content: e.target.value }))}
               rows={4}
-              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+              className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none"
             />
           </label>
           <label className="block">
-            <span className="text-sm font-semibold text-[#5b2b86]">Instructions</span>
+            <span className="text-sm font-semibold text-white">Instructions</span>
             <textarea
               value={lessonForm.instructions}
               onChange={(e) => setLessonForm((current) => ({ ...current, instructions: e.target.value }))}
               rows={3}
-              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+              className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none"
             />
           </label>
           <label className="block">
-            <span className="text-sm font-semibold text-[#5b2b86]">Questions</span>
+            <span className="text-sm font-semibold text-white">Questions</span>
             <textarea
               value={lessonForm.questions}
               onChange={(e) => setLessonForm((current) => ({ ...current, questions: e.target.value }))}
               rows={3}
               placeholder="One question per line"
-              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+              className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
             />
           </label>
           <FormField label="Asset image URL" value={lessonForm.assetUrl} onChange={(value) => setLessonForm((current) => ({ ...current, assetUrl: value }))} hint="Use for colouring pages or illustrated activities" />
           {lessonForm.contentType === 'COLOURING_PAGE' && (
             <label className="block">
-              <span className="text-sm font-semibold text-[#5b2b86]">Upload colouring image</span>
+              <span className="text-sm font-semibold text-white">Upload colouring image</span>
               <input
                 id={`new-lesson-asset-upload-${module.id}`}
                 type="file"
@@ -742,24 +743,24 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
               />
               <label
                 htmlFor={`new-lesson-asset-upload-${module.id}`}
-                className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-4 border-dashed px-4 py-4 text-sm text-[#5b2b86] shadow-[0_10px_24px_rgba(140,82,255,0.08)] transition duration-150 active:scale-[0.99] ${
+                className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-2 border-dashed px-4 py-4 text-sm text-white shadow-[0_10px_24px_rgba(5,5,28,0.12)] transition duration-150 active:scale-[0.99] ${
                   !adding && !uploadingAsset
-                    ? 'border-[#7ce8ff] bg-white/90 hover:border-[#00c2ff] hover:bg-[#f5fdff]'
-                    : 'border-white bg-white/80 cursor-not-allowed opacity-75'
+                    ? 'border-[#7ce8ff]/70 bg-white/10 hover:border-[#00c2ff] hover:bg-white/14'
+                    : 'border-white/18 bg-white/10 cursor-not-allowed opacity-75'
                 }`}
               >
                 <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
                   Choose file
                 </span>
-                <span className="flex-1 truncate text-[#7b6d8a]">{selectedAssetFile?.name || 'No file chosen'}</span>
+                <span className="flex-1 truncate text-white/64">{selectedAssetFile?.name || 'No file chosen'}</span>
               </label>
-              <span className="mt-1 block text-xs text-[#7b6d8a]">
+              <span className="mt-1 block text-xs text-white/62">
                 {selectedAssetFile
                   ? 'Your selected colouring page image will be uploaded after you add this lesson.'
                   : 'Optional. Choose a colouring page image to prefill the lesson asset URL after the lesson is created.'}
               </span>
               {!lessonForm.assetUrl && selectedAssetFile && (
-                <p className="mt-3 text-sm text-[#5b5872]">
+                <p className="mt-3 text-sm text-white/74">
                   {selectedAssetFile.name} ({formatFileSize(selectedAssetFile.size)})
                 </p>
               )}
@@ -772,52 +773,52 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
           {lessonForm.contentType === 'GAME' && (
             <>
               <label className="block">
-                <span className="text-sm font-semibold text-[#5b2b86]">Game type</span>
+                <span className="text-sm font-semibold text-white">Game type</span>
                 <select
                   value={lessonForm.gameType}
                   onChange={(e) => setLessonForm((current) => ({ ...current, gameType: e.target.value }))}
-                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-[rgba(15,18,50,0.96)] px-4 py-3 text-sm text-white outline-none"
                 >
                   <option value="QUIZ">Quiz</option>
                   <option value="FILL_IN_THE_BLANK">Fill in the blank</option>
                 </select>
               </label>
               <label className="block">
-                <span className="text-sm font-semibold text-[#5b2b86]">Game prompt</span>
+                <span className="text-sm font-semibold text-white">Game prompt</span>
                 <textarea
                   value={lessonForm.gamePrompt}
                   onChange={(e) => setLessonForm((current) => ({ ...current, gamePrompt: e.target.value }))}
                   rows={2}
-                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none"
                 />
               </label>
               <label className="block">
-                <span className="text-sm font-semibold text-[#5b2b86]">Game options</span>
+                <span className="text-sm font-semibold text-white">Game options</span>
                 <textarea
                   value={lessonForm.gameOptions}
                   onChange={(e) => setLessonForm((current) => ({ ...current, gameOptions: e.target.value }))}
                   rows={3}
                   placeholder="One option per line"
-                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                 />
               </label>
               <FormField label="Correct answer" value={lessonForm.gameAnswer} onChange={(value) => setLessonForm((current) => ({ ...current, gameAnswer: value }))} />
               <label className="block">
-                <span className="text-sm font-semibold text-[#5b2b86]">Success message</span>
+                <span className="text-sm font-semibold text-white">Success message</span>
                 <textarea
                   value={lessonForm.successMessage}
                   onChange={(e) => setLessonForm((current) => ({ ...current, successMessage: e.target.value }))}
                   rows={2}
-                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none"
                 />
               </label>
               <label className="block">
-                <span className="text-sm font-semibold text-[#5b2b86]">Try again message</span>
+                <span className="text-sm font-semibold text-white">Try again message</span>
                 <textarea
                   value={lessonForm.retryMessage}
                   onChange={(e) => setLessonForm((current) => ({ ...current, retryMessage: e.target.value }))}
                   rows={2}
-                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                  className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none"
                 />
               </label>
             </>
@@ -829,18 +830,18 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             hint="Only needed for video steps"
           />
           <FormField label="Duration (seconds, optional)" type="number" value={lessonForm.durationSeconds} onChange={(value) => setLessonForm((current) => ({ ...current, durationSeconds: value }))} />
-          {error && <p className="text-sm text-[#d0467a]">{error}</p>}
+          {error && <p className="text-sm text-[#ff8bc3]">{error}</p>}
           <div className="flex flex-col gap-2.5 sm:flex-row">
             <button type="submit" disabled={adding} className="rounded-full bg-[#00c2ff] px-5 py-2 text-xs font-black uppercase tracking-wide text-white disabled:opacity-60">
               {adding ? 'Adding…' : 'Add activity'}
             </button>
-            <button type="button" onClick={() => setShowAddLesson(false)} className="rounded-full bg-[#fff1a8] px-5 py-2 text-xs font-black uppercase tracking-wide text-[#8a4b00]">
+            <button type="button" onClick={() => setShowAddLesson(false)} className="rounded-full bg-[#fff1a8] px-5 py-2 text-xs font-black uppercase tracking-wide text-[#8a4b00] shadow-[0_12px_22px_rgba(255,216,77,0.18)]">
               Cancel
             </button>
           </div>
         </form>
       ) : (
-        <button onClick={() => setShowAddLesson(true)} className="mt-4 text-xs font-black uppercase tracking-wide text-[#00a8b5] hover:underline">
+        <button onClick={() => setShowAddLesson(true)} className="mt-4 text-xs font-black uppercase tracking-wide text-[#5fe7ff] hover:underline">
           + Add activity
         </button>
       )}
