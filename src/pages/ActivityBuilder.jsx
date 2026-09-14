@@ -4,6 +4,24 @@ import { api } from '../api/client'
 import FormField from '../components/FormField'
 import ThemedPage from '../components/ThemedPage'
 
+const EMPTY_LESSON_FORM = {
+  title: '',
+  contentType: 'STORY',
+  content: '',
+  instructions: '',
+  questions: '',
+  assetUrl: '',
+  downloadUrl: '',
+  gameType: 'QUIZ',
+  gamePrompt: '',
+  gameOptions: '',
+  gameAnswer: '',
+  successMessage: '',
+  retryMessage: '',
+  videoRef: '',
+  durationSeconds: '',
+}
+
 export default function ActivityBuilder() {
   const { slug } = useParams()
   const [course, setCourse] = useState(null)
@@ -190,24 +208,7 @@ export default function ActivityBuilder() {
 
 function ModuleEditor({ module, index, onChanged, onDelete }) {
   const [showAddLesson, setShowAddLesson] = useState(false)
-  const emptyLessonForm = {
-    title: '',
-    contentType: 'STORY',
-    content: '',
-    instructions: '',
-    questions: '',
-    assetUrl: '',
-    downloadUrl: '',
-    gameType: 'QUIZ',
-    gamePrompt: '',
-    gameOptions: '',
-    gameAnswer: '',
-    successMessage: '',
-    retryMessage: '',
-    videoRef: '',
-    durationSeconds: '',
-  }
-  const [lessonForm, setLessonForm] = useState(emptyLessonForm)
+  const [lessonForm, setLessonForm] = useState(EMPTY_LESSON_FORM)
   const [editingModule, setEditingModule] = useState(false)
   const [moduleTitle, setModuleTitle] = useState(module.title)
   const [editingLessonId, setEditingLessonId] = useState(null)
@@ -306,7 +307,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
     setError(null)
     try {
       await api.post(`/api/modules/${module.id}/lessons`, buildLessonPayload(lessonForm))
-      setLessonForm(emptyLessonForm)
+      setLessonForm(EMPTY_LESSON_FORM)
       setShowAddLesson(false)
       onChanged()
     } catch (err) {
@@ -336,7 +337,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
       setError(null)
       await api.patch(`/api/modules/${module.id}/lessons/${lessonId}`, buildLessonPayload(lessonForm))
       setEditingLessonId(null)
-      setLessonForm(emptyLessonForm)
+      setLessonForm(EMPTY_LESSON_FORM)
       onChanged()
     } catch (err) {
       setError(err.message)
@@ -391,7 +392,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                 />
                 <select
                   value={lessonForm.contentType}
-                  onChange={(e) => setLessonForm((current) => ({ ...emptyLessonForm, ...current, contentType: e.target.value, title: current.title }))}
+                  onChange={(e) => setLessonForm((current) => ({ ...EMPTY_LESSON_FORM, ...current, contentType: e.target.value, title: current.title }))}
                   className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
                 >
                   <option value="STORY">Story</option>
@@ -502,7 +503,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                     type="button"
                     onClick={() => {
                       setEditingLessonId(null)
-                      setLessonForm(emptyLessonForm)
+                      setLessonForm(EMPTY_LESSON_FORM)
                     }}
                     className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
                   >
@@ -523,7 +524,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                     onClick={() => {
                       setEditingLessonId(lesson.id)
                       setLessonForm({
-                        ...emptyLessonForm,
+                        ...EMPTY_LESSON_FORM,
                         title: lesson.title || '',
                         contentType: lesson.contentType || 'STORY',
                         content: lesson.content || '',
@@ -563,7 +564,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             <span className="text-sm font-semibold text-[#5b2b86]">Activity type</span>
             <select
               value={lessonForm.contentType}
-              onChange={(e) => setLessonForm((current) => ({ ...emptyLessonForm, ...current, contentType: e.target.value, title: current.title }))}
+              onChange={(e) => setLessonForm((current) => ({ ...EMPTY_LESSON_FORM, ...current, contentType: e.target.value, title: current.title }))}
               className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
             >
               <option value="STORY">Story</option>
