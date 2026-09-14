@@ -56,15 +56,15 @@ export default function SignUp() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,216,77,0.14),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(0,194,255,0.12),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(140,82,255,0.12),transparent_36%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[0.98fr_1.02fr]">
+      <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-6 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[0.98fr_1.02fr]">
         <section className="order-1">
           <div className="relative rounded-[2.2rem] border-4 border-white/70 bg-white/60 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.08)] backdrop-blur-md">
             <img src={lessonTalkUrl} alt="David and Goliath Rockidz lesson discussion page" className="w-full rounded-[1.7rem] object-cover" />
-            <div className="absolute -left-3 top-8 rounded-2xl bg-[#00c2ff] px-4 py-3 text-white shadow-xl">
+            <div className="absolute left-2 top-4 rounded-2xl bg-[#00c2ff] px-3 py-2.5 text-white shadow-xl sm:-left-3 sm:top-8 sm:px-4 sm:py-3">
               <div className="font-display text-3xl leading-none">+</div>
               <div className="text-[10px] font-black uppercase tracking-[0.2em]">Join in</div>
             </div>
-            <div className="absolute -right-3 bottom-8 rounded-2xl bg-[#8c52ff] px-4 py-3 text-white shadow-xl">
+            <div className="absolute right-2 bottom-4 rounded-2xl bg-[#8c52ff] px-3 py-2.5 text-white shadow-xl sm:-right-3 sm:bottom-8 sm:px-4 sm:py-3">
               <div className="font-display text-3xl leading-none">✓</div>
               <div className="text-[10px] font-black uppercase tracking-[0.2em]">Learn & play</div>
             </div>
@@ -75,7 +75,7 @@ export default function SignUp() {
           <span className="inline-flex rounded-full bg-[#fff1a8] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">
             Join Rockidz
           </span>
-          <h1 className="mt-5 font-display text-5xl text-[#5b2b86] sm:text-6xl">Create your fun profile</h1>
+          <h1 className="mt-5 font-display text-4xl text-[#5b2b86] sm:text-6xl">Create your fun profile</h1>
           <p className="mt-3 max-w-md text-base text-[#5b5872]">
             Start your colourful Bible journey with stories, games, memory verses, and activity packs made for kids.
           </p>

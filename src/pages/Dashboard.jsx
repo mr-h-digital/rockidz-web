@@ -24,9 +24,9 @@ export default function Dashboard() {
 
   return (
     <ThemedPage variant="dashboard">
-      <div className="mx-auto max-w-5xl px-6 py-16">
+      <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
         <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">Welcome back, {user?.displayName?.split(' ')[0]}</p>
-        <h1 className="mt-2 font-display text-5xl text-[#5b2b86]">Your fun faith journey</h1>
+        <h1 className="mt-2 text-4xl font-display text-[#5b2b86] sm:text-5xl">Your fun faith journey</h1>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <QuickActionCard title="Play again" description="Jump into more Bible activities, stories, and games." ctaLabel="Browse activities" to="/activities" />
@@ -78,7 +78,7 @@ export default function Dashboard() {
         )}
 
         {enrollments && enrollments.length > 0 && (
-          <div className="mt-6 flex gap-8">
+          <div className="mt-6 flex flex-wrap gap-6 sm:gap-8">
             <StatChip num={enrollments.length} label="Joined" />
             <StatChip num={activitiesCompleted} label="Completed" />
           </div>
@@ -98,8 +98,8 @@ export default function Dashboard() {
         {enrollments && enrollments.length > 0 && (
           <div className="mt-10 space-y-4">
             {enrollments.map((item) => (
-              <div key={item.enrollmentId} className="flex items-center justify-between rounded-[2rem] border-4 border-white/70 bg-white/70 p-6">
-                <div>
+              <div key={item.enrollmentId} className="flex flex-col gap-4 rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+                <div className="min-w-0">
                   <h3 className="font-display text-2xl text-[#5b2b86]">{item.courseTitle}</h3>
                   <div className="mt-2">
                     <ProgressPath completed={item.completedLessons} total={item.totalLessons} />
@@ -109,7 +109,7 @@ export default function Dashboard() {
                 {item.status === 'COMPLETED' ? (
                   <span className="rounded-full bg-[#fff1a8] px-4 py-1.5 text-xs font-black uppercase tracking-wide text-[#8a4b00]">Completed</span>
                 ) : (
-                  <Link to={`/activities/${item.courseSlug}/play`} className="rounded-full bg-[#ff6fb5] px-5 py-2.5 text-xs font-black uppercase tracking-wide text-white">
+                  <Link to={`/activities/${item.courseSlug}/play`} className="rounded-full bg-[#ff6fb5] px-5 py-2.5 text-center text-xs font-black uppercase tracking-wide text-white">
                     Continue
                   </Link>
                 )}

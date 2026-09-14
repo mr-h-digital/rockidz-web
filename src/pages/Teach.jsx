@@ -178,11 +178,11 @@ export default function Teach() {
 
   return (
     <ThemedPage variant="teach">
-      <div className="mx-auto max-w-4xl px-6 py-16">
-        <div className="flex items-start justify-between gap-4">
+      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.2em] text-[#00a8b5]">Leader hub</p>
-            <h1 className="mt-2 font-display text-5xl text-[#5b2b86]">Your activity packs</h1>
+            <h1 className="mt-2 text-4xl font-display text-[#5b2b86] sm:text-5xl">Your activity packs</h1>
           </div>
           <button
             onClick={() => {
@@ -196,7 +196,7 @@ export default function Teach() {
               }
               setShowCreate(true)
             }}
-            className="whitespace-nowrap rounded-full bg-[#ff6fb5] px-5 py-3 text-xs font-black uppercase tracking-wide text-white"
+            className="w-full whitespace-nowrap rounded-full bg-[#ff6fb5] px-5 py-3 text-xs font-black uppercase tracking-wide text-white sm:w-auto"
           >
             {showCreate ? 'Cancel' : '+ New activity'}
           </button>
@@ -205,7 +205,7 @@ export default function Teach() {
         {error && <p className="mt-6 text-sm text-[#d0467a]">{error}</p>}
 
         {showCreate && (
-          <form onSubmit={editingCourseId ? handleUpdateCourse : handleCreate} className="mt-8 space-y-4 rounded-[2rem] border-4 border-white/70 bg-white/70 p-6">
+          <form onSubmit={editingCourseId ? handleUpdateCourse : handleCreate} className="mt-8 space-y-4 rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 sm:p-6">
             <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">
               {editingCourseId ? 'Edit activity' : 'Create activity'}
             </p>
@@ -305,7 +305,7 @@ export default function Teach() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="cursor-pointer rounded-full bg-[linear-gradient(120deg,#00c2ff_0%,#8c52ff_58%,#ff6fb5_100%)] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_18px_34px_rgba(140,82,255,0.32)] ring-2 ring-white/80 transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_42px_rgba(140,82,255,0.38)] disabled:cursor-not-allowed disabled:opacity-60"
+              className="cursor-pointer rounded-full bg-[linear-gradient(120deg,#00c2ff_0%,#8c52ff_58%,#ff6fb5_100%)] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_18px_34px_rgba(140,82,255,0.32)] ring-2 ring-white/80 transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_42px_rgba(140,82,255,0.38)] disabled:cursor-not-allowed disabled:opacity-60 w-full sm:w-auto"
             >
               {editingCourseId
                 ? savingCourseId === editingCourseId
@@ -320,29 +320,29 @@ export default function Teach() {
 
         <div className="mt-8 space-y-3">
           {courses?.map((course) => (
-            <div key={course.id} className="flex items-center justify-between rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
-              <div>
+            <div key={course.id} className="flex flex-col gap-4 rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
                 <div className="flex items-center gap-2.5">
-                  <h3 className="font-display text-xl text-[#5b2b86]">{course.title}</h3>
+                  <h3 className="font-display text-xl text-[#5b2b86] break-words">{course.title}</h3>
                   <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide ${course.status === 'PUBLISHED' ? 'bg-[#dff7ff] text-[#007e8c]' : 'bg-[#fff1a8] text-[#8a4b00]'}`}>
                     {course.status}
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-[#5b5872]">{course.enrolledCount} kids joined</p>
               </div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
                 <button
                   onClick={() => beginEditCourse(course)}
-                  className="rounded-full bg-[#fff1a8] px-4 py-2 text-xs font-black uppercase tracking-wide text-[#8a4b00]"
+                  className="rounded-full bg-[#fff1a8] px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-[#8a4b00]"
                 >
                   Edit
                 </button>
                 {course.status === 'DRAFT' && (
-                  <button onClick={() => handlePublish(course.id)} className="rounded-full bg-[#ffd84d] px-4 py-2 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+                  <button onClick={() => handlePublish(course.id)} className="rounded-full bg-[#ffd84d] px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-[#6b4b00]">
                     Publish
                   </button>
                 )}
-                <Link to={`/teach/${course.slug}`} className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white">
+                <Link to={`/teach/${course.slug}`} className="rounded-full bg-[#00c2ff] px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-white">
                   Manage
                 </Link>
               </div>

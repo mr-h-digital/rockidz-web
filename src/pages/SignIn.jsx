@@ -47,12 +47,12 @@ export default function SignIn() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_16%,rgba(0,194,255,0.12),transparent_30%),radial-gradient(circle_at_85%_22%,rgba(140,82,255,0.1),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(255,216,77,0.14),transparent_35%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-8 px-6 py-12 lg:grid-cols-[1.02fr_0.98fr]">
+      <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-6 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[1.02fr_0.98fr]">
         <section className="order-2 rounded-[2rem] border-4 border-white/70 bg-white/78 p-6 shadow-[0_22px_65px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-8 lg:order-1">
           <span className="inline-flex rounded-full bg-[#7ce8ff] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#005f75]">
             Welcome back
           </span>
-          <h1 className="mt-5 font-display text-5xl text-[#5b2b86] sm:text-6xl">Jump back into the fun</h1>
+          <h1 className="mt-5 font-display text-4xl text-[#5b2b86] sm:text-6xl">Jump back into the fun</h1>
           <p className="mt-3 max-w-md text-base text-[#5b5872]">
             Sign in to continue your Bible adventure, memory verses, games, and colourful learning activities.
           </p>
@@ -110,11 +110,11 @@ export default function SignIn() {
         <section className="order-1 lg:order-2">
           <div className="relative rounded-[2.2rem] border-4 border-white/70 bg-white/60 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.08)] backdrop-blur-md">
             <img src={storyPosterUrl} alt="David and Goliath Rockidz story sheet" className="w-full rounded-[1.7rem] object-cover" />
-            <div className="absolute -left-3 top-8 rounded-2xl bg-[#8c52ff] px-4 py-3 text-white shadow-xl">
+            <div className="absolute left-2 top-4 rounded-2xl bg-[#8c52ff] px-3 py-2.5 text-white shadow-xl sm:-left-3 sm:top-8 sm:px-4 sm:py-3">
               <div className="font-display text-3xl leading-none">★</div>
               <div className="text-[10px] font-black uppercase tracking-[0.2em]">Story time</div>
             </div>
-            <div className="absolute -right-3 bottom-8 rounded-2xl bg-[#ffd84d] px-4 py-3 text-[#6b4b00] shadow-xl">
+            <div className="absolute right-2 bottom-4 rounded-2xl bg-[#ffd84d] px-3 py-2.5 text-[#6b4b00] shadow-xl sm:-right-3 sm:bottom-8 sm:px-4 sm:py-3">
               <div className="font-display text-3xl leading-none">3</div>
               <div className="text-[10px] font-black uppercase tracking-[0.2em]">Fun steps</div>
             </div>

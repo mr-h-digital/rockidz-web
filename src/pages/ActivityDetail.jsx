@@ -84,10 +84,10 @@ export default function ActivityDetail() {
 
   return (
     <ThemedPage variant="detail">
-      <div className="mx-auto max-w-4xl px-6 py-16">
-        <div className="rounded-[2rem] border-4 border-white/70 bg-white/65 p-7 shadow-[0_18px_50px_rgba(0,0,0,0.08)] backdrop-blur-md">
+      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="rounded-[2rem] border-4 border-white/70 bg-white/65 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-7">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">Led by {course.createdByName}</p>
-          <h1 className="mt-2 font-display text-5xl text-[#5b2b86]">{course.title}</h1>
+          <h1 className="mt-2 text-4xl font-display text-[#5b2b86] sm:text-5xl">{course.title}</h1>
           <p className="mt-4 text-[#5b5872]">{course.description}</p>
 
           <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wide text-[#8f7f9d]">
@@ -103,7 +103,7 @@ export default function ActivityDetail() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+          <div className="mt-8 grid gap-4 sm:gap-5 lg:grid-cols-2">
             <img src={storyPosterUrl} alt="David and Goliath illustrated story page" className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg" />
             <img src={lessonTalkUrl} alt="David and Goliath lesson discussion page" className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg" />
           </div>
@@ -112,7 +112,7 @@ export default function ActivityDetail() {
             {enrolled ? (
               <button
                 onClick={() => navigate(`/activities/${slug}/play`)}
-                className="rounded-full bg-[#00c2ff] px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(0,194,255,0.28)] transition-transform hover:-translate-y-0.5"
+                className="w-full rounded-full bg-[#00c2ff] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(0,194,255,0.28)] transition-transform hover:-translate-y-0.5 sm:w-auto"
               >
                 You&apos;re in — start playing
               </button>
@@ -120,7 +120,7 @@ export default function ActivityDetail() {
               <button
                 onClick={handleEnroll}
                 disabled={enrolling}
-                className="rounded-full bg-[#ff6fb5] px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(255,111,181,0.3)] transition-transform hover:-translate-y-0.5 disabled:opacity-50"
+                className="w-full rounded-full bg-[#ff6fb5] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(255,111,181,0.3)] transition-transform hover:-translate-y-0.5 disabled:opacity-50 sm:w-auto"
               >
                 {enrolling ? 'Joining…' : 'Join this activity'}
               </button>
@@ -140,10 +140,10 @@ export default function ActivityDetail() {
                 <h3 className="mt-1 font-display text-2xl text-[#5b2b86]">{module.title}</h3>
                 <ul className="mt-3 space-y-2">
                   {module.lessons.map((lesson) => (
-                    <li key={lesson.id} className="flex items-center gap-3 rounded-xl bg-white/70 px-4 py-3 text-sm text-[#5b5872]">
+                    <li key={lesson.id} className="flex flex-col gap-2 rounded-xl bg-white/70 px-4 py-3 text-sm text-[#5b5872] sm:flex-row sm:items-center">
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#ffd84d] text-[#8a4b00]">⭐</span>
-                      <span>{lesson.title}</span>
-                      <span className="ml-auto text-[11px] font-black uppercase tracking-wide text-[#8f7f9d]">
+                      <span className="sm:flex-1">{lesson.title}</span>
+                      <span className="text-[11px] font-black uppercase tracking-wide text-[#8f7f9d] sm:ml-auto">
                         {formatContentTypeLabel(lesson.contentType)}
                       </span>
                     </li>

@@ -76,7 +76,7 @@ export default function ActivityPlayer() {
 
   return (
     <ThemedPage variant="player">
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
         <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">{course.title}</p>
         <div className="mt-3">
           <ProgressPath completed={completedCount} total={totalLessons} size="sm" />
@@ -86,15 +86,15 @@ export default function ActivityPlayer() {
           <div className="space-y-6">
             {activeLesson ? (
               <>
-                <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)]">
-                  <h2 className="font-display text-4xl text-[#5b2b86]">{activeLesson.title}</h2>
+                <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.08)] sm:p-6">
+                  <h2 className="font-display text-3xl text-[#5b2b86] sm:text-4xl">{activeLesson.title}</h2>
                   <p className="mt-2 text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">
                     {formatContentTypeLabel(activeLesson.contentType)}
                   </p>
                   <LessonContent lesson={activeLesson} />
                 </div>
 
-                <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-6">
+                <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 sm:p-6">
                   {activeLesson.contentType === 'QUESTIONS' ? (
                     <>
                       <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Discussion time</p>
@@ -116,12 +116,12 @@ export default function ActivityPlayer() {
                       />
                       <div className="mt-4 flex flex-wrap gap-3">
                         {activeLesson.assetUrl && (
-                          <a href={resolveApiUrl(activeLesson.assetUrl)} target="_blank" rel="noreferrer" className="rounded-full bg-[#00c2ff] px-5 py-3 text-xs font-black uppercase tracking-wide text-white">
+                          <a href={resolveApiUrl(activeLesson.assetUrl)} target="_blank" rel="noreferrer" className="w-full rounded-full bg-[#00c2ff] px-5 py-3 text-center text-xs font-black uppercase tracking-wide text-white sm:w-auto">
                             Open to colour
                           </a>
                         )}
                         {activeLesson.downloadUrl && (
-                          <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+                          <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="w-full rounded-full bg-[#ffd84d] px-5 py-3 text-center text-xs font-black uppercase tracking-wide text-[#6b4b00] sm:w-auto">
                             Download printable
                           </a>
                         )}
@@ -151,7 +151,7 @@ export default function ActivityPlayer() {
                   <button
                     onClick={() => markComplete(activeLesson.id)}
                     disabled={!!progressByLesson[activeLesson.id]}
-                    className="mt-6 rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] disabled:opacity-50"
+                    className="mt-6 w-full rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] disabled:opacity-50 sm:w-auto"
                   >
                     {progressByLesson[activeLesson.id] ? 'Activity complete' : 'Mark this activity complete'}
                   </button>
@@ -159,7 +159,7 @@ export default function ActivityPlayer() {
                   {activeLesson.downloadUrl && (
                     <div className="mt-6 rounded-[1.5rem] bg-white p-4">
                       <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">Printable resource</p>
-                      <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="mt-3 inline-flex rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+                      <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="mt-3 inline-flex w-full justify-center rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] sm:w-auto">
                         Open resource
                       </a>
                     </div>
@@ -172,7 +172,7 @@ export default function ActivityPlayer() {
           </div>
 
           <aside className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
-            <h3 className="font-display text-3xl text-[#5b2b86]">Adventure map</h3>
+            <h3 className="font-display text-2xl text-[#5b2b86] sm:text-3xl">Adventure map</h3>
             <div className="mt-5 space-y-5">
               {modules.map((module, index) => (
                 <div key={module.id}>
@@ -198,8 +198,8 @@ export default function ActivityPlayer() {
                             <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full ${isDone ? 'bg-[#ffd84d] text-[#6b4b00]' : 'bg-[#ffd6ea] text-[#b33e79]'}`}>
                               {isDone ? '✓' : '★'}
                             </span>
-                            <div>
-                              <div>{lesson.title}</div>
+                            <div className="min-w-0 flex-1">
+                              <div className="break-words">{lesson.title}</div>
                               <div className={`text-[10px] font-black uppercase tracking-wide ${isActive ? 'text-white/80' : 'text-[#8f7f9d]'}`}>
                                 {formatContentTypeLabel(lesson.contentType)}
                               </div>

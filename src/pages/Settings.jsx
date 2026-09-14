@@ -77,9 +77,9 @@ export default function Settings() {
 
   return (
     <ThemedPage variant="settings">
-      <div className="mx-auto max-w-3xl px-6 py-16">
+      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-rock-gold">Settings</p>
-        <h1 className="mt-2 font-display text-5xl">Your profile</h1>
+        <h1 className="mt-2 text-4xl font-display sm:text-5xl">Your profile</h1>
         <p className="mt-3 text-sm text-rock-muted">Keep your account details up to date.</p>
 
         <div className="mt-6 rounded-2xl border border-rock-border bg-rock-panel p-5">
@@ -89,7 +89,7 @@ export default function Settings() {
           <p className="mt-2 text-xs uppercase tracking-wide text-rock-goldlight">Role: {roleLabel}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-5 rounded-2xl border border-rock-border bg-rock-panel p-6">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-5 rounded-2xl border border-rock-border bg-rock-panel p-5 sm:p-6">
           <FormField
             label="Display name"
             value={form.displayName}
@@ -145,7 +145,7 @@ export default function Settings() {
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-full bg-grad-gold px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-[#0b1220] transition-opacity hover:opacity-90 disabled:opacity-60"
+            className="w-full rounded-full bg-grad-gold px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-[#0b1220] transition-opacity hover:opacity-90 disabled:opacity-60 sm:w-auto"
           >
             {submitting ? 'Saving…' : 'Save changes'}
           </button>

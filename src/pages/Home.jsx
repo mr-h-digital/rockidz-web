@@ -24,9 +24,9 @@ export default function Home() {
 
       <Marquee items={['Bible fun for little hearts', 'Games, songs and story time', 'New Sunday activities every week']} />
 
-      <section className="mx-auto max-w-6xl px-6 pt-16 pb-14">
+      <section className="mx-auto max-w-6xl px-4 pb-14 pt-10 sm:px-6 sm:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="rounded-[2rem] border-4 border-white/60 bg-white/55 p-6 shadow-[0_24px_80px_rgba(255,105,180,0.18)] backdrop-blur-md sm:p-8">
+          <div className="rounded-[2rem] border-4 border-white/60 bg-white/55 p-5 shadow-[0_24px_80px_rgba(255,105,180,0.18)] backdrop-blur-md sm:p-8">
             {user && (
               <p className="mb-4 inline-flex items-center rounded-full bg-[#fff1a8] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">
                 Welcome back, {firstName}
@@ -41,31 +41,31 @@ export default function Home() {
               Where fun grows faith
             </p>
 
-            <h1 className="mt-6 font-display text-[54px] leading-[0.9] text-[#5b2b86] sm:text-[80px] lg:text-[96px]">
+            <h1 className="mt-6 font-display text-[42px] leading-[0.92] text-[#5b2b86] sm:text-[80px] lg:text-[96px]">
               Discover God's Word
               <span className="block text-[#00a8b5]">through play.</span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-lg text-[#5b5872]">
+            <p className="mt-5 max-w-xl text-base text-[#5b5872] sm:text-lg">
               Colourful Bible stories, memory verse fun, printable worksheets, and joyful activities made just for kids.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3.5">
+            <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:flex-wrap">
               <Link
                 to="/activities"
-                className="rounded-full bg-[#00c2ff] px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(0,194,255,0.25)] transition-transform hover:-translate-y-0.5"
+                className="rounded-full bg-[#00c2ff] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(0,194,255,0.25)] transition-transform hover:-translate-y-0.5"
               >
                 Start exploring
               </Link>
               <Link
                 to="/sign-up"
-                className="rounded-full bg-[#ffd84d] px-7 py-4 text-sm font-black uppercase tracking-wide text-[#6b4b00] shadow-[0_14px_28px_rgba(255,216,77,0.28)] transition-transform hover:-translate-y-0.5"
+                className="rounded-full bg-[#ffd84d] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-[#6b4b00] shadow-[0_14px_28px_rgba(255,216,77,0.28)] transition-transform hover:-translate-y-0.5"
               >
                 Join Rockidz
               </Link>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-7">
+            <div className="mt-10 grid grid-cols-2 gap-5 sm:flex sm:flex-wrap sm:gap-7">
               <Stat num="12+" label="Fun activities" />
               <Stat num="4-12" label="Ages welcomed" />
               <Stat num="100%" label="Bible based" />
@@ -81,7 +81,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="absolute -right-3 -top-4 rotate-6 rounded-2xl bg-[#ff8a00] px-4 py-3 text-white shadow-xl">
+            <div className="absolute -right-2 top-3 rotate-6 rounded-2xl bg-[#ff8a00] px-3 py-2.5 text-white shadow-xl sm:-right-3 sm:-top-4 sm:px-4 sm:py-3">
               <div className="font-display text-3xl leading-none">1</div>
               <div className="text-[10px] font-black uppercase tracking-[0.2em]">Featured story</div>
             </div>
@@ -90,8 +90,8 @@ export default function Home() {
       </section>
 
       <section className="pb-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="rounded-[2rem] border-4 border-white/60 bg-white/55 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.06)] backdrop-blur-md sm:p-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="rounded-[2rem] border-4 border-white/60 bg-white/55 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.06)] backdrop-blur-md sm:p-8">
             <h2 className="font-display text-4xl text-[#5b2b86] sm:text-5xl">How the fun works</h2>
             <div className="mt-8 grid gap-5 sm:grid-cols-3">
               <StepCard n="01" title="Pick a story" desc="Choose a Bible adventure and open its colourful lesson page." />

@@ -135,20 +135,20 @@ export default function ActivityBuilder() {
 
   return (
     <ThemedPage variant="builder">
-      <div className="mx-auto max-w-3xl px-6 py-16">
+      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <Link to="/teach" className="text-xs font-black uppercase tracking-wide text-[#5b5872] hover:text-[#00a8b5]">
           ← Your activity packs
         </Link>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h1 className="font-display text-5xl text-[#5b2b86]">{course.title}</h1>
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <h1 className="font-display text-4xl text-[#5b2b86] break-words sm:text-5xl">{course.title}</h1>
             <span className={`mt-2 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide ${course.status === 'PUBLISHED' ? 'bg-[#dff7ff] text-[#007e8c]' : 'bg-[#fff1a8] text-[#8a4b00]'}`}>
               {course.status}
             </span>
           </div>
           {course.status === 'DRAFT' && (
-            <button onClick={handlePublish} className="rounded-full bg-[#ff6fb5] px-6 py-3 text-sm font-black uppercase tracking-wide text-white">
+            <button onClick={handlePublish} className="w-full rounded-full bg-[#ff6fb5] px-6 py-3 text-sm font-black uppercase tracking-wide text-white sm:w-auto">
               Publish activity
             </button>
           )}
@@ -394,9 +394,9 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
   }
 
   return (
-    <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
+    <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-4 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+        <div className="min-w-0">
           <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Step {String(index + 1).padStart(2, '0')}</p>
           {editingModule ? (
             <form onSubmit={handleUpdateModule} className="mt-2 flex flex-col gap-2 sm:flex-row">
@@ -410,10 +410,10 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
               </button>
             </form>
           ) : (
-            <h3 className="mt-1 font-display text-2xl text-[#5b2b86]">{module.title}</h3>
+            <h3 className="mt-1 break-words font-display text-2xl text-[#5b2b86]">{module.title}</h3>
           )}
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => {
               setEditingModule((value) => !value)
@@ -625,13 +625,13 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
               </form>
             ) : (
               <>
-                <div>
-                  <div className="text-[#5b5872]">{lesson.title}</div>
+                <div className="min-w-0">
+                  <div className="break-words text-[#5b5872]">{lesson.title}</div>
                   <div className="text-[11px] font-black uppercase tracking-wide text-[#8f7f9d]">
                     {formatContentTypeLabel(lesson.contentType)}
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <button
                     onClick={() => {
                       setEditingLessonId(lesson.id)

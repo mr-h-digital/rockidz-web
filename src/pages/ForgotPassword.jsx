@@ -41,9 +41,9 @@ export default function ForgotPassword() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0b1320]/28 via-[#0f1a2b]/40 to-[#101521]/56" />
       </div>
 
-      <div className="mx-auto max-w-md px-6 py-20">
-        <div className="rounded-2xl border border-rock-border bg-[#0f1a2b]/58 p-6 backdrop-blur-md sm:p-8">
-          <h1 className="font-display text-5xl">Reset password</h1>
+      <div className="mx-auto max-w-md px-4 py-14 sm:px-6 sm:py-20">
+        <div className="rounded-2xl border border-rock-border bg-[#0f1a2b]/58 p-5 backdrop-blur-md sm:p-8">
+          <h1 className="font-display text-4xl sm:text-5xl">Reset password</h1>
           <p className="mt-2 text-sm text-rock-muted">
             Enter your email and we will prepare a password reset link.
           </p>
