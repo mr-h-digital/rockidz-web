@@ -75,7 +75,7 @@ export default function ActivityDetail() {
   if (!course) {
     return (
       <ThemedPage variant="detail">
-        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-[#5b5872]">Loading…</p>
+        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-white/88">Loading…</p>
       </ThemedPage>
     )
   }
@@ -88,9 +88,9 @@ export default function ActivityDetail() {
         <div className="rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(23,12,73,0.86)_0%,rgba(10,42,85,0.8)_100%)] p-5 text-white shadow-[0_20px_52px_rgba(4,4,28,0.28)] backdrop-blur-xl sm:p-7">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ffd233]">Scripture constellation · Led by {course.createdByName}</p>
           <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">{course.title}</h1>
-          <p className="mt-4 text-white/74">{course.description}</p>
+          <p className="mt-4 text-white/88">{course.description}</p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wide text-white/58">
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wide text-white/82">
             <span>{modules.length} story steps</span>
             <span>{totalLessons} activities</span>
             <span>{course.enrolledCount} kids joined</span>
@@ -98,7 +98,7 @@ export default function ActivityDetail() {
 
           <div className="mt-8 rounded-[1.5rem] border border-white/16 bg-white/10 p-5 backdrop-blur-sm">
             <h2 className="font-display text-3xl text-[#ffd233]">What kids will do</h2>
-            <p className="mt-2 text-sm text-white/76">
+            <p className="mt-2 text-sm text-white/88">
               Read the Bible story, enjoy playful activities, learn a memory verse, and finish with a cheerful reward.
             </p>
           </div>
@@ -140,7 +140,7 @@ export default function ActivityDetail() {
               <h3 className="mt-1 font-display text-2xl text-white">{module.title}</h3>
                 <ul className="mt-3 space-y-2">
                   {module.lessons.map((lesson) => (
-                  <li key={lesson.id} className="flex flex-col gap-2 rounded-xl border border-white/12 bg-white/10 px-4 py-3 text-sm text-white/76 sm:flex-row sm:items-center">
+                  <li key={lesson.id} className="flex flex-col gap-2 rounded-xl border border-white/18 bg-white/12 px-4 py-3 text-sm text-white/88 sm:flex-row sm:items-center">
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#ffd84d] text-[#8a4b00]">⭐</span>
                       <span className="sm:flex-1">{lesson.title}</span>
                     <span className="text-[11px] font-black uppercase tracking-wide text-white/56 sm:ml-auto">
@@ -153,7 +153,7 @@ export default function ActivityDetail() {
             ))}
           </ol>
 
-          {modules.length === 0 && <p className="mt-4 text-sm text-white/70">This activity pack is being prepared right now.</p>}
+          {modules.length === 0 && <p className="mt-4 text-sm text-white/84">This activity pack is being prepared right now.</p>}
         </div>
       </div>
     </ThemedPage>

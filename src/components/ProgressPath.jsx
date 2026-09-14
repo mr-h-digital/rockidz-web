@@ -30,7 +30,7 @@ export default function ProgressPath({ completed, total, size = 'md' }) {
           />
         ))}
       </div>
-      <span className="whitespace-nowrap font-body text-xs text-white/72">
+      <span className="whitespace-nowrap font-body text-xs text-white/86">
         {completed}/{total}
       </span>
     </div>

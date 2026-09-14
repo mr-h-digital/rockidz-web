@@ -269,9 +269,9 @@ export default function Teach() {
                 <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
                   Choose file
                 </span>
-                <span className="flex-1 truncate text-white/64">{selectedThumbnailFile?.name || 'No file chosen'}</span>
+                <span className="flex-1 truncate text-white/84">{selectedThumbnailFile?.name || 'No file chosen'}</span>
               </label>
-              <span className="mt-1 block text-xs text-white/62">
+              <span className="mt-1 block text-xs text-white/78">
                 {isSubmitting && selectedThumbnailFile && !uploadingThumbnail
                   ? 'Preparing your draft and cover image upload…'
                   : uploadingThumbnail
@@ -300,7 +300,7 @@ export default function Teach() {
             {!form.thumbnailUrl && selectedThumbnailFile && (
               <div className="rounded-[1.5rem] border border-white/18 bg-white/10 p-3">
                 <p className="text-xs font-black uppercase tracking-wide text-[#5fe7ff]">Selected cover image</p>
-                <p className="mt-3 text-sm text-white/74">
+                <p className="mt-3 text-sm text-white/88">
                   {selectedThumbnailFile.name} ({formatFileSize(selectedThumbnailFile.size)})
                 </p>
               </div>
@@ -334,7 +334,7 @@ export default function Teach() {
                     {course.status}
                   </span>
                 </div>
-                <p className="mt-1 text-xs text-white/68">{course.enrolledCount} kids joined</p>
+                <p className="mt-1 text-xs text-white/84">{course.enrolledCount} kids joined</p>
               </div>
               <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
                 <button
@@ -355,7 +355,7 @@ export default function Teach() {
             </div>
           ))}
 
-          {courses && courses.length === 0 && !showCreate && <p className="text-sm text-white/72">You haven&apos;t created any Rockidz activities yet.</p>}
+          {courses && courses.length === 0 && !showCreate && <p className="text-sm text-white/84">You haven&apos;t created any Rockidz activities yet.</p>}
         </div>
       </div>
     </ThemedPage>

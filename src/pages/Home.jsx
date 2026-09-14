@@ -110,17 +110,17 @@ function Stat({ num, label }) {
   return (
     <div>
       <div className="font-display text-3xl leading-none text-[#5fe7ff]">{num}</div>
-      <div className="mt-1 text-[11px] font-black uppercase tracking-wide text-white/72">{label}</div>
+      <div className="mt-1 text-[11px] font-black uppercase tracking-wide text-white/88">{label}</div>
     </div>
   )
 }
 
 function StepCard({ n, title, desc }) {
   return (
-    <div className="rounded-[1.5rem] border border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.08)_100%)] p-6 shadow-[0_18px_34px_rgba(4,4,26,0.24)] backdrop-blur-sm">
+    <div className="rounded-[1.5rem] border border-white/22 bg-[linear-gradient(180deg,rgba(68,93,150,0.46)_0%,rgba(31,56,116,0.38)_100%)] p-6 shadow-[0_18px_34px_rgba(4,4,26,0.3)] backdrop-blur-md">
       <p className="font-display text-4xl leading-none text-[#5fe7ff]">{n}</p>
       <h3 className="mt-2.5 font-display text-2xl text-white">{title}</h3>
-      <p className="mt-2 text-sm text-white/78">{desc}</p>
+      <p className="mt-2 text-sm text-white/92">{desc}</p>
     </div>
   )
 }

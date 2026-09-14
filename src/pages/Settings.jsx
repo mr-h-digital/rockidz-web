@@ -80,12 +80,12 @@ export default function Settings() {
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#ffd233]">Explorer passport</p>
         <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">Your profile</h1>
-        <p className="mt-3 text-sm text-white/72">Keep your account details up to date.</p>
+        <p className="mt-3 text-sm text-white/86">Keep your account details up to date.</p>
 
         <div className="mt-6 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.82)_0%,rgba(10,42,85,0.74)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.2)]">
-          <p className="text-xs uppercase tracking-wide text-white/58">Signed in as</p>
+          <p className="text-xs uppercase tracking-wide text-white/82">Signed in as</p>
           <p className="mt-2 text-sm text-white">{user?.displayName}</p>
-          <p className="text-sm text-white/70">{user?.email}</p>
+          <p className="text-sm text-white/84">{user?.email}</p>
           <p className="mt-2 text-xs uppercase tracking-wide text-[#ffd233]">Role: {roleLabel}</p>
         </div>
 

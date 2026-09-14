@@ -48,12 +48,12 @@ export default function SignIn() {
       </div>
 
       <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-6 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[1.02fr_0.98fr]">
-        <section className="order-2 rounded-[2rem] border-4 border-white/70 bg-white/78 p-6 shadow-[0_22px_65px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-8 lg:order-1">
+        <section className="order-2 rounded-[2rem] border-4 border-white/24 bg-[linear-gradient(180deg,rgba(17,11,56,0.9)_0%,rgba(10,41,84,0.86)_100%)] p-6 text-white shadow-[0_22px_65px_rgba(0,0,0,0.22)] backdrop-blur-xl sm:p-8 lg:order-1">
           <span className="inline-flex rounded-full bg-[#7ce8ff] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#005f75]">
             Welcome back
           </span>
-          <h1 className="mt-5 font-display text-4xl text-[#5b2b86] sm:text-6xl">Jump back into the fun</h1>
-          <p className="mt-3 max-w-md text-base text-[#5b5872]">
+          <h1 className="mt-5 font-display text-4xl text-white sm:text-6xl">Jump back into the fun</h1>
+          <p className="mt-3 max-w-md text-base text-white/88">
             Sign in to continue your Bible adventure, memory verses, games, and colourful learning activities.
           </p>
 
@@ -83,7 +83,7 @@ export default function SignIn() {
             />
 
             <div className="-mt-1 text-right">
-              <Link to="/forgot-password" className="text-sm font-bold text-[#00a8b5] hover:underline">
+              <Link to="/forgot-password" className="text-sm font-bold text-[#7ce8ff] hover:text-white hover:underline">
                 Forgot password?
               </Link>
             </div>
@@ -99,9 +99,9 @@ export default function SignIn() {
             </button>
           </form>
 
-          <p className="mt-6 text-sm text-[#5b5872]">
+          <p className="mt-6 text-sm text-white/86">
             New here?{' '}
-            <Link to="/sign-up" className="font-bold text-[#6f33c7] hover:underline">
+            <Link to="/sign-up" className="font-bold text-[#ffd84d] hover:text-white hover:underline">
               Create a Rockidz profile
             </Link>
           </p>

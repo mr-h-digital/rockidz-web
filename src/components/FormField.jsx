@@ -13,7 +13,7 @@ export default function FormField({ label, value, onChange, type = 'text', hint,
           type={inputType}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white shadow-[0_14px_28px_rgba(5,5,28,0.18)] outline-none placeholder:text-white/40 focus:border-[#5fe7ff] focus:shadow-[0_0_0_4px_rgba(0,184,255,0.14)] ${
+          className={`w-full rounded-2xl border-2 border-white/22 bg-white/12 px-4 py-3 text-sm text-white shadow-[0_14px_28px_rgba(5,5,28,0.18)] outline-none placeholder:text-white/55 focus:border-[#5fe7ff] focus:shadow-[0_0_0_4px_rgba(0,184,255,0.14)] ${
             isPassword && allowReveal ? 'pr-20' : ''
           }`}
           {...rest}
@@ -28,7 +28,7 @@ export default function FormField({ label, value, onChange, type = 'text', hint,
           </button>
         )}
       </div>
-      {hint && <span className="mt-1 block text-xs text-white/62">{hint}</span>}
+      {hint && <span className="mt-1 block text-xs text-white/78">{hint}</span>}
     </label>
   )
 }

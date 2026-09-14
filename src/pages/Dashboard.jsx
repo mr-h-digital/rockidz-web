@@ -27,7 +27,7 @@ export default function Dashboard() {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
         <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ffd233]">Explorer passport · Welcome back, {user?.displayName?.split(' ')[0]}</p>
         <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">Your Rockidz mission dashboard</h1>
-        <p className="mt-4 max-w-2xl text-sm text-white/74 sm:text-base">
+        <p className="mt-4 max-w-2xl text-sm text-white/88 sm:text-base">
           Track your active adventures, celebrate progress, and jump back into the next world waiting for you.
         </p>
 
@@ -44,7 +44,7 @@ export default function Dashboard() {
               {nextUp ? (
                 <>
                   <h2 className="mt-2 font-display text-3xl text-white">{nextUp.courseTitle}</h2>
-                  <p className="mt-2 text-sm text-white/74">Pick up your next activity and keep your badge trail growing.</p>
+                  <p className="mt-2 text-sm text-white/88">Pick up your next activity and keep your badge trail growing.</p>
                   <div className="mt-4">
                     <ProgressPath completed={nextUp.completedLessons} total={nextUp.totalLessons} />
                   </div>
@@ -58,7 +58,7 @@ export default function Dashboard() {
               ) : (
                 <>
                   <h2 className="mt-2 font-display text-3xl text-white">You finished your current adventures</h2>
-                  <p className="mt-2 text-sm text-white/74">Amazing work. Pick a new Bible activity to keep learning.</p>
+                  <p className="mt-2 text-sm text-white/88">Amazing work. Pick a new Bible activity to keep learning.</p>
                   <Link to="/activities" className="mt-5 inline-block rounded-full bg-[#ffd84d] px-6 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] shadow-[0_16px_30px_rgba(255,216,77,0.22)]">
                     Start another activity
                   </Link>
@@ -72,7 +72,7 @@ export default function Dashboard() {
                 {recentActivity.map((item, index) => (
                   <li key={`${item.title}-${index}`} className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3">
                     <p className="text-sm font-semibold text-white">{item.title}</p>
-                    <p className="mt-1 text-xs text-white/66">{item.meta}</p>
+                    <p className="mt-1 text-xs text-white/82">{item.meta}</p>
                   </li>
                 ))}
               </ul>
@@ -91,7 +91,7 @@ export default function Dashboard() {
 
         {enrollments && enrollments.length === 0 && (
           <div className="mt-10 rounded-[2rem] border border-dashed border-white/22 bg-[linear-gradient(180deg,rgba(24,12,76,0.72)_0%,rgba(11,43,88,0.68)_100%)] p-10 text-center text-white shadow-[0_18px_44px_rgba(4,4,28,0.22)]">
-            <p className="text-white/74">You haven&apos;t joined an activity yet.</p>
+            <p className="text-white/88">You haven&apos;t joined an activity yet.</p>
             <Link to="/activities" className="mt-4 inline-block rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_16px_30px_rgba(0,194,255,0.28)]">
               Browse activities
             </Link>
@@ -132,7 +132,7 @@ function StatChip({ num, label }) {
   return (
     <div>
       <div className="font-display text-3xl leading-none text-[#5fe7ff]">{num}</div>
-      <div className="mt-1 text-[11px] font-black uppercase tracking-wide text-white/66">{label}</div>
+      <div className="mt-1 text-[11px] font-black uppercase tracking-wide text-white/84">{label}</div>
     </div>
   )
 }
@@ -141,7 +141,7 @@ function QuickActionCard({ title, description, ctaLabel, to }) {
   return (
     <div className="rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(25,12,77,0.84)_0%,rgba(14,45,88,0.78)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.22)]">
       <h2 className="font-display text-2xl text-white">{title}</h2>
-      <p className="mt-2 text-sm text-white/72">{description}</p>
+      <p className="mt-2 text-sm text-white/86">{description}</p>
       <Link to={to} className="mt-4 inline-block rounded-full bg-[#ffd84d] px-4 py-2 text-xs font-black uppercase tracking-wide text-[#6b4b00] shadow-[0_14px_24px_rgba(255,216,77,0.18)]">
         {ctaLabel}
       </Link>

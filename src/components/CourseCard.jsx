@@ -26,10 +26,10 @@ export default function CourseCard({ course }) {
       </div>
       <div className="p-5 text-white">
         <h3 className="font-display text-2xl text-white transition-colors group-hover:text-[#5fe7ff]">{course.title}</h3>
-        <p className="mt-1.5 line-clamp-3 text-sm text-white/74">{course.description}</p>
-        <div className="mt-4 flex items-center justify-between text-xs font-bold uppercase tracking-wide text-white/56">
+        <p className="mt-1.5 line-clamp-3 text-sm text-white/88">{course.description}</p>
+        <div className="mt-4 flex items-center justify-between text-xs font-bold uppercase tracking-wide text-white/82">
           <span className="truncate pr-3">{course.createdByName}</span>
-          <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1 text-white/78">{course.enrolledCount} explorers</span>
+          <span className="rounded-full border border-white/18 bg-white/12 px-3 py-1 text-white/92">{course.enrolledCount} explorers</span>
         </div>
       </div>
     </Link>

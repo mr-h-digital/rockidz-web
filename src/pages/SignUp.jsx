@@ -71,12 +71,12 @@ export default function SignUp() {
           </div>
         </section>
 
-        <section className="order-2 rounded-[2rem] border-4 border-white/70 bg-white/80 p-6 shadow-[0_22px_65px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-8">
+        <section className="order-2 rounded-[2rem] border-4 border-white/24 bg-[linear-gradient(180deg,rgba(17,11,56,0.9)_0%,rgba(10,41,84,0.86)_100%)] p-6 text-white shadow-[0_22px_65px_rgba(0,0,0,0.22)] backdrop-blur-xl sm:p-8">
           <span className="inline-flex rounded-full bg-[#fff1a8] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">
             Join Rockidz
           </span>
-          <h1 className="mt-5 font-display text-4xl text-[#5b2b86] sm:text-6xl">Create your fun profile</h1>
-          <p className="mt-3 max-w-md text-base text-[#5b5872]">
+          <h1 className="mt-5 font-display text-4xl text-white sm:text-6xl">Create your fun profile</h1>
+          <p className="mt-3 max-w-md text-base text-white/88">
             Start your colourful Bible journey with stories, games, memory verses, and activity packs made for kids.
           </p>
 
@@ -134,9 +134,9 @@ export default function SignUp() {
             </button>
           </form>
 
-          <p className="mt-6 text-sm text-[#5b5872]">
+          <p className="mt-6 text-sm text-white/86">
             Already have a profile?{' '}
-            <Link to="/sign-in" className="font-bold text-[#00a8b5] hover:underline">
+            <Link to="/sign-in" className="font-bold text-[#7ce8ff] hover:text-white hover:underline">
               Sign in
             </Link>
           </p>

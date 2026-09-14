@@ -69,7 +69,7 @@ export default function ActivityPlayer() {
   if (!course) {
     return (
       <ThemedPage variant="player">
-        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-[#5b5872]">Loading…</p>
+        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-white/88">Loading…</p>
       </ThemedPage>
     )
   }
