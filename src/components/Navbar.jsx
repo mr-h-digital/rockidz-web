@@ -24,10 +24,15 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <a href="https://rockmission.co.za" className="flex items-center gap-3 font-display text-xl leading-none tracking-wide text-[#5b2b86] sm:text-2xl" rel="noopener noreferrer">
           <img src={logoUrl} alt="Rockidz" className="h-12 w-auto drop-shadow-[0_10px_20px_rgba(140,82,255,0.18)]" />
-          <span>
-            ROCK<span className="text-[#00a8b5]">IDZ</span>{' '}
-            <span className="hidden align-middle font-body text-[10px] font-black uppercase tracking-[0.2em] text-[#5b5872] sm:inline">
-              Kids Corner
+          <span className="flex flex-col">
+            <span>
+              ROCK<span className="text-[#00a8b5]">IDZ</span>{' '}
+              <span className="hidden align-middle font-body text-[10px] font-black uppercase tracking-[0.2em] text-[#5b5872] sm:inline">
+                Kids Corner
+              </span>
+            </span>
+            <span className="hidden font-body text-[10px] font-black uppercase tracking-[0.18em] text-[#ff8a00] sm:block">
+              Where fun grows faith
             </span>
           </span>
         </a>

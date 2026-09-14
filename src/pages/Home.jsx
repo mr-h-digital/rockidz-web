@@ -37,6 +37,10 @@ export default function Home() {
               Rockidz Kids Corner
             </span>
 
+            <p className="mt-4 text-sm font-black uppercase tracking-[0.24em] text-[#ff8a00] sm:text-base">
+              Where fun grows faith
+            </p>
+
             <h1 className="mt-6 font-display text-[54px] leading-[0.9] text-[#5b2b86] sm:text-[80px] lg:text-[96px]">
               Discover God's Word
               <span className="block text-[#00a8b5]">through play.</span>

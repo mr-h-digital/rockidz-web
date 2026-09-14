@@ -36,7 +36,7 @@ export default function Teach() {
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false)
   const [thumbnailUploadProgress, setThumbnailUploadProgress] = useState(0)
   const [selectedThumbnailFile, setSelectedThumbnailFile] = useState(null)
-  const isSubmitting = creating || savingCourseId === editingCourseId
+  const isSubmitting = creating || (editingCourseId != null && savingCourseId === editingCourseId)
 
   function loadCourses() {
     api.get('/api/courses/mine').then(setCourses).catch((err) => setError(err.message))
