@@ -1,24 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import { api } from '../api/client'
+import { api, resolveApiUrl } from '../api/client'
 import ProgressPath from '../components/ProgressPath'
 import ThemedPage from '../components/ThemedPage'
 
 const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.webp`
 const colouringPageUrl = `${import.meta.env.BASE_URL}david-colour-in-page.webp`
-
-const GAME_TEMPLATES = [
-  {
-    title: 'Memory verse puzzle',
-    prompt: 'Finish the verse: "The battle is the ___."',
-    answer: 'Lord',
-  },
-  {
-    title: 'Brave choice quiz',
-    prompt: 'Who trusted God when facing Goliath?',
-    answer: 'David',
-  },
-]
 
 export default function ActivityPlayer() {
   const { slug } = useParams()
@@ -47,8 +34,6 @@ export default function ActivityPlayer() {
 
   const totalLessons = modules.reduce((sum, module) => sum + module.lessons.length, 0)
   const completedCount = Object.values(progressByLesson).filter(Boolean).length
-  const game = GAME_TEMPLATES[(activeLesson?.orderIndex || 0) % GAME_TEMPLATES.length]
-
   const markComplete = useCallback((lessonId) => {
     api
       .put(`/api/lessons/${lessonId}/progress`, { watchTimeSeconds: 0, markComplete: true })
@@ -58,14 +43,15 @@ export default function ActivityPlayer() {
 
   function submitGuess(e) {
     e.preventDefault()
-    if (guess.trim().toLowerCase() === game.answer.toLowerCase()) {
-      setGuessFeedback('Amazing job! You got it right.')
+    if (!activeLesson) return
+    if (guess.trim().toLowerCase() === (activeLesson.gameAnswer || '').trim().toLowerCase()) {
+      setGuessFeedback(activeLesson.successMessage || 'Amazing job! You got it right.')
       if (activeLesson) {
         markComplete(activeLesson.id)
       }
       return
     }
-    setGuessFeedback('Nice try! Read the story clue and try again.')
+    setGuessFeedback(activeLesson.retryMessage || 'Nice try! Read the story clue and try again.')
   }
 
   if (error) {
@@ -98,44 +84,81 @@ export default function ActivityPlayer() {
               <>
                 <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)]">
                   <h2 className="font-display text-4xl text-[#5b2b86]">{activeLesson.title}</h2>
-                  <p className="mt-3 text-[#5b5872]">
-                    God helps us be brave, kind, and full of faith. Read the story clue below, then play the mini game.
+                  <p className="mt-2 text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">
+                    {activeLesson.contentType.replaceAll('_', ' ')}
                   </p>
-
-                  <div className="mt-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-                    <img src={storyPosterUrl} alt="David and Goliath Bible story sheet" className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg" />
-                    <div className="rounded-[1.5rem] bg-[linear-gradient(180deg,#76e4ff_0%,#ffd6ea_55%,#fff1a8_100%)] p-6">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">Story clue</p>
-                      <p className="mt-3 text-lg font-semibold text-[#5b2b86]">
-                        David trusted God more than he feared the giant. He knew the Lord would help him.
-                      </p>
-                      <p className="mt-4 text-sm text-[#5b5872]">
-                        Key verse: “The battle is the Lord&apos;s.” When big things feel scary, God gives us courage.
-                      </p>
-                    </div>
-                  </div>
+                  <LessonContent lesson={activeLesson} />
                 </div>
 
                 <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-6">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">{game.title}</p>
-                  <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{game.prompt}</h3>
+                  {activeLesson.contentType === 'QUESTIONS' ? (
+                    <>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Discussion time</p>
+                      <QuestionList questions={activeLesson.questions} />
+                    </>
+                  ) : activeLesson.contentType === 'GAME' ? (
+                    <GamePanel lesson={activeLesson} guess={guess} setGuess={setGuess} guessFeedback={guessFeedback} onSubmit={submitGuess} />
+                  ) : activeLesson.contentType === 'COLOURING_PAGE' ? (
+                    <>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Colouring page</p>
+                      <img
+                        src={activeLesson.assetUrl ? resolveApiUrl(activeLesson.assetUrl) : colouringPageUrl}
+                        alt={activeLesson.title}
+                        className="mt-4 w-full rounded-[1.25rem] border-4 border-[#f3ecff] object-cover"
+                      />
+                      <div className="mt-4 flex flex-wrap gap-3">
+                        {activeLesson.assetUrl && (
+                          <a href={resolveApiUrl(activeLesson.assetUrl)} target="_blank" rel="noreferrer" className="rounded-full bg-[#00c2ff] px-5 py-3 text-xs font-black uppercase tracking-wide text-white">
+                            Open to colour
+                          </a>
+                        )}
+                        {activeLesson.downloadUrl && (
+                          <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+                            Download printable
+                          </a>
+                        )}
+                      </div>
+                    </>
+                  ) : activeLesson.contentType === 'VIDEO' ? (
+                    <>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Video activity</p>
+                      {activeLesson.videoRef ? (
+                        <div className="mt-4 aspect-video overflow-hidden rounded-[1.5rem] border-4 border-white/70">
+                          <iframe
+                            title={activeLesson.title}
+                            src={`https://www.youtube.com/embed/${activeLesson.videoRef}`}
+                            className="h-full w-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                      ) : (
+                        <p className="mt-4 text-sm text-[#5b5872]">No video has been added for this step yet.</p>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">{game.title}</p>
+                      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{game.prompt}</h3>
 
-                  <form onSubmit={submitGuess} className="mt-5 flex flex-col gap-3 sm:flex-row">
-                    <input
-                      value={guess}
-                      onChange={(e) => setGuess(e.target.value)}
-                      className="w-full rounded-full border-4 border-white bg-white px-5 py-3 text-sm text-[#5b2b86] outline-none"
-                      placeholder="Type your answer"
-                    />
-                    <button
-                      type="submit"
-                      className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white"
-                    >
-                      Check answer
-                    </button>
-                  </form>
+                      <form onSubmit={submitGuess} className="mt-5 flex flex-col gap-3 sm:flex-row">
+                        <input
+                          value={guess}
+                          onChange={(e) => setGuess(e.target.value)}
+                          className="w-full rounded-full border-4 border-white bg-white px-5 py-3 text-sm text-[#5b2b86] outline-none"
+                          placeholder="Type your answer"
+                        />
+                        <button
+                          type="submit"
+                          className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white"
+                        >
+                          Check answer
+                        </button>
+                      </form>
 
-                  {guessFeedback && <p className="mt-4 text-sm font-semibold text-[#5b5872]">{guessFeedback}</p>}
+                      {guessFeedback && <p className="mt-4 text-sm font-semibold text-[#5b5872]">{guessFeedback}</p>}
+                    </>
+                  )}
 
                   <button
                     onClick={() => markComplete(activeLesson.id)}
@@ -145,10 +168,14 @@ export default function ActivityPlayer() {
                     {progressByLesson[activeLesson.id] ? 'Activity complete' : 'Mark this activity complete'}
                   </button>
 
-                  <div className="mt-6 rounded-[1.5rem] bg-white p-4">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">Bonus colouring page</p>
-                    <img src={colouringPageUrl} alt="David colouring page for kids" className="mt-3 w-full rounded-[1.25rem] border-4 border-[#f3ecff] object-cover" />
-                  </div>
+                  {activeLesson.downloadUrl && (
+                    <div className="mt-6 rounded-[1.5rem] bg-white p-4">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">Printable resource</p>
+                      <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="mt-3 inline-flex rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+                        Open resource
+                      </a>
+                    </div>
+                  )}
                 </div>
               </>
             ) : (
@@ -183,7 +210,12 @@ export default function ActivityPlayer() {
                             <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full ${isDone ? 'bg-[#ffd84d] text-[#6b4b00]' : 'bg-[#ffd6ea] text-[#b33e79]'}`}>
                               {isDone ? '✓' : '★'}
                             </span>
-                            {lesson.title}
+                            <div>
+                              <div>{lesson.title}</div>
+                              <div className={`text-[10px] font-black uppercase tracking-wide ${isActive ? 'text-white/80' : 'text-[#8f7f9d]'}`}>
+                                {lesson.contentType.replaceAll('_', ' ')}
+                              </div>
+                            </div>
                           </button>
                         </li>
                       )
@@ -196,5 +228,97 @@ export default function ActivityPlayer() {
         </div>
       </div>
     </ThemedPage>
+  )
+}
+
+function LessonContent({ lesson }) {
+  return (
+    <div className="mt-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+      <img
+        src={lesson.assetUrl ? resolveApiUrl(lesson.assetUrl) : storyPosterUrl}
+        alt={lesson.title}
+        className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg"
+      />
+      <div className="rounded-[1.5rem] bg-[linear-gradient(180deg,#76e4ff_0%,#ffd6ea_55%,#fff1a8_100%)] p-6">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">Story clue</p>
+        {lesson.content ? (
+          <p className="mt-3 whitespace-pre-line text-lg font-semibold text-[#5b2b86]">{lesson.content}</p>
+        ) : (
+          <p className="mt-3 text-lg font-semibold text-[#5b2b86]">This step is ready for your story, context, or lesson notes.</p>
+        )}
+        {lesson.instructions && <p className="mt-4 whitespace-pre-line text-sm text-[#5b5872]">{lesson.instructions}</p>}
+      </div>
+    </div>
+  )
+}
+
+function QuestionList({ questions }) {
+  const items = (questions || '')
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+
+  if (items.length === 0) {
+    return <p className="mt-4 text-sm text-[#5b5872]">No questions have been added for this step yet.</p>
+  }
+
+  return (
+    <ul className="mt-4 space-y-3">
+      {items.map((question) => (
+        <li key={question} className="rounded-2xl bg-white px-4 py-3 text-sm text-[#5b5872]">
+          {question}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
+  const options = (lesson.gameOptions || '')
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+
+  return (
+    <>
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">
+        {lesson.gameType === 'FILL_IN_THE_BLANK' ? 'Fill in the blank' : 'Quiz game'}
+      </p>
+      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{lesson.gamePrompt || 'Add a game prompt to this step.'}</h3>
+
+      {lesson.gameType === 'QUIZ' && options.length > 0 && (
+        <div className="mt-5 grid gap-3">
+          {options.map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => setGuess(option)}
+              className={`rounded-2xl border-4 px-4 py-3 text-left text-sm font-semibold ${
+                guess === option ? 'border-[#00c2ff] bg-[#dff7ff] text-[#007e8c]' : 'border-white bg-white text-[#5b5872]'
+              }`}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <form onSubmit={onSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
+        <input
+          value={guess}
+          onChange={(e) => setGuess(e.target.value)}
+          className="w-full rounded-full border-4 border-white bg-white px-5 py-3 text-sm text-[#5b2b86] outline-none"
+          placeholder={lesson.gameType === 'FILL_IN_THE_BLANK' ? 'Type the missing word' : 'Type or pick your answer'}
+        />
+        <button
+          type="submit"
+          className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white"
+        >
+          Check answer
+        </button>
+      </form>
+
+      {guessFeedback && <p className="mt-4 text-sm font-semibold text-[#5b5872]">{guessFeedback}</p>}
+    </>
   )
 }

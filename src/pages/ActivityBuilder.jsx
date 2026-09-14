@@ -190,7 +190,24 @@ export default function ActivityBuilder() {
 
 function ModuleEditor({ module, index, onChanged, onDelete }) {
   const [showAddLesson, setShowAddLesson] = useState(false)
-  const [lessonForm, setLessonForm] = useState({ title: '', videoRef: '', durationSeconds: '' })
+  const emptyLessonForm = {
+    title: '',
+    contentType: 'STORY',
+    content: '',
+    instructions: '',
+    questions: '',
+    assetUrl: '',
+    downloadUrl: '',
+    gameType: 'QUIZ',
+    gamePrompt: '',
+    gameOptions: '',
+    gameAnswer: '',
+    successMessage: '',
+    retryMessage: '',
+    videoRef: '',
+    durationSeconds: '',
+  }
+  const [lessonForm, setLessonForm] = useState(emptyLessonForm)
   const [editingModule, setEditingModule] = useState(false)
   const [moduleTitle, setModuleTitle] = useState(module.title)
   const [editingLessonId, setEditingLessonId] = useState(null)
@@ -216,11 +233,22 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
     try {
       await api.post(`/api/modules/${module.id}/lessons`, {
         title: lessonForm.title,
-        videoProvider: 'YOUTUBE',
+        contentType: lessonForm.contentType,
+        content: lessonForm.content,
+        instructions: lessonForm.instructions,
+        questions: lessonForm.questions,
+        assetUrl: lessonForm.assetUrl,
+        downloadUrl: lessonForm.downloadUrl,
+        gameType: lessonForm.gameType,
+        gamePrompt: lessonForm.gamePrompt,
+        gameOptions: lessonForm.gameOptions,
+        gameAnswer: lessonForm.gameAnswer,
+        successMessage: lessonForm.successMessage,
+        retryMessage: lessonForm.retryMessage,
         videoRef: lessonForm.videoRef,
         durationSeconds: lessonForm.durationSeconds ? Number(lessonForm.durationSeconds) : null,
       })
-      setLessonForm({ title: '', videoRef: '', durationSeconds: '' })
+      setLessonForm(emptyLessonForm)
       setShowAddLesson(false)
       onChanged()
     } catch (err) {
@@ -245,12 +273,23 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
       setError(null)
       await api.patch(`/api/modules/${module.id}/lessons/${lessonId}`, {
         title: lessonForm.title,
-        videoProvider: 'YOUTUBE',
+        contentType: lessonForm.contentType,
+        content: lessonForm.content,
+        instructions: lessonForm.instructions,
+        questions: lessonForm.questions,
+        assetUrl: lessonForm.assetUrl,
+        downloadUrl: lessonForm.downloadUrl,
+        gameType: lessonForm.gameType,
+        gamePrompt: lessonForm.gamePrompt,
+        gameOptions: lessonForm.gameOptions,
+        gameAnswer: lessonForm.gameAnswer,
+        successMessage: lessonForm.successMessage,
+        retryMessage: lessonForm.retryMessage,
         videoRef: lessonForm.videoRef,
         durationSeconds: lessonForm.durationSeconds ? Number(lessonForm.durationSeconds) : null,
       })
       setEditingLessonId(null)
-      setLessonForm({ title: '', videoRef: '', durationSeconds: '' })
+      setLessonForm(emptyLessonForm)
       onChanged()
     } catch (err) {
       setError(err.message)
@@ -303,6 +342,98 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   onChange={(e) => setLessonForm((current) => ({ ...current, title: e.target.value }))}
                   className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
                 />
+                <select
+                  value={lessonForm.contentType}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, contentType: e.target.value }))}
+                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                >
+                  <option value="STORY">Story</option>
+                  <option value="QUESTIONS">Questions</option>
+                  <option value="ACTIVITY">Activity</option>
+                  <option value="GAME">Game</option>
+                  <option value="VIDEO">Video</option>
+                  <option value="COLOURING_PAGE">Colouring page</option>
+                  <option value="DOWNLOAD">Download</option>
+                </select>
+                <textarea
+                  value={lessonForm.content}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, content: e.target.value }))}
+                  rows={3}
+                  placeholder="Story, context, game intro, or main content"
+                  className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                />
+                <textarea
+                  value={lessonForm.instructions}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, instructions: e.target.value }))}
+                  rows={3}
+                  placeholder="Instructions for the child, teacher, or parent"
+                  className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                />
+                <textarea
+                  value={lessonForm.questions}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, questions: e.target.value }))}
+                  rows={3}
+                  placeholder="Questions, one per line"
+                  className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                />
+                <input
+                  value={lessonForm.assetUrl}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, assetUrl: e.target.value }))}
+                  placeholder="Activity or colouring image URL"
+                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                />
+                <input
+                  value={lessonForm.downloadUrl}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, downloadUrl: e.target.value }))}
+                  placeholder="Printable or download URL"
+                  className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                />
+                {lessonForm.contentType === 'GAME' && (
+                  <>
+                    <select
+                      value={lessonForm.gameType}
+                      onChange={(e) => setLessonForm((current) => ({ ...current, gameType: e.target.value }))}
+                      className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                    >
+                      <option value="QUIZ">Quiz</option>
+                      <option value="FILL_IN_THE_BLANK">Fill in the blank</option>
+                    </select>
+                    <textarea
+                      value={lessonForm.gamePrompt}
+                      onChange={(e) => setLessonForm((current) => ({ ...current, gamePrompt: e.target.value }))}
+                      rows={2}
+                      placeholder="Game prompt"
+                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                    />
+                    <textarea
+                      value={lessonForm.gameOptions}
+                      onChange={(e) => setLessonForm((current) => ({ ...current, gameOptions: e.target.value }))}
+                      rows={3}
+                      placeholder="Options, one per line"
+                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                    />
+                    <input
+                      value={lessonForm.gameAnswer}
+                      onChange={(e) => setLessonForm((current) => ({ ...current, gameAnswer: e.target.value }))}
+                      placeholder="Correct answer"
+                      className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
+                    />
+                    <textarea
+                      value={lessonForm.successMessage}
+                      onChange={(e) => setLessonForm((current) => ({ ...current, successMessage: e.target.value }))}
+                      rows={2}
+                      placeholder="Success message"
+                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                    />
+                    <textarea
+                      value={lessonForm.retryMessage}
+                      onChange={(e) => setLessonForm((current) => ({ ...current, retryMessage: e.target.value }))}
+                      rows={2}
+                      placeholder="Try again message"
+                      className="rounded-3xl border-4 border-[#f3ecff] bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                    />
+                  </>
+                )}
                 <input
                   value={lessonForm.videoRef}
                   onChange={(e) => setLessonForm((current) => ({ ...current, videoRef: e.target.value }))}
@@ -324,7 +455,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                     type="button"
                     onClick={() => {
                       setEditingLessonId(null)
-                      setLessonForm({ title: '', videoRef: '', durationSeconds: '' })
+                      setLessonForm(emptyLessonForm)
                     }}
                     className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
                   >
@@ -334,13 +465,30 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
               </form>
             ) : (
               <>
-                <span className="text-[#5b5872]">{lesson.title}</span>
+                <div>
+                  <div className="text-[#5b5872]">{lesson.title}</div>
+                  <div className="text-[11px] font-black uppercase tracking-wide text-[#8f7f9d]">
+                    {lesson.contentType.replaceAll('_', ' ')}
+                  </div>
+                </div>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => {
                       setEditingLessonId(lesson.id)
                       setLessonForm({
                         title: lesson.title || '',
+                        contentType: lesson.contentType || 'STORY',
+                        content: lesson.content || '',
+                        instructions: lesson.instructions || '',
+                        questions: lesson.questions || '',
+                        assetUrl: lesson.assetUrl || '',
+                        downloadUrl: lesson.downloadUrl || '',
+                        gameType: lesson.gameType || 'QUIZ',
+                        gamePrompt: lesson.gamePrompt || '',
+                        gameOptions: lesson.gameOptions || '',
+                        gameAnswer: lesson.gameAnswer || '',
+                        successMessage: lesson.successMessage || '',
+                        retryMessage: lesson.retryMessage || '',
                         videoRef: lesson.videoRef || '',
                         durationSeconds: lesson.durationSeconds?.toString() || '',
                       })
@@ -363,12 +511,110 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
       {showAddLesson ? (
         <form onSubmit={handleAddLesson} className="mt-4 space-y-3 rounded-[1.5rem] bg-white p-4">
           <FormField label="Activity title" value={lessonForm.title} onChange={(value) => setLessonForm((current) => ({ ...current, title: value }))} required />
+          <label className="block">
+            <span className="text-sm font-semibold text-[#5b2b86]">Activity type</span>
+            <select
+              value={lessonForm.contentType}
+              onChange={(e) => setLessonForm((current) => ({ ...current, contentType: e.target.value }))}
+              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+            >
+              <option value="STORY">Story</option>
+              <option value="QUESTIONS">Questions</option>
+              <option value="ACTIVITY">Activity</option>
+              <option value="GAME">Game</option>
+              <option value="VIDEO">Video</option>
+              <option value="COLOURING_PAGE">Colouring page</option>
+              <option value="DOWNLOAD">Download</option>
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-sm font-semibold text-[#5b2b86]">Story or content</span>
+            <textarea
+              value={lessonForm.content}
+              onChange={(e) => setLessonForm((current) => ({ ...current, content: e.target.value }))}
+              rows={4}
+              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+            />
+          </label>
+          <label className="block">
+            <span className="text-sm font-semibold text-[#5b2b86]">Instructions</span>
+            <textarea
+              value={lessonForm.instructions}
+              onChange={(e) => setLessonForm((current) => ({ ...current, instructions: e.target.value }))}
+              rows={3}
+              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+            />
+          </label>
+          <label className="block">
+            <span className="text-sm font-semibold text-[#5b2b86]">Questions</span>
+            <textarea
+              value={lessonForm.questions}
+              onChange={(e) => setLessonForm((current) => ({ ...current, questions: e.target.value }))}
+              rows={3}
+              placeholder="One question per line"
+              className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+            />
+          </label>
+          <FormField label="Asset image URL" value={lessonForm.assetUrl} onChange={(value) => setLessonForm((current) => ({ ...current, assetUrl: value }))} hint="Use for colouring pages or illustrated activities" />
+          <FormField label="Download URL" value={lessonForm.downloadUrl} onChange={(value) => setLessonForm((current) => ({ ...current, downloadUrl: value }))} hint="Optional printable or worksheet link" />
+          {lessonForm.contentType === 'GAME' && (
+            <>
+              <label className="block">
+                <span className="text-sm font-semibold text-[#5b2b86]">Game type</span>
+                <select
+                  value={lessonForm.gameType}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, gameType: e.target.value }))}
+                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                >
+                  <option value="QUIZ">Quiz</option>
+                  <option value="FILL_IN_THE_BLANK">Fill in the blank</option>
+                </select>
+              </label>
+              <label className="block">
+                <span className="text-sm font-semibold text-[#5b2b86]">Game prompt</span>
+                <textarea
+                  value={lessonForm.gamePrompt}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, gamePrompt: e.target.value }))}
+                  rows={2}
+                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-semibold text-[#5b2b86]">Game options</span>
+                <textarea
+                  value={lessonForm.gameOptions}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, gameOptions: e.target.value }))}
+                  rows={3}
+                  placeholder="One option per line"
+                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                />
+              </label>
+              <FormField label="Correct answer" value={lessonForm.gameAnswer} onChange={(value) => setLessonForm((current) => ({ ...current, gameAnswer: value }))} />
+              <label className="block">
+                <span className="text-sm font-semibold text-[#5b2b86]">Success message</span>
+                <textarea
+                  value={lessonForm.successMessage}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, successMessage: e.target.value }))}
+                  rows={2}
+                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-semibold text-[#5b2b86]">Try again message</span>
+                <textarea
+                  value={lessonForm.retryMessage}
+                  onChange={(e) => setLessonForm((current) => ({ ...current, retryMessage: e.target.value }))}
+                  rows={2}
+                  className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                />
+              </label>
+            </>
+          )}
           <FormField
             label="YouTube video ID"
             value={lessonForm.videoRef}
             onChange={(value) => setLessonForm((current) => ({ ...current, videoRef: value }))}
-            hint="Optional for now, but supported for story videos"
-            required
+            hint="Only needed for video steps"
           />
           <FormField label="Duration (seconds, optional)" type="number" value={lessonForm.durationSeconds} onChange={(value) => setLessonForm((current) => ({ ...current, durationSeconds: value }))} />
           {error && <p className="text-sm text-[#d0467a]">{error}</p>}

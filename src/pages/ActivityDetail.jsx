@@ -138,7 +138,10 @@ export default function ActivityDetail() {
                   {module.lessons.map((lesson) => (
                     <li key={lesson.id} className="flex items-center gap-3 rounded-xl bg-white/70 px-4 py-3 text-sm text-[#5b5872]">
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#ffd84d] text-[#8a4b00]">⭐</span>
-                      {lesson.title}
+                      <span>{lesson.title}</span>
+                      <span className="ml-auto text-[11px] font-black uppercase tracking-wide text-[#8f7f9d]">
+                        {lesson.contentType.replaceAll('_', ' ')}
+                      </span>
                     </li>
                   ))}
                 </ul>
