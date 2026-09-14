@@ -22,7 +22,7 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-rock-border bg-rock-bg/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-        <a href="https://rockmission.co.za" className="flex items-center gap-3 font-display text-xl leading-none tracking-wide text-[#5b2b86] sm:text-2xl" rel="noopener noreferrer">
+        <Link to="/" className="flex items-center gap-3 font-display text-xl leading-none tracking-wide text-[#5b2b86] sm:text-2xl">
           <img src={logoUrl} alt="Rockidz" className="h-12 w-auto drop-shadow-[0_10px_20px_rgba(140,82,255,0.18)]" />
           <span className="flex flex-col">
             <span>
@@ -35,7 +35,7 @@ export default function Navbar() {
               Where fun grows faith
             </span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 font-body text-sm md:flex">
           <Link to="/" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
@@ -44,6 +44,14 @@ export default function Navbar() {
           <Link to="/activities" className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
             Activities
           </Link>
+          <a
+            href="https://rockmission.co.za"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#5b5872] transition-colors hover:text-[#00a8b5]"
+          >
+            Rock Mission
+          </a>
 
           {user ? (
             <>
@@ -116,6 +124,15 @@ export default function Navbar() {
             <Link to="/activities" onClick={closeMenu} className="text-[#5b5872] transition-colors hover:text-[#00a8b5]">
               Activities
             </Link>
+            <a
+              href="https://rockmission.co.za"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+              className="text-[#5b5872] transition-colors hover:text-[#00a8b5]"
+            >
+              Rock Mission
+            </a>
 
             {user ? (
               <>
