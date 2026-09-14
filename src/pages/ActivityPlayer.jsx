@@ -141,7 +141,7 @@ export default function ActivityPlayer() {
                           />
                         </div>
                       ) : (
-                        <p className="mt-4 text-sm text-white/72">No video has been added for this step yet.</p>
+                        <p className="mt-4 text-sm text-white/84">No video has been added for this step yet.</p>
                       )}
                     </>
                   ) : (
@@ -167,7 +167,7 @@ export default function ActivityPlayer() {
                 </div>
               </>
             ) : (
-              <p className="text-sm text-white/72">This activity pack doesn&apos;t have any game steps yet.</p>
+              <p className="text-sm text-white/84">This activity pack doesn&apos;t have any game steps yet.</p>
             )}
           </div>
 
@@ -192,7 +192,7 @@ export default function ActivityPlayer() {
                               setGuessFeedback('')
                             }}
                             className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm ${
-                              isActive ? 'bg-[#00c2ff] text-white shadow-[0_16px_28px_rgba(0,194,255,0.24)]' : 'border border-white/12 bg-white/10 text-white/76'
+                              isActive ? 'bg-[#00c2ff] text-white shadow-[0_16px_28px_rgba(0,194,255,0.24)]' : 'border border-white/18 bg-white/12 text-white/88'
                             }`}
                           >
                             <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full ${isDone ? 'bg-[#ffd84d] text-[#6b4b00]' : 'bg-[#ffd6ea] text-[#b33e79]'}`}>
@@ -200,7 +200,7 @@ export default function ActivityPlayer() {
                             </span>
                             <div className="min-w-0 flex-1">
                               <div className="break-words">{lesson.title}</div>
-                              <div className={`text-[10px] font-black uppercase tracking-wide ${isActive ? 'text-white/80' : 'text-white/50'}`}>
+                              <div className={`text-[10px] font-black uppercase tracking-wide ${isActive ? 'text-white/86' : 'text-white/72'}`}>
                                 {formatContentTypeLabel(lesson.contentType)}
                               </div>
                             </div>
@@ -234,7 +234,7 @@ function LessonContent({ lesson }) {
         ) : (
           <p className="mt-3 text-lg font-semibold text-white">This step is ready for your story, context, or lesson notes.</p>
         )}
-        {lesson.instructions && <p className="mt-4 whitespace-pre-line text-sm text-white/74">{lesson.instructions}</p>}
+        {lesson.instructions && <p className="mt-4 whitespace-pre-line text-sm text-white/88">{lesson.instructions}</p>}
       </div>
     </div>
   )
@@ -244,7 +244,7 @@ function StoryPanel({ lesson }) {
   return (
     <>
       <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Story time</p>
-      <p className="mt-3 whitespace-pre-line text-sm text-white/74">
+      <p className="mt-3 whitespace-pre-line text-sm text-white/88">
         {lesson.instructions || lesson.content || 'Add story details or guidance to this step.'}
       </p>
     </>
@@ -258,13 +258,13 @@ function QuestionList({ questions }) {
     .filter(Boolean)
 
   if (items.length === 0) {
-    return <p className="mt-4 text-sm text-white/72">No questions have been added for this step yet.</p>
+    return <p className="mt-4 text-sm text-white/84">No questions have been added for this step yet.</p>
   }
 
   return (
     <ul className="mt-4 space-y-3">
       {items.map((question) => (
-        <li key={question} className="rounded-2xl border border-white/12 bg-white/10 px-4 py-3 text-sm text-white/76">
+        <li key={question} className="rounded-2xl border border-white/18 bg-white/12 px-4 py-3 text-sm text-white/88">
           {question}
         </li>
       ))}
@@ -295,7 +295,7 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
               className={`rounded-2xl border-4 px-4 py-3 text-left text-sm font-semibold ${
                 guess === option
                   ? 'border-[#5fe7ff] bg-[#5fe7ff]/18 text-white shadow-[0_16px_26px_rgba(0,194,255,0.18)]'
-                  : 'border-white/18 bg-white/10 text-white/76'
+                  : 'border-white/22 bg-white/12 text-white/88'
               }`}
             >
               {option}
@@ -319,7 +319,7 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
         </button>
       </form>
 
-      {guessFeedback && <p className="mt-4 text-sm font-semibold text-white/76">{guessFeedback}</p>}
+      {guessFeedback && <p className="mt-4 text-sm font-semibold text-white/88">{guessFeedback}</p>}
     </>
   )
 }
@@ -329,7 +329,7 @@ function ActivityPanel({ lesson }) {
     <>
       <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Hands-on activity</p>
       <h3 className="mt-2 font-display text-3xl text-white">{lesson.instructions || 'Try this activity together'}</h3>
-      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-white/74">{lesson.content}</p>}
+      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-white/88">{lesson.content}</p>}
       {lesson.assetUrl && (
         <img
           src={resolveApiUrl(lesson.assetUrl)}
@@ -346,7 +346,7 @@ function DownloadPanel({ lesson }) {
     <>
       <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Printable download</p>
       <h3 className="mt-2 font-display text-3xl text-white">{lesson.instructions || 'Open the printable resource'}</h3>
-      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-white/74">{lesson.content}</p>}
+      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-white/88">{lesson.content}</p>}
       {lesson.downloadUrl ? (
         <a
           href={resolveApiUrl(lesson.downloadUrl)}
@@ -357,7 +357,7 @@ function DownloadPanel({ lesson }) {
           Download resource
         </a>
       ) : (
-        <p className="mt-4 text-sm text-white/72">No download has been added for this step yet.</p>
+        <p className="mt-4 text-sm text-white/84">No download has been added for this step yet.</p>
       )}
     </>
   )

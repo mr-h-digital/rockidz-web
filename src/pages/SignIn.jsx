@@ -60,7 +60,7 @@ export default function SignIn() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Badge color="bg-[#dff7ff] text-[#007e8c]" label="Stories" />
             <Badge color="bg-[#fff1a8] text-[#8a4b00]" label="Games" />
-            <Badge color="bg-[#efe2ff] text-[#6f33c7]" label="Badges" />
+            <Badge color="bg-[#203e72] text-[#7ce8ff] border border-[#7ce8ff]/35" label="Badges" />
           </div>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
@@ -108,7 +108,7 @@ export default function SignIn() {
         </section>
 
         <section className="order-1 lg:order-2">
-          <div className="relative rounded-[2.2rem] border-4 border-white/70 bg-white/60 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.08)] backdrop-blur-md">
+          <div className="relative rounded-[2.2rem] border-4 border-white/24 bg-[linear-gradient(180deg,rgba(20,11,67,0.78)_0%,rgba(10,44,88,0.74)_100%)] p-4 shadow-[0_22px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl">
             <img src={storyPosterUrl} alt="David and Goliath Rockidz story sheet" className="w-full rounded-[1.7rem] object-cover" />
             <div className="absolute left-2 top-4 rounded-2xl bg-[#8c52ff] px-3 py-2.5 text-white shadow-xl sm:-left-3 sm:top-8 sm:px-4 sm:py-3">
               <div className="font-display text-3xl leading-none">★</div>

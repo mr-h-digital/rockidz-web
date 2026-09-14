@@ -70,7 +70,7 @@ export default function Dashboard() {
               <p className="text-xs font-black uppercase tracking-wide text-[#ff8bc3]">Recent fun</p>
               <ul className="mt-3 space-y-3">
                 {recentActivity.map((item, index) => (
-                  <li key={`${item.title}-${index}`} className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3">
+                  <li key={`${item.title}-${index}`} className="rounded-2xl border border-white/18 bg-white/12 px-4 py-3">
                     <p className="text-sm font-semibold text-white">{item.title}</p>
                     <p className="mt-1 text-xs text-white/82">{item.meta}</p>
                   </li>

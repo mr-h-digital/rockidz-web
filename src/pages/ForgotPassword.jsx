@@ -44,7 +44,7 @@ export default function ForgotPassword() {
       <div className="mx-auto max-w-md px-4 py-14 sm:px-6 sm:py-20">
         <div className="rounded-2xl border border-rock-border bg-[#0f1a2b]/58 p-5 backdrop-blur-md sm:p-8">
           <h1 className="font-display text-4xl sm:text-5xl">Reset password</h1>
-          <p className="mt-2 text-sm text-rock-muted">
+          <p className="mt-2 text-sm text-white/86">
             Enter your email and we will prepare a password reset link.
           </p>
 
@@ -61,11 +61,11 @@ export default function ForgotPassword() {
             {error && <p className="text-sm text-rock-ember">{error}</p>}
 
             {result && (
-              <div className="rounded-xl border border-rock-border bg-white/[0.02] p-4 text-sm text-rock-muted">
+              <div className="rounded-xl border border-white/18 bg-white/10 p-4 text-sm text-white/86">
                 <p>{result.message}</p>
                 {result.resetUrl && (
                   <p className="mt-3">
-                    <a href={result.resetUrl} className="text-rock-gold hover:underline">
+                    <a href={result.resetUrl} className="text-[#7ce8ff] hover:text-white hover:underline">
                       Open reset link
                     </a>
                   </p>
@@ -82,9 +82,9 @@ export default function ForgotPassword() {
             </button>
           </form>
 
-          <p className="mt-6 text-sm text-rock-muted">
+          <p className="mt-6 text-sm text-white/86">
             Remembered your password?{' '}
-            <Link to="/sign-in" className="text-rock-gold hover:underline">
+            <Link to="/sign-in" className="text-[#ffd84d] hover:text-white hover:underline">
               Back to sign in
             </Link>
           </p>

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 
 const programCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.webp`
 const heroBackgroundUrl = `${import.meta.env.BASE_URL}rockidz-home-launch-pad-background.webp`
-const heroLogoUrl = `${import.meta.env.BASE_URL}rockidz-logo-astro.webp`
+const heroLogoUrl = `${import.meta.env.BASE_URL}rockidz-logo-transparent.webp`
 
 export default function Home() {
   const { user } = useAuth()
@@ -28,7 +28,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-14 pt-10 sm:px-6 sm:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="rounded-[2rem] border-4 border-white/20 bg-[linear-gradient(180deg,rgba(34,13,88,0.8)_0%,rgba(24,10,68,0.8)_100%)] p-5 text-white shadow-[0_28px_84px_rgba(9,9,34,0.38)] backdrop-blur-xl sm:p-8">
-            <div className="inline-flex max-w-[260px] -rotate-2 rounded-[1.5rem] border-4 border-white/18 bg-white/8 px-4 py-3 shadow-[0_20px_34px_rgba(0,0,0,0.22)] backdrop-blur-sm">
+            <div className="inline-flex max-w-[260px] -rotate-2 rounded-[1.5rem] border-4 border-white/24 bg-[linear-gradient(180deg,rgba(37,18,93,0.52)_0%,rgba(15,48,98,0.42)_100%)] px-4 py-3 shadow-[0_20px_34px_rgba(0,0,0,0.28)] backdrop-blur-md">
               <img src={heroLogoUrl} alt="Rockidz Kids Ministry" className="h-auto w-full" />
             </div>
 
@@ -74,7 +74,7 @@ export default function Home() {
           </div>
 
           <div className="relative">
-            <div className="rounded-[2rem] border-4 border-white/75 bg-white/74 p-4 shadow-[0_22px_66px_rgba(125,60,255,0.18)] backdrop-blur-md sm:p-5">
+            <div className="rounded-[2rem] border-4 border-white/24 bg-[linear-gradient(180deg,rgba(21,11,64,0.86)_0%,rgba(9,44,88,0.82)_100%)] p-4 shadow-[0_22px_66px_rgba(6,18,52,0.34)] backdrop-blur-xl sm:p-5">
               <img
                 src={programCoverUrl}
                 alt="David and Goliath Rockidz Sunday school program cover"

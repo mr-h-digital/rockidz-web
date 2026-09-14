@@ -143,7 +143,7 @@ export default function ActivityDetail() {
                   <li key={lesson.id} className="flex flex-col gap-2 rounded-xl border border-white/18 bg-white/12 px-4 py-3 text-sm text-white/88 sm:flex-row sm:items-center">
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#ffd84d] text-[#8a4b00]">⭐</span>
                       <span className="sm:flex-1">{lesson.title}</span>
-                    <span className="text-[11px] font-black uppercase tracking-wide text-white/56 sm:ml-auto">
+                    <span className="text-[11px] font-black uppercase tracking-wide text-white/80 sm:ml-auto">
                         {formatContentTypeLabel(lesson.contentType)}
                       </span>
                     </li>

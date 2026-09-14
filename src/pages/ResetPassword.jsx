@@ -66,7 +66,7 @@ export default function ResetPassword() {
       <div className="mx-auto max-w-md px-4 py-14 sm:px-6 sm:py-20">
         <div className="rounded-2xl border border-rock-border bg-[#0f1a2b]/58 p-5 backdrop-blur-md sm:p-8">
           <h1 className="font-display text-4xl sm:text-5xl">Set new password</h1>
-          <p className="mt-2 text-sm text-rock-muted">Use your reset token to create a new password.</p>
+          <p className="mt-2 text-sm text-white/86">Use your reset token to create a new password.</p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <FormField
@@ -108,9 +108,9 @@ export default function ResetPassword() {
             </button>
           </form>
 
-          <p className="mt-6 text-sm text-rock-muted">
+          <p className="mt-6 text-sm text-white/86">
             Need another link?{' '}
-            <Link to="/forgot-password" className="text-rock-gold hover:underline">
+            <Link to="/forgot-password" className="text-[#ffd84d] hover:text-white hover:underline">
               Request reset token
             </Link>
           </p>

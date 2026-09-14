@@ -58,7 +58,7 @@ export default function SignUp() {
 
       <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-6 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[0.98fr_1.02fr]">
         <section className="order-1">
-          <div className="relative rounded-[2.2rem] border-4 border-white/70 bg-white/60 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.08)] backdrop-blur-md">
+          <div className="relative rounded-[2.2rem] border-4 border-white/24 bg-[linear-gradient(180deg,rgba(20,11,67,0.78)_0%,rgba(10,44,88,0.74)_100%)] p-4 shadow-[0_22px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl">
             <img src={lessonTalkUrl} alt="David and Goliath Rockidz lesson discussion page" className="w-full rounded-[1.7rem] object-cover" />
             <div className="absolute left-2 top-4 rounded-2xl bg-[#00c2ff] px-3 py-2.5 text-white shadow-xl sm:-left-3 sm:top-8 sm:px-4 sm:py-3">
               <div className="font-display text-3xl leading-none">+</div>
@@ -83,7 +83,7 @@ export default function SignUp() {
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <InfoCard title="Stories" tone="bg-[#dff7ff] text-[#007e8c]" />
             <InfoCard title="Verses" tone="bg-[#fff1a8] text-[#8a4b00]" />
-            <InfoCard title="Rewards" tone="bg-[#efe2ff] text-[#6f33c7]" />
+            <InfoCard title="Rewards" tone="border border-[#7ce8ff]/35 bg-[#203e72] text-[#7ce8ff]" />
           </div>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">

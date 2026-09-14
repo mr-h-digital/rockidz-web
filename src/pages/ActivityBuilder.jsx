@@ -128,7 +128,7 @@ export default function ActivityBuilder() {
   if (!course) {
     return (
       <ThemedPage variant="builder">
-        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-white/72">Loading…</p>
+        <p className="mx-auto max-w-3xl px-6 py-20 text-sm text-white/86">Loading…</p>
       </ThemedPage>
     )
   }
@@ -136,7 +136,7 @@ export default function ActivityBuilder() {
   return (
     <ThemedPage variant="builder">
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-        <Link to="/teach" className="text-xs font-black uppercase tracking-wide text-white/66 hover:text-[#5fe7ff]">
+        <Link to="/teach" className="text-xs font-black uppercase tracking-wide text-white/84 hover:text-[#5fe7ff]">
           ← Your activity packs
         </Link>
 
@@ -176,13 +176,13 @@ export default function ActivityBuilder() {
 
         <div className="mt-14 border-t border-white/70 pt-8">
           <h2 className="font-display text-3xl text-white">Kids joined</h2>
-          {!roster && <p className="mt-4 text-sm text-white/72">Loading…</p>}
-          {roster && roster.length === 0 && <p className="mt-4 text-sm text-white/72">No children have joined this activity yet.</p>}
+          {!roster && <p className="mt-4 text-sm text-white/86">Loading…</p>}
+          {roster && roster.length === 0 && <p className="mt-4 text-sm text-white/86">No children have joined this activity yet.</p>}
           {roster && roster.length > 0 && (
             <div className="mt-4 overflow-x-auto">
               <table className="min-w-[560px] w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-white/20 text-xs font-black uppercase tracking-wide text-white/58">
+                  <tr className="border-b border-white/20 text-xs font-black uppercase tracking-wide text-white/84">
                     <th className="py-2 font-black">Child</th>
                     <th className="py-2 font-black">Status</th>
                     <th className="py-2 font-black">Progress</th>
@@ -193,9 +193,9 @@ export default function ActivityBuilder() {
                     <tr key={entry.userId} className="border-b border-white/12">
                       <td className="py-3">
                         <div className="text-white">{entry.displayName}</div>
-                        <div className="text-xs text-white/62">{entry.email}</div>
+                        <div className="text-xs text-white/80">{entry.email}</div>
                       </td>
-                      <td className="py-3 text-white/68">{entry.enrollmentStatus}</td>
+                      <td className="py-3 text-white/84">{entry.enrollmentStatus}</td>
                       <td className="py-3 text-xs font-bold text-[#5fe7ff]">
                         {entry.completedLessons}/{entry.totalLessons}
                       </td>
@@ -516,9 +516,9 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                       <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
                         Choose file
                       </span>
-                      <span className="flex-1 truncate text-white/64">{selectedAssetFile?.name || 'No file chosen'}</span>
+                      <span className="flex-1 truncate text-white/84">{selectedAssetFile?.name || 'No file chosen'}</span>
                     </label>
-                    <span className="mt-1 block text-xs text-white/62">
+                    <span className="mt-1 block text-xs text-white/78">
                       {uploadingAsset
                         ? `Uploading and optimizing image… ${assetUploadProgress}%`
                         : 'PNG, JPG, WEBP, or GIF. This uploads the colouring page image and saves its lesson asset URL for you.'}
@@ -535,7 +535,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                       <img src={resolveApiUrl(lessonForm.assetUrl)} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
                     )}
                     {!lessonForm.assetUrl && selectedAssetFile && (
-                      <p className="mt-3 text-sm text-white/74">
+                      <p className="mt-3 text-sm text-white/88">
                         {selectedAssetFile.name} ({formatFileSize(selectedAssetFile.size)})
                       </p>
                     )}
@@ -627,7 +627,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
               <>
                 <div className="min-w-0">
                   <div className="break-words text-white/84">{lesson.title}</div>
-                  <div className="text-[11px] font-black uppercase tracking-wide text-white/50">
+                  <div className="text-[11px] font-black uppercase tracking-wide text-white/74">
                     {formatContentTypeLabel(lesson.contentType)}
                   </div>
                 </div>
@@ -666,7 +666,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             )}
           </li>
         ))}
-        {module.lessons.length === 0 && <p className="text-sm text-white/72">No activity steps yet.</p>}
+        {module.lessons.length === 0 && <p className="text-sm text-white/86">No activity steps yet.</p>}
 
       </ul>
 
@@ -752,15 +752,15 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                 <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
                   Choose file
                 </span>
-                <span className="flex-1 truncate text-white/64">{selectedAssetFile?.name || 'No file chosen'}</span>
+                <span className="flex-1 truncate text-white/84">{selectedAssetFile?.name || 'No file chosen'}</span>
               </label>
-              <span className="mt-1 block text-xs text-white/62">
+              <span className="mt-1 block text-xs text-white/78">
                 {selectedAssetFile
                   ? 'Your selected colouring page image will be uploaded after you add this lesson.'
                   : 'Optional. Choose a colouring page image to prefill the lesson asset URL after the lesson is created.'}
               </span>
               {!lessonForm.assetUrl && selectedAssetFile && (
-                <p className="mt-3 text-sm text-white/74">
+                <p className="mt-3 text-sm text-white/88">
                   {selectedAssetFile.name} ({formatFileSize(selectedAssetFile.size)})
                 </p>
               )}

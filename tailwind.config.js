@@ -5,16 +5,16 @@ export default {
     extend: {
       colors: {
         rock: {
-          bg: '#fff4cf',
-          panel: '#ffffff',
-          panel2: '#fff0fb',
-          border: 'rgba(140, 82, 255, 0.26)',
+          bg: '#120a36',
+          panel: '#170c49',
+          panel2: '#0d2f61',
+          border: 'rgba(95, 231, 255, 0.24)',
           gold: '#00b8ff',
           goldlight: '#5fe7ff',
           ember: '#ff4fa3',
           emberlight: '#ff8fc3',
-          cream: '#4f1f8f',
-          muted: 'rgba(72, 53, 109, 0.9)',
+          cream: '#ffffff',
+          muted: 'rgba(255, 255, 255, 0.82)',
           yellow: '#ffd233',
           lime: '#b8ef00',
           violet: '#7d3cff',

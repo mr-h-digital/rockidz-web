@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-const logoUrl = `${import.meta.env.BASE_URL}rockidz-logo-astro-transparent.webp`
+const logoUrl = `${import.meta.env.BASE_URL}rockidz-logo-transparent.webp`
 const desktopNavLinkClassName =
   'rounded-full px-3 py-2 text-[13px] font-bold tracking-[0.04em] !text-white transition-all duration-200 hover:bg-white/10 hover:!text-[#5fe7ff] hover:shadow-[0_0_18px_rgba(95,231,255,0.22)]'
 const mobileNavLinkClassName =
@@ -31,7 +31,7 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-3 font-display text-xl leading-none tracking-wide text-white sm:text-2xl">
           <img src={logoUrl} alt="Rockidz Kids Ministry" className="h-14 w-auto drop-shadow-[0_16px_28px_rgba(125,60,255,0.24)] sm:h-16" />
           <span className="hidden flex-col sm:flex">
-            <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#d5c8ff]">Kids Ministry</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.24em] text-white/88">Kids Ministry</span>
             <span className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#ffd233]">
               Launch into God&apos;s Word
             </span>
@@ -165,7 +165,7 @@ export default function Navbar() {
                   </Link>
                 )}
                 <div className="rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 shadow-[0_10px_22px_rgba(5,5,28,0.12)]">
-                  <span className="block text-[10px] font-black uppercase tracking-[0.2em] text-[#d5c8ff]">Signed in as</span>
+                  <span className="block text-[10px] font-black uppercase tracking-[0.2em] text-white/82">Signed in as</span>
                   <span className="mt-1 block truncate text-sm font-bold text-white">{user.displayName}</span>
                 </div>
                 <button
