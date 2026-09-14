@@ -40,7 +40,13 @@ export default function Teach() {
   const isSubmitting = creating || (editingCourseId != null && savingCourseId === editingCourseId)
 
   function loadCourses() {
-    api.get('/api/courses/mine').then(setCourses).catch((err) => setError(err.message))
+    return api.get('/api/courses/mine').then((loadedCourses) => {
+      setCourses(loadedCourses)
+      return loadedCourses
+    }).catch((err) => {
+      setError(err.message)
+      throw err
+    })
   }
 
   useEffect(loadCourses, [])
@@ -149,12 +155,15 @@ export default function Teach() {
     setUploadingThumbnail(true)
     setThumbnailUploadProgress(0)
     try {
-      const uploaded = await api.upload(`/api/courses/${editingCourseId}/thumbnail`, file, 'file', {
+      await api.upload(`/api/courses/${editingCourseId}/thumbnail`, file, 'file', {
         onProgress: setThumbnailUploadProgress,
       })
-      setForm((current) => ({ ...current, thumbnailUrl: uploaded.url }))
       setSelectedThumbnailFile(null)
-      loadCourses()
+      const refreshedCourses = await loadCourses()
+      const updatedCourse = refreshedCourses?.find?.((course) => course.id === editingCourseId)
+      if (updatedCourse) {
+        setForm((current) => ({ ...current, thumbnailUrl: updatedCourse.thumbnailUrl || '' }))
+      }
     } catch (err) {
       setError(err.message)
     } finally {
