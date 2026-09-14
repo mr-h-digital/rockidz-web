@@ -51,7 +51,7 @@ export default function AdminUsers() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="user@example.com"
               required
-              className="mt-1.5 w-full rounded-lg border border-white/18 bg-white/10 px-4 py-2.5 text-sm text-white outline-none placeholder:text-white/40 focus:border-[#ffd233]"
+              className="mt-1.5 w-full rounded-lg border border-white/18 bg-white/10 px-4 py-2.5 text-sm text-white outline-none placeholder:text-white/72 focus:border-[#ffd233]"
             />
           </label>
 

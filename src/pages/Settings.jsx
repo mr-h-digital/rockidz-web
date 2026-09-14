@@ -92,6 +92,7 @@ export default function Settings() {
         <form
           onSubmit={handleSubmit}
           className="mt-6 space-y-5 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.84)_0%,rgba(9,41,84,0.76)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.22)] sm:p-6"
+          autoComplete="off"
         >
           <FormField
             label="Display name"

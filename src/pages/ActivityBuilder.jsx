@@ -165,7 +165,7 @@ export default function ActivityBuilder() {
             value={newModuleTitle}
             onChange={(e) => setNewModuleTitle(e.target.value)}
             placeholder="New story step title"
-            className="flex-1 rounded-full border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+            className="flex-1 rounded-full border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
           />
           <button type="submit" disabled={addingModule} className="w-full rounded-full bg-[#00c2ff] px-5 py-3 text-xs font-black uppercase tracking-wide text-white disabled:opacity-50 sm:w-auto">
             {addingModule ? 'Adding…' : 'Add story step'}
@@ -437,7 +437,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                 <input
                   value={lessonForm.title}
                   onChange={(e) => setLessonForm((current) => ({ ...current, title: e.target.value }))}
-                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 <select
                   value={lessonForm.contentType}
@@ -457,27 +457,27 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   onChange={(e) => setLessonForm((current) => ({ ...current, content: e.target.value }))}
                   rows={3}
                   placeholder="Story, context, game intro, or main content"
-                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 <textarea
                   value={lessonForm.instructions}
                   onChange={(e) => setLessonForm((current) => ({ ...current, instructions: e.target.value }))}
                   rows={3}
                   placeholder="Instructions for the child, teacher, or parent"
-                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 <textarea
                   value={lessonForm.questions}
                   onChange={(e) => setLessonForm((current) => ({ ...current, questions: e.target.value }))}
                   rows={3}
                   placeholder="Questions, one per line"
-                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 <input
                   value={lessonForm.assetUrl}
                   onChange={(e) => setLessonForm((current) => ({ ...current, assetUrl: e.target.value }))}
                   placeholder="Activity or colouring image URL"
-                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 {lessonForm.contentType === 'COLOURING_PAGE' && (
                   <label className="block">
@@ -545,7 +545,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   value={lessonForm.downloadUrl}
                   onChange={(e) => setLessonForm((current) => ({ ...current, downloadUrl: e.target.value }))}
                   placeholder="Printable or download URL"
-                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 {lessonForm.contentType === 'GAME' && (
                   <>
@@ -562,34 +562,34 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                       onChange={(e) => setLessonForm((current) => ({ ...current, gamePrompt: e.target.value }))}
                       rows={2}
                       placeholder="Game prompt"
-                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                     />
                     <textarea
                       value={lessonForm.gameOptions}
                       onChange={(e) => setLessonForm((current) => ({ ...current, gameOptions: e.target.value }))}
                       rows={3}
                       placeholder="Options, one per line"
-                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                     />
                     <input
                       value={lessonForm.gameAnswer}
                       onChange={(e) => setLessonForm((current) => ({ ...current, gameAnswer: e.target.value }))}
                       placeholder="Correct answer"
-                      className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
+                      className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/72"
                     />
                     <textarea
                       value={lessonForm.successMessage}
                       onChange={(e) => setLessonForm((current) => ({ ...current, successMessage: e.target.value }))}
                       rows={2}
                       placeholder="Success message"
-                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                     />
                     <textarea
                       value={lessonForm.retryMessage}
                       onChange={(e) => setLessonForm((current) => ({ ...current, retryMessage: e.target.value }))}
                       rows={2}
                       placeholder="Try again message"
-                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                      className="rounded-3xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                     />
                   </>
                 )}
@@ -597,14 +597,14 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   value={lessonForm.videoRef}
                   onChange={(e) => setLessonForm((current) => ({ ...current, videoRef: e.target.value }))}
                   placeholder="YouTube video ID"
-                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 <input
                   type="number"
                   value={lessonForm.durationSeconds}
                   onChange={(e) => setLessonForm((current) => ({ ...current, durationSeconds: e.target.value }))}
                   placeholder="Duration in seconds"
-                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/40"
+                  className="rounded-full border-2 border-white/18 bg-white/10 px-4 py-2 text-sm text-white outline-none placeholder:text-white/72"
                 />
                 <div className="flex items-center gap-3">
                   <button type="submit" className="text-xs font-black uppercase tracking-wide text-[#5fe7ff] hover:underline">
@@ -714,7 +714,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
               onChange={(e) => setLessonForm((current) => ({ ...current, questions: e.target.value }))}
               rows={3}
               placeholder="One question per line"
-              className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+              className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
             />
           </label>
           <FormField label="Asset image URL" value={lessonForm.assetUrl} onChange={(value) => setLessonForm((current) => ({ ...current, assetUrl: value }))} hint="Use for colouring pages or illustrated activities" />
@@ -799,7 +799,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   onChange={(e) => setLessonForm((current) => ({ ...current, gameOptions: e.target.value }))}
                   rows={3}
                   placeholder="One option per line"
-                  className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                  className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
                 />
               </label>
               <FormField label="Correct answer" value={lessonForm.gameAnswer} onChange={(value) => setLessonForm((current) => ({ ...current, gameAnswer: value }))} />

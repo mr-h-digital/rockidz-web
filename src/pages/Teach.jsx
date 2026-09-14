@@ -229,7 +229,7 @@ export default function Teach() {
                 value={form.description}
                 onChange={(e) => setForm((current) => ({ ...current, description: e.target.value }))}
                 rows={3}
-                className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
+                className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/72"
               />
             </label>
             <FormField label="Thumbnail URL (optional)" value={form.thumbnailUrl} onChange={(value) => setForm((current) => ({ ...current, thumbnailUrl: value }))} />

@@ -308,7 +308,7 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
         <input
           value={guess}
           onChange={(e) => setGuess(e.target.value)}
-          className="w-full rounded-full border-2 border-white/18 bg-white/10 px-5 py-3 text-sm text-white outline-none placeholder:text-white/42"
+          className="w-full rounded-full border-2 border-white/18 bg-white/10 px-5 py-3 text-sm text-white outline-none placeholder:text-white/72"
           placeholder={lesson.gameType === 'FILL_IN_THE_BLANK' ? 'Type the missing word' : 'Type or pick your answer'}
         />
         <button
