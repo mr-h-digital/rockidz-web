@@ -85,20 +85,20 @@ export default function ActivityDetail() {
   return (
     <ThemedPage variant="detail">
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
-        <div className="rounded-[2rem] border-4 border-white/70 bg-white/65 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.08)] backdrop-blur-md sm:p-7">
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">Led by {course.createdByName}</p>
-          <h1 className="mt-2 text-4xl font-display text-[#5b2b86] sm:text-5xl">{course.title}</h1>
-          <p className="mt-4 text-[#5b5872]">{course.description}</p>
+        <div className="rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(23,12,73,0.86)_0%,rgba(10,42,85,0.8)_100%)] p-5 text-white shadow-[0_20px_52px_rgba(4,4,28,0.28)] backdrop-blur-xl sm:p-7">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ffd233]">Scripture constellation · Led by {course.createdByName}</p>
+          <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">{course.title}</h1>
+          <p className="mt-4 text-white/74">{course.description}</p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wide text-[#8f7f9d]">
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wide text-white/58">
             <span>{modules.length} story steps</span>
             <span>{totalLessons} activities</span>
             <span>{course.enrolledCount} kids joined</span>
           </div>
 
-          <div className="mt-8 rounded-[1.5rem] bg-[#fff5b8] p-5">
-            <h2 className="font-display text-3xl text-[#8a4b00]">What kids will do</h2>
-            <p className="mt-2 text-sm text-[#6b5a2c]">
+          <div className="mt-8 rounded-[1.5rem] border border-white/16 bg-white/10 p-5 backdrop-blur-sm">
+            <h2 className="font-display text-3xl text-[#ffd233]">What kids will do</h2>
+            <p className="mt-2 text-sm text-white/76">
               Read the Bible story, enjoy playful activities, learn a memory verse, and finish with a cheerful reward.
             </p>
           </div>
@@ -112,7 +112,7 @@ export default function ActivityDetail() {
             {enrolled ? (
               <button
                 onClick={() => navigate(`/activities/${slug}/play`)}
-                className="w-full rounded-full bg-[#00c2ff] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(0,194,255,0.28)] transition-transform hover:-translate-y-0.5 sm:w-auto"
+                className="w-full rounded-full bg-[#00c2ff] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-[0_16px_30px_rgba(0,194,255,0.32)] transition-transform hover:-translate-y-0.5 sm:w-auto"
               >
                 You&apos;re in — start playing
               </button>
@@ -120,30 +120,30 @@ export default function ActivityDetail() {
               <button
                 onClick={handleEnroll}
                 disabled={enrolling}
-                className="w-full rounded-full bg-[#ff6fb5] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-[0_14px_28px_rgba(255,111,181,0.3)] transition-transform hover:-translate-y-0.5 disabled:opacity-50 sm:w-auto"
+                className="w-full rounded-full bg-[#ff6fb5] px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-[0_16px_30px_rgba(255,111,181,0.32)] transition-transform hover:-translate-y-0.5 disabled:opacity-50 sm:w-auto"
               >
                 {enrolling ? 'Joining…' : 'Join this activity'}
               </button>
             )}
-            {enrollError && <p className="mt-3 text-sm text-[#d0467a]">{enrollError}</p>}
+            {enrollError && <p className="mt-3 text-sm text-[#ff8bc3]">{enrollError}</p>}
           </div>
         </div>
 
         <div className="mt-10">
-          <h2 className="font-display text-3xl text-[#5b2b86]">Adventure path</h2>
+          <h2 className="font-display text-3xl text-white">Adventure path</h2>
           <ol className="mt-6 space-y-5">
             {modules.map((module, index) => (
-              <li key={module.id} className="rounded-[1.75rem] border-4 border-white/70 bg-white/65 p-5">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">
+            <li key={module.id} className="rounded-[1.75rem] border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.82)_0%,rgba(9,42,84,0.72)_100%)] p-5 text-white shadow-[0_16px_36px_rgba(4,4,28,0.18)]">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">
                   Step {String(index + 1).padStart(2, '0')}
                 </p>
-                <h3 className="mt-1 font-display text-2xl text-[#5b2b86]">{module.title}</h3>
+              <h3 className="mt-1 font-display text-2xl text-white">{module.title}</h3>
                 <ul className="mt-3 space-y-2">
                   {module.lessons.map((lesson) => (
-                    <li key={lesson.id} className="flex flex-col gap-2 rounded-xl bg-white/70 px-4 py-3 text-sm text-[#5b5872] sm:flex-row sm:items-center">
+                  <li key={lesson.id} className="flex flex-col gap-2 rounded-xl border border-white/12 bg-white/10 px-4 py-3 text-sm text-white/76 sm:flex-row sm:items-center">
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#ffd84d] text-[#8a4b00]">⭐</span>
                       <span className="sm:flex-1">{lesson.title}</span>
-                      <span className="text-[11px] font-black uppercase tracking-wide text-[#8f7f9d] sm:ml-auto">
+                    <span className="text-[11px] font-black uppercase tracking-wide text-white/56 sm:ml-auto">
                         {formatContentTypeLabel(lesson.contentType)}
                       </span>
                     </li>
@@ -153,7 +153,7 @@ export default function ActivityDetail() {
             ))}
           </ol>
 
-          {modules.length === 0 && <p className="mt-4 text-sm text-[#5b5872]">This activity pack is being prepared right now.</p>}
+          {modules.length === 0 && <p className="mt-4 text-sm text-white/70">This activity pack is being prepared right now.</p>}
         </div>
       </div>
     </ThemedPage>

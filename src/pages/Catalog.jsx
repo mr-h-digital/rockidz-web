@@ -20,12 +20,15 @@ export default function Catalog() {
       <Marquee items={['Story time adventures', 'Printable fun sheets', 'Memory verses and mini games']} />
 
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">Activities</p>
-        <h1 className="mt-2 text-4xl font-display text-[#5b2b86] sm:text-5xl">Choose a fun Bible adventure</h1>
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ffd233]">Adventure Galaxy</p>
+        <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">Choose your next Bible adventure</h1>
+        <p className="mt-4 max-w-2xl text-sm text-white/76 sm:text-base">
+          Explore glowing story worlds, playful challenges, memory verse missions, and printable discoveries waiting across the Rockidz universe.
+        </p>
 
-        {error && <p className="mt-6 text-sm text-[#d0467a]">Couldn't load activities: {error}</p>}
-        {!courses && !error && <p className="mt-10 text-sm text-[#5b5872]">Loading activities…</p>}
-        {courses && courses.length === 0 && <p className="mt-10 text-sm text-[#5b5872]">New Rockidz activities are coming soon.</p>}
+        {error && <p className="mt-6 text-sm text-[#ff8ebf]">Couldn't load activities: {error}</p>}
+        {!courses && !error && <p className="mt-10 text-sm text-white/70">Scanning the galaxy for activities…</p>}
+        {courses && courses.length === 0 && <p className="mt-10 text-sm text-white/70">New Rockidz adventures are docking soon.</p>}
 
         {courses && courses.length > 0 && (
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

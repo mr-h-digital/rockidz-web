@@ -1,35 +1,67 @@
 const BACKDROPS = {
   catalog: {
-    imageUrl: `${import.meta.env.BASE_URL}rockidz-activities-page-background-image.webp`,
-    gradientClass: 'bg-[linear-gradient(180deg,rgba(255,229,95,0.76)_0%,rgba(255,124,196,0.52)_48%,rgba(113,228,255,0.72)_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-activities-adventure-galaxy-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(11,7,44,0.7)_0%,rgba(18,11,74,0.66)_44%,rgba(6,57,106,0.58)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_18%_16%,rgba(255,79,163,0.16),transparent_18%),radial-gradient(circle_at_78%_20%,rgba(95,231,255,0.18),transparent_20%),radial-gradient(circle_at_22%_76%,rgba(184,239,0,0.14),transparent_16%),radial-gradient(circle_at_88%_68%,rgba(255,210,51,0.14),transparent_16%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(31,15,83,0.42)_0%,rgba(29,18,92,0.24)_36%,rgba(4,74,117,0.28)_100%)]',
   },
   detail: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#8feeff_0%,#ffc0e2_55%,#ffe772_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-bible-lessons-constellations-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(15,10,51,0.8)_0%,rgba(25,14,73,0.76)_40%,rgba(8,48,92,0.72)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_18%_18%,rgba(255,210,51,0.14),transparent_18%),radial-gradient(circle_at_84%_22%,rgba(95,231,255,0.14),transparent_18%),radial-gradient(circle_at_50%_68%,rgba(255,79,163,0.1),transparent_22%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(28,15,83,0.32)_0%,rgba(42,18,95,0.18)_38%,rgba(10,74,122,0.2)_100%)]',
   },
   player: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#ffe772_0%,#90efff_45%,#ffb2d8_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-quiz-cosmic-challenge-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(8,11,47,0.86)_0%,rgba(17,15,70,0.8)_38%,rgba(6,49,96,0.76)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_16%_14%,rgba(0,184,255,0.16),transparent_18%),radial-gradient(circle_at_82%_22%,rgba(255,79,163,0.14),transparent_18%),radial-gradient(circle_at_24%_78%,rgba(255,210,51,0.12),transparent_16%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(13,19,64,0.4)_0%,rgba(29,18,80,0.16)_42%,rgba(6,79,115,0.18)_100%)]',
   },
   dashboard: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#ffc0e2_0%,#ffe772_55%,#90efff_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-rewards-galactic-station-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(12,10,51,0.82)_0%,rgba(21,13,74,0.76)_42%,rgba(7,55,101,0.68)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_18%_16%,rgba(255,79,163,0.16),transparent_18%),radial-gradient(circle_at_78%_18%,rgba(255,210,51,0.14),transparent_18%),radial-gradient(circle_at_50%_74%,rgba(95,231,255,0.12),transparent_20%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(31,17,88,0.34)_0%,rgba(33,19,90,0.18)_42%,rgba(4,82,120,0.18)_100%)]',
   },
   teach: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#90efff_0%,#ffe772_60%,#ffc0e2_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-bible-lessons-constellations-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(8,14,55,0.82)_0%,rgba(15,18,74,0.78)_42%,rgba(8,59,94,0.68)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_16%_16%,rgba(95,231,255,0.14),transparent_18%),radial-gradient(circle_at_82%_20%,rgba(255,210,51,0.12),transparent_18%),radial-gradient(circle_at_52%_76%,rgba(255,79,163,0.12),transparent_18%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(13,21,66,0.34)_0%,rgba(18,31,77,0.18)_42%,rgba(7,85,116,0.18)_100%)]',
   },
   builder: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#ffe772_0%,#90efff_50%,#ffc0e2_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-bible-lessons-constellations-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(11,14,56,0.84)_0%,rgba(20,13,71,0.8)_42%,rgba(7,56,99,0.72)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_14%_20%,rgba(255,210,51,0.14),transparent_18%),radial-gradient(circle_at_84%_18%,rgba(95,231,255,0.16),transparent_18%),radial-gradient(circle_at_50%_78%,rgba(255,79,163,0.12),transparent_18%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(16,21,66,0.34)_0%,rgba(32,14,86,0.18)_42%,rgba(5,82,116,0.18)_100%)]',
   },
   admin: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#ffc0e2_0%,#90efff_45%,#ffe772_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-signin-mission-control-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(14,9,49,0.88)_0%,rgba(22,14,72,0.82)_38%,rgba(6,47,85,0.76)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_18%_18%,rgba(255,79,163,0.12),transparent_18%),radial-gradient(circle_at_82%_18%,rgba(95,231,255,0.14),transparent_18%),radial-gradient(circle_at_50%_74%,rgba(255,210,51,0.1),transparent_20%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(17,13,58,0.4)_0%,rgba(27,15,75,0.18)_42%,rgba(7,61,95,0.18)_100%)]',
   },
   settings: {
-    imageUrl: '',
-    gradientClass: 'bg-[linear-gradient(180deg,#ffe772_0%,#ffc0e2_55%,#90efff_100%)]',
+    imageUrl: `${import.meta.env.BASE_URL}rockidz-signin-mission-control-background.webp`,
+    overlayClass:
+      'bg-[linear-gradient(180deg,rgba(12,10,51,0.84)_0%,rgba(20,14,72,0.8)_40%,rgba(8,55,98,0.72)_100%)]',
+    accentClass:
+      'bg-[radial-gradient(circle_at_18%_18%,rgba(255,210,51,0.12),transparent_18%),radial-gradient(circle_at_80%_20%,rgba(255,79,163,0.12),transparent_18%),radial-gradient(circle_at_48%_78%,rgba(95,231,255,0.12),transparent_20%)]',
+    gradientClass: 'bg-[linear-gradient(180deg,rgba(14,15,59,0.38)_0%,rgba(29,16,82,0.18)_42%,rgba(8,74,110,0.18)_100%)]',
   },
 }
 
@@ -40,7 +72,8 @@ export default function ThemedPage({ variant = 'catalog', children }) {
     <div className="relative isolate min-h-screen overflow-hidden bg-[#1a1242]">
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         {backdrop.imageUrl ? <img src={backdrop.imageUrl} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.3]" /> : null}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(255,79,163,0.34),transparent_20%),radial-gradient(circle_at_80%_20%,rgba(0,184,255,0.3),transparent_22%),radial-gradient(circle_at_bottom,rgba(255,210,51,0.26),transparent_20%),radial-gradient(circle_at_62%_38%,rgba(125,60,255,0.28),transparent_22%),radial-gradient(circle_at_28%_74%,rgba(184,239,0,0.16),transparent_18%)]" />
+        <div className={`absolute inset-0 ${backdrop.overlayClass}`} />
+        <div className={`absolute inset-0 ${backdrop.accentClass}`} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_24%,rgba(255,255,255,0.7)_0_2px,transparent_3px),radial-gradient(circle_at_74%_16%,rgba(255,255,255,0.62)_0_2px,transparent_3px),radial-gradient(circle_at_86%_56%,rgba(255,255,255,0.58)_0_1.5px,transparent_3px),radial-gradient(circle_at_32%_82%,rgba(255,255,255,0.52)_0_1.5px,transparent_3px)] opacity-70" />
         <div className={`absolute inset-0 ${backdrop.gradientClass}`} />
       </div>

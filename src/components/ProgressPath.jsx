@@ -22,15 +22,15 @@ export default function ProgressPath({ completed, total, size = 'md' }) {
             key={i}
             className={`${dimension} rounded-full border border-white/50 transition-colors duration-500 ${
               state === 'lit'
-                ? 'bg-[#00b8ff] shadow-[0_0_10px_rgba(0,184,255,0.75)]'
+                ? 'bg-[#00b8ff] shadow-[0_0_12px_rgba(0,184,255,0.8)]'
                 : state === 'ember'
-                  ? 'bg-[#ff4fa3] shadow-[0_0_10px_rgba(255,79,163,0.7)]'
-                  : 'bg-[#fff2a6]/85'
+                  ? 'bg-[#ff4fa3] shadow-[0_0_12px_rgba(255,79,163,0.78)]'
+                  : 'bg-white/18'
             }`}
           />
         ))}
       </div>
-      <span className="whitespace-nowrap font-body text-xs text-[#5d487f]">
+      <span className="whitespace-nowrap font-body text-xs text-white/72">
         {completed}/{total}
       </span>
     </div>

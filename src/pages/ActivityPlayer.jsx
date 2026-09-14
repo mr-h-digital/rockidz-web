@@ -77,7 +77,7 @@ export default function ActivityPlayer() {
   return (
     <ThemedPage variant="player">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6fb5]">{course.title}</p>
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ffd233]">Cosmic challenge zone · {course.title}</p>
         <div className="mt-3">
           <ProgressPath completed={completedCount} total={totalLessons} size="sm" />
         </div>
@@ -86,18 +86,18 @@ export default function ActivityPlayer() {
           <div className="space-y-6">
             {activeLesson ? (
               <>
-                <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.08)] sm:p-6">
-                  <h2 className="font-display text-3xl text-[#5b2b86] sm:text-4xl">{activeLesson.title}</h2>
-                  <p className="mt-2 text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">
+                <div className="rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.86)_0%,rgba(10,42,85,0.8)_100%)] p-5 text-white shadow-[0_18px_50px_rgba(4,4,28,0.28)] sm:p-6">
+                  <h2 className="font-display text-3xl text-white sm:text-4xl">{activeLesson.title}</h2>
+                  <p className="mt-2 text-xs font-black uppercase tracking-[0.18em] text-[#ff8bc3]">
                     {formatContentTypeLabel(activeLesson.contentType)}
                   </p>
                   <LessonContent lesson={activeLesson} />
                 </div>
 
-                <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 sm:p-6">
+                <div className="rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(20,11,68,0.86)_0%,rgba(8,41,82,0.78)_100%)] p-5 text-white shadow-[0_18px_50px_rgba(4,4,28,0.24)] sm:p-6">
                   {activeLesson.contentType === 'QUESTIONS' ? (
                     <>
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Discussion time</p>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Discussion time</p>
                       <QuestionList questions={activeLesson.questions} />
                     </>
                   ) : activeLesson.contentType === 'GAME' ? (
@@ -108,7 +108,7 @@ export default function ActivityPlayer() {
                     <DownloadPanel lesson={activeLesson} />
                   ) : activeLesson.contentType === 'COLOURING_PAGE' ? (
                     <>
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Colouring page</p>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Colouring page</p>
                       <img
                         src={activeLesson.assetUrl ? resolveApiUrl(activeLesson.assetUrl) : colouringPageUrl}
                         alt={activeLesson.title}
@@ -129,7 +129,7 @@ export default function ActivityPlayer() {
                     </>
                   ) : activeLesson.contentType === 'VIDEO' ? (
                     <>
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Video activity</p>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Video activity</p>
                       {activeLesson.videoRef ? (
                         <div className="mt-4 aspect-video overflow-hidden rounded-[1.5rem] border-4 border-white/70">
                           <iframe
@@ -141,7 +141,7 @@ export default function ActivityPlayer() {
                           />
                         </div>
                       ) : (
-                        <p className="mt-4 text-sm text-[#5b5872]">No video has been added for this step yet.</p>
+                        <p className="mt-4 text-sm text-white/72">No video has been added for this step yet.</p>
                       )}
                     </>
                   ) : (
@@ -151,15 +151,15 @@ export default function ActivityPlayer() {
                   <button
                     onClick={() => markComplete(activeLesson.id)}
                     disabled={!!progressByLesson[activeLesson.id]}
-                    className="mt-6 w-full rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] disabled:opacity-50 sm:w-auto"
+                    className="mt-6 w-full rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] shadow-[0_16px_28px_rgba(255,216,77,0.22)] disabled:opacity-50 sm:w-auto"
                   >
                     {progressByLesson[activeLesson.id] ? 'Activity complete' : 'Mark this activity complete'}
                   </button>
 
                   {activeLesson.downloadUrl && (
-                    <div className="mt-6 rounded-[1.5rem] bg-white p-4">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">Printable resource</p>
-                      <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="mt-3 inline-flex w-full justify-center rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] sm:w-auto">
+                    <div className="mt-6 rounded-[1.5rem] border border-white/14 bg-white/10 p-4 backdrop-blur-sm">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff8bc3]">Printable resource</p>
+                      <a href={resolveApiUrl(activeLesson.downloadUrl)} target="_blank" rel="noreferrer" className="mt-3 inline-flex w-full justify-center rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] shadow-[0_16px_28px_rgba(255,216,77,0.22)] sm:w-auto">
                         Open resource
                       </a>
                     </div>
@@ -167,16 +167,16 @@ export default function ActivityPlayer() {
                 </div>
               </>
             ) : (
-              <p className="text-sm text-[#5b5872]">This activity pack doesn&apos;t have any game steps yet.</p>
+              <p className="text-sm text-white/72">This activity pack doesn&apos;t have any game steps yet.</p>
             )}
           </div>
 
-          <aside className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-5">
-            <h3 className="font-display text-2xl text-[#5b2b86] sm:text-3xl">Adventure map</h3>
+          <aside className="rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(23,12,73,0.84)_0%,rgba(9,42,84,0.76)_100%)] p-5 text-white shadow-[0_18px_44px_rgba(4,4,28,0.22)]">
+            <h3 className="font-display text-2xl text-white sm:text-3xl">Adventure map</h3>
             <div className="mt-5 space-y-5">
               {modules.map((module, index) => (
                 <div key={module.id}>
-                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ff6fb5]">
+                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ff8bc3]">
                     Step {String(index + 1).padStart(2, '0')} · {module.title}
                   </p>
                   <ul className="mt-2 space-y-2">
@@ -192,7 +192,7 @@ export default function ActivityPlayer() {
                               setGuessFeedback('')
                             }}
                             className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm ${
-                              isActive ? 'bg-[#00c2ff] text-white' : 'bg-white text-[#5b5872]'
+                              isActive ? 'bg-[#00c2ff] text-white shadow-[0_16px_28px_rgba(0,194,255,0.24)]' : 'border border-white/12 bg-white/10 text-white/76'
                             }`}
                           >
                             <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full ${isDone ? 'bg-[#ffd84d] text-[#6b4b00]' : 'bg-[#ffd6ea] text-[#b33e79]'}`}>
@@ -200,7 +200,7 @@ export default function ActivityPlayer() {
                             </span>
                             <div className="min-w-0 flex-1">
                               <div className="break-words">{lesson.title}</div>
-                              <div className={`text-[10px] font-black uppercase tracking-wide ${isActive ? 'text-white/80' : 'text-[#8f7f9d]'}`}>
+                              <div className={`text-[10px] font-black uppercase tracking-wide ${isActive ? 'text-white/80' : 'text-white/50'}`}>
                                 {formatContentTypeLabel(lesson.contentType)}
                               </div>
                             </div>
@@ -227,14 +227,14 @@ function LessonContent({ lesson }) {
         alt={lesson.title}
         className="w-full rounded-[1.5rem] border-4 border-white/70 object-cover shadow-lg"
       />
-      <div className="rounded-[1.5rem] bg-[linear-gradient(180deg,#76e4ff_0%,#ffd6ea_55%,#fff1a8_100%)] p-6">
-        <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8a4b00]">Story clue</p>
+      <div className="rounded-[1.5rem] border border-white/14 bg-[linear-gradient(180deg,rgba(95,231,255,0.22)_0%,rgba(255,79,163,0.16)_55%,rgba(255,210,51,0.18)_100%)] p-6 backdrop-blur-sm">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ffd233]">Story clue</p>
         {lesson.content ? (
-          <p className="mt-3 whitespace-pre-line text-lg font-semibold text-[#5b2b86]">{lesson.content}</p>
+          <p className="mt-3 whitespace-pre-line text-lg font-semibold text-white">{lesson.content}</p>
         ) : (
-          <p className="mt-3 text-lg font-semibold text-[#5b2b86]">This step is ready for your story, context, or lesson notes.</p>
+          <p className="mt-3 text-lg font-semibold text-white">This step is ready for your story, context, or lesson notes.</p>
         )}
-        {lesson.instructions && <p className="mt-4 whitespace-pre-line text-sm text-[#5b5872]">{lesson.instructions}</p>}
+        {lesson.instructions && <p className="mt-4 whitespace-pre-line text-sm text-white/74">{lesson.instructions}</p>}
       </div>
     </div>
   )
@@ -243,8 +243,8 @@ function LessonContent({ lesson }) {
 function StoryPanel({ lesson }) {
   return (
     <>
-      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Story time</p>
-      <p className="mt-3 whitespace-pre-line text-sm text-[#5b5872]">
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Story time</p>
+      <p className="mt-3 whitespace-pre-line text-sm text-white/74">
         {lesson.instructions || lesson.content || 'Add story details or guidance to this step.'}
       </p>
     </>
@@ -258,13 +258,13 @@ function QuestionList({ questions }) {
     .filter(Boolean)
 
   if (items.length === 0) {
-    return <p className="mt-4 text-sm text-[#5b5872]">No questions have been added for this step yet.</p>
+    return <p className="mt-4 text-sm text-white/72">No questions have been added for this step yet.</p>
   }
 
   return (
     <ul className="mt-4 space-y-3">
       {items.map((question) => (
-        <li key={question} className="rounded-2xl bg-white px-4 py-3 text-sm text-[#5b5872]">
+        <li key={question} className="rounded-2xl border border-white/12 bg-white/10 px-4 py-3 text-sm text-white/76">
           {question}
         </li>
       ))}
@@ -280,10 +280,10 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
 
   return (
     <>
-      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">
         {lesson.gameType === 'FILL_IN_THE_BLANK' ? 'Fill in the blank' : 'Quiz game'}
       </p>
-      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{lesson.gamePrompt || 'Add a game prompt to this step.'}</h3>
+      <h3 className="mt-2 font-display text-3xl text-white">{lesson.gamePrompt || 'Add a game prompt to this step.'}</h3>
 
       {lesson.gameType === 'QUIZ' && options.length > 0 && (
         <div className="mt-5 grid gap-3">
@@ -293,7 +293,9 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
               type="button"
               onClick={() => setGuess(option)}
               className={`rounded-2xl border-4 px-4 py-3 text-left text-sm font-semibold ${
-                guess === option ? 'border-[#00c2ff] bg-[#dff7ff] text-[#007e8c]' : 'border-white bg-white text-[#5b5872]'
+                guess === option
+                  ? 'border-[#5fe7ff] bg-[#5fe7ff]/18 text-white shadow-[0_16px_26px_rgba(0,194,255,0.18)]'
+                  : 'border-white/18 bg-white/10 text-white/76'
               }`}
             >
               {option}
@@ -306,18 +308,18 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
         <input
           value={guess}
           onChange={(e) => setGuess(e.target.value)}
-          className="w-full rounded-full border-4 border-white bg-white px-5 py-3 text-sm text-[#5b2b86] outline-none"
+          className="w-full rounded-full border-2 border-white/18 bg-white/10 px-5 py-3 text-sm text-white outline-none placeholder:text-white/42"
           placeholder={lesson.gameType === 'FILL_IN_THE_BLANK' ? 'Type the missing word' : 'Type or pick your answer'}
         />
         <button
           type="submit"
-          className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white"
+          className="rounded-full bg-[#00c2ff] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_16px_28px_rgba(0,194,255,0.22)]"
         >
           Check answer
         </button>
       </form>
 
-      {guessFeedback && <p className="mt-4 text-sm font-semibold text-[#5b5872]">{guessFeedback}</p>}
+      {guessFeedback && <p className="mt-4 text-sm font-semibold text-white/76">{guessFeedback}</p>}
     </>
   )
 }
@@ -325,9 +327,9 @@ function GamePanel({ lesson, guess, setGuess, guessFeedback, onSubmit }) {
 function ActivityPanel({ lesson }) {
   return (
     <>
-      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Hands-on activity</p>
-      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{lesson.instructions || 'Try this activity together'}</h3>
-      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-[#5b5872]">{lesson.content}</p>}
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Hands-on activity</p>
+      <h3 className="mt-2 font-display text-3xl text-white">{lesson.instructions || 'Try this activity together'}</h3>
+      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-white/74">{lesson.content}</p>}
       {lesson.assetUrl && (
         <img
           src={resolveApiUrl(lesson.assetUrl)}
@@ -342,15 +344,20 @@ function ActivityPanel({ lesson }) {
 function DownloadPanel({ lesson }) {
   return (
     <>
-      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00a8b5]">Printable download</p>
-      <h3 className="mt-2 font-display text-3xl text-[#5b2b86]">{lesson.instructions || 'Open the printable resource'}</h3>
-      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-[#5b5872]">{lesson.content}</p>}
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#5fe7ff]">Printable download</p>
+      <h3 className="mt-2 font-display text-3xl text-white">{lesson.instructions || 'Open the printable resource'}</h3>
+      {lesson.content && <p className="mt-4 whitespace-pre-line text-sm text-white/74">{lesson.content}</p>}
       {lesson.downloadUrl ? (
-        <a href={resolveApiUrl(lesson.downloadUrl)} target="_blank" rel="noreferrer" className="mt-5 inline-flex rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00]">
+        <a
+          href={resolveApiUrl(lesson.downloadUrl)}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-5 inline-flex rounded-full bg-[#ffd84d] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#6b4b00] shadow-[0_16px_28px_rgba(255,216,77,0.22)]"
+        >
           Download resource
         </a>
       ) : (
-        <p className="mt-4 text-sm text-[#5b5872]">No download has been added for this step yet.</p>
+        <p className="mt-4 text-sm text-white/72">No download has been added for this step yet.</p>
       )}
     </>
   )

@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import FormField from '../components/FormField'
 
-const authBackdropUrl = `${import.meta.env.BASE_URL}rockidz-sign-in-page-background-image.webp`
+const authBackdropUrl = `${import.meta.env.BASE_URL}rockidz-signin-mission-control-background.webp`
 const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.webp`
 
 export default function SignIn() {
@@ -42,9 +42,9 @@ export default function SignIn() {
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <img src={authBackdropUrl} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.56]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(223,247,255,0.56)_0%,rgba(255,247,209,0.42)_45%,rgba(255,229,241,0.5)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_16%,rgba(0,194,255,0.12),transparent_30%),radial-gradient(circle_at_85%_22%,rgba(140,82,255,0.1),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(255,216,77,0.14),transparent_35%)]" />
+        <img src={authBackdropUrl} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.9]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,8,44,0.62)_0%,rgba(23,10,73,0.56)_45%,rgba(7,53,99,0.5)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_16%,rgba(255,79,163,0.12),transparent_30%),radial-gradient(circle_at_85%_22%,rgba(95,231,255,0.12),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(255,216,77,0.12),transparent_35%)]" />
       </div>
 
       <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-6 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[1.02fr_0.98fr]">

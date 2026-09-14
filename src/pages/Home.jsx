@@ -3,8 +3,8 @@ import Marquee from '../components/Marquee'
 import { useAuth } from '../context/AuthContext'
 
 const programCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.webp`
-const heroBackgroundUrl = `${import.meta.env.BASE_URL}rockidz-home-astro-background.webp`
-const heroLogoUrl = `${import.meta.env.BASE_URL}rockidz-logo-astro-transparent.webp`
+const heroBackgroundUrl = `${import.meta.env.BASE_URL}rockidz-home-launch-pad-background.webp`
+const heroLogoUrl = `${import.meta.env.BASE_URL}rockidz-logo-astro.webp`
 
 export default function Home() {
   const { user } = useAuth()
