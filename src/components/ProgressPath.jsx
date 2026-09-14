@@ -20,17 +20,17 @@ export default function ProgressPath({ completed, total, size = 'md' }) {
         {stones.map((state, i) => (
           <span
             key={i}
-            className={`${dimension} rounded-full transition-colors duration-500 ${
+            className={`${dimension} rounded-full border border-white/50 transition-colors duration-500 ${
               state === 'lit'
-                ? 'bg-[#00c2ff] shadow-[0_0_8px_rgba(0,194,255,0.6)]'
+                ? 'bg-[#00b8ff] shadow-[0_0_10px_rgba(0,184,255,0.75)]'
                 : state === 'ember'
-                  ? 'bg-[#ff6fb5] shadow-[0_0_8px_rgba(255,111,181,0.6)]'
-                  : 'bg-white/60'
+                  ? 'bg-[#ff4fa3] shadow-[0_0_10px_rgba(255,79,163,0.7)]'
+                  : 'bg-[#fff2a6]/85'
             }`}
           />
         ))}
       </div>
-      <span className="whitespace-nowrap font-body text-xs text-[#5b5872]">
+      <span className="whitespace-nowrap font-body text-xs text-[#5d487f]">
         {completed}/{total}
       </span>
     </div>
