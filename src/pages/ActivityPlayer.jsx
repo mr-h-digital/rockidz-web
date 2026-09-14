@@ -7,6 +7,10 @@ import ThemedPage from '../components/ThemedPage'
 const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.webp`
 const colouringPageUrl = `${import.meta.env.BASE_URL}david-colour-in-page.webp`
 
+function formatContentTypeLabel(contentType) {
+  return typeof contentType === 'string' && contentType.length > 0 ? contentType.replaceAll('_', ' ') : 'STORY'
+}
+
 export default function ActivityPlayer() {
   const { slug } = useParams()
   const [course, setCourse] = useState(null)
@@ -85,7 +89,7 @@ export default function ActivityPlayer() {
                 <div className="rounded-[2rem] border-4 border-white/70 bg-white/70 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)]">
                   <h2 className="font-display text-4xl text-[#5b2b86]">{activeLesson.title}</h2>
                   <p className="mt-2 text-xs font-black uppercase tracking-[0.18em] text-[#ff6fb5]">
-                    {activeLesson.contentType.replaceAll('_', ' ')}
+                    {formatContentTypeLabel(activeLesson.contentType)}
                   </p>
                   <LessonContent lesson={activeLesson} />
                 </div>
@@ -197,7 +201,7 @@ export default function ActivityPlayer() {
                             <div>
                               <div>{lesson.title}</div>
                               <div className={`text-[10px] font-black uppercase tracking-wide ${isActive ? 'text-white/80' : 'text-[#8f7f9d]'}`}>
-                                {lesson.contentType.replaceAll('_', ' ')}
+                                {formatContentTypeLabel(lesson.contentType)}
                               </div>
                             </div>
                           </button>

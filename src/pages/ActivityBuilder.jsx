@@ -22,6 +22,10 @@ const EMPTY_LESSON_FORM = {
   durationSeconds: '',
 }
 
+function formatContentTypeLabel(contentType) {
+  return typeof contentType === 'string' && contentType.length > 0 ? contentType.replaceAll('_', ' ') : 'STORY'
+}
+
 export default function ActivityBuilder() {
   const { slug } = useParams()
   const [course, setCourse] = useState(null)
@@ -516,7 +520,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                 <div>
                   <div className="text-[#5b5872]">{lesson.title}</div>
                   <div className="text-[11px] font-black uppercase tracking-wide text-[#8f7f9d]">
-                    {lesson.contentType.replaceAll('_', ' ')}
+                    {formatContentTypeLabel(lesson.contentType)}
                   </div>
                 </div>
                 <div className="flex items-center gap-3">

@@ -7,6 +7,10 @@ import ThemedPage from '../components/ThemedPage'
 const storyPosterUrl = `${import.meta.env.BASE_URL}david-and-goliath-story.webp`
 const lessonTalkUrl = `${import.meta.env.BASE_URL}david-and-goliath-lesson-talk.webp`
 
+function formatContentTypeLabel(contentType) {
+  return typeof contentType === 'string' && contentType.length > 0 ? contentType.replaceAll('_', ' ') : 'STORY'
+}
+
 export default function ActivityDetail() {
   const { slug } = useParams()
   const [searchParams] = useSearchParams()
@@ -140,7 +144,7 @@ export default function ActivityDetail() {
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#ffd84d] text-[#8a4b00]">⭐</span>
                       <span>{lesson.title}</span>
                       <span className="ml-auto text-[11px] font-black uppercase tracking-wide text-[#8f7f9d]">
-                        {lesson.contentType.replaceAll('_', ' ')}
+                        {formatContentTypeLabel(lesson.contentType)}
                       </span>
                     </li>
                   ))}
