@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 import FormField from '../components/FormField'
 import ThemedPage from '../components/ThemedPage'
+import { formatFileSize, optimizeImageForUpload } from '../lib/imageUpload'
 
 function slugify(text) {
   return text
@@ -129,6 +130,14 @@ export default function Teach() {
     setShowCreate(true)
   }
 
+  async function prepareThumbnailFile(file) {
+    if (!file) return null
+
+    const optimizedFile = await optimizeImageForUpload(file)
+    setSelectedThumbnailFile(optimizedFile)
+    return optimizedFile
+  }
+
   async function handleThumbnailUpload(file) {
     if (!file) return
     if (!editingCourseId) {
@@ -213,15 +222,21 @@ export default function Teach() {
               <input
                 type="file"
                 accept="image/png,image/jpeg,image/webp,image/gif"
-                onChange={(e) => {
+                onChange={async (e) => {
                   const file = e.target.files?.[0]
-                  if (file) {
-                    setSelectedThumbnailFile(file)
-                    if (editingCourseId) {
-                      handleThumbnailUpload(file)
-                    }
-                  }
                   e.target.value = ''
+                  if (!file) return
+
+                  try {
+                    setError(null)
+                    const optimizedFile = await prepareThumbnailFile(file)
+                    if (optimizedFile && editingCourseId) {
+                      handleThumbnailUpload(optimizedFile)
+                    }
+                  } catch (err) {
+                    setSelectedThumbnailFile(null)
+                    setError(err.message)
+                  }
                 }}
                 disabled={uploadingThumbnail || isSubmitting}
                 className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
@@ -236,10 +251,10 @@ export default function Teach() {
                   : uploadingThumbnail
                   ? `Uploading and optimizing image… ${thumbnailUploadProgress}%`
                   : editingCourseId
-                    ? 'Uploads are resized and converted to WebP before being stored.'
+                  ? 'PNG, JPG, WEBP, or GIF. We resize to 1600px max, convert to WebP, and aim to keep uploads around 4 MB or less.'
                     : selectedThumbnailFile
                       ? 'Your selected image will upload automatically when you create the draft.'
-                      : 'Optional. Choose an image now, or add one later.'}
+                    : 'Optional. Choose a PNG, JPG, WEBP, or GIF image. Large images are optimized before upload.'}
               </span>
               {uploadingThumbnail && (
                 <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/80">
@@ -259,7 +274,9 @@ export default function Teach() {
             {!form.thumbnailUrl && selectedThumbnailFile && (
               <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
                 <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Selected cover image</p>
-                <p className="mt-3 text-sm text-[#5b5872]">{selectedThumbnailFile.name}</p>
+                <p className="mt-3 text-sm text-[#5b5872]">
+                  {selectedThumbnailFile.name} ({formatFileSize(selectedThumbnailFile.size)})
+                </p>
               </div>
             )}
             <button
