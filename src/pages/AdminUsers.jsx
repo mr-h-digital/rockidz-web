@@ -33,31 +33,34 @@ export default function AdminUsers() {
   return (
     <ThemedPage variant="admin">
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-rock-gold">Admin</p>
-        <h1 className="mt-2 text-4xl font-display sm:text-5xl">User role management</h1>
-        <p className="mt-3 max-w-xl text-sm text-rock-muted">
+        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#ffd233]">Mission control</p>
+        <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">User role management</h1>
+        <p className="mt-3 max-w-xl text-sm text-white/72">
           Promote registered users to educator or admin, or return them to student access.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-2xl border border-rock-border bg-rock-panel p-5 sm:p-6">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-8 space-y-4 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.84)_0%,rgba(9,41,84,0.76)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.22)] sm:p-6"
+        >
           <label className="block">
-            <span className="text-sm font-semibold text-rock-cream">User email</span>
+            <span className="text-sm font-semibold text-white">User email</span>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="user@example.com"
               required
-              className="mt-1.5 w-full rounded-lg border border-rock-border bg-white/5 px-4 py-2.5 text-sm text-rock-cream outline-none placeholder:text-rock-muted/50 focus:border-rock-gold"
+              className="mt-1.5 w-full rounded-lg border border-white/18 bg-white/10 px-4 py-2.5 text-sm text-white outline-none placeholder:text-white/40 focus:border-[#ffd233]"
             />
           </label>
 
           <label className="block">
-            <span className="text-sm font-semibold text-rock-cream">Role</span>
+            <span className="text-sm font-semibold text-white">Role</span>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="mt-1.5 w-full rounded-lg border border-rock-border bg-white/5 px-4 py-2.5 text-sm text-rock-cream outline-none focus:border-rock-gold"
+              className="mt-1.5 w-full rounded-lg border border-white/18 bg-[rgba(15,18,50,0.96)] px-4 py-2.5 text-sm text-white outline-none focus:border-[#ffd233]"
             >
               {ROLE_OPTIONS.map((opt) => (
                 <option key={opt} value={opt}>
@@ -76,14 +79,14 @@ export default function AdminUsers() {
           </button>
         </form>
 
-        {error && <p className="mt-5 text-sm text-rock-ember">{error}</p>}
+        {error && <p className="mt-5 text-sm text-[#ff8bc3]">{error}</p>}
 
         {result && (
-          <div className="mt-6 rounded-2xl border border-rock-border bg-rock-panel p-5">
-            <p className="text-xs font-bold uppercase tracking-wide text-rock-gold">Updated user</p>
-            <p className="mt-3 text-sm text-rock-cream">{result.displayName}</p>
-            <p className="text-sm text-rock-muted">{result.email}</p>
-            <p className="mt-2 text-xs uppercase tracking-wide text-rock-goldlight">Role: {result.role}</p>
+          <div className="mt-6 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.82)_0%,rgba(10,42,85,0.74)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.2)]">
+            <p className="text-xs font-bold uppercase tracking-wide text-[#ffd233]">Updated user</p>
+            <p className="mt-3 text-sm text-white">{result.displayName}</p>
+            <p className="text-sm text-white/70">{result.email}</p>
+            <p className="mt-2 text-xs uppercase tracking-wide text-[#5fe7ff]">Role: {result.role}</p>
           </div>
         )}
       </div>

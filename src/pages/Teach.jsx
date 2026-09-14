@@ -181,8 +181,8 @@ export default function Teach() {
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#00a8b5]">Leader hub</p>
-            <h1 className="mt-2 text-4xl font-display text-[#5b2b86] sm:text-5xl">Your activity packs</h1>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#5fe7ff]">Leader hub</p>
+            <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">Your activity packs</h1>
           </div>
           <button
             onClick={() => {
@@ -202,11 +202,14 @@ export default function Teach() {
           </button>
         </div>
 
-        {error && <p className="mt-6 text-sm text-[#d0467a]">{error}</p>}
+        {error && <p className="mt-6 text-sm text-[#ff8bc3]">{error}</p>}
 
         {showCreate && (
-          <form onSubmit={editingCourseId ? handleUpdateCourse : handleCreate} className="mt-8 space-y-4 rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 sm:p-6">
-            <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">
+          <form
+            onSubmit={editingCourseId ? handleUpdateCourse : handleCreate}
+            className="mt-8 space-y-4 rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(23,12,73,0.86)_0%,rgba(10,42,85,0.8)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.22)] sm:p-6"
+          >
+            <p className="text-xs font-black uppercase tracking-wide text-[#5fe7ff]">
               {editingCourseId ? 'Edit activity' : 'Create activity'}
             </p>
             <FormField label="Activity title" value={form.title} onChange={handleTitleChange} required />
@@ -221,17 +224,17 @@ export default function Teach() {
               required
             />
             <label className="block">
-              <span className="text-sm font-semibold text-[#5b2b86]">Description</span>
+              <span className="text-sm font-semibold text-white">Description</span>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((current) => ({ ...current, description: e.target.value }))}
                 rows={3}
-                className="mt-1.5 w-full rounded-2xl border-4 border-white bg-white px-4 py-3 text-sm text-[#5b2b86] outline-none"
+                className="mt-1.5 w-full rounded-2xl border-2 border-white/18 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
               />
             </label>
             <FormField label="Thumbnail URL (optional)" value={form.thumbnailUrl} onChange={(value) => setForm((current) => ({ ...current, thumbnailUrl: value }))} />
             <label className="block">
-              <span className="text-sm font-semibold text-[#5b2b86]">Activity cover image</span>
+              <span className="text-sm font-semibold text-white">Activity cover image</span>
               <input
                 id="course-thumbnail-upload"
                 type="file"
@@ -257,18 +260,18 @@ export default function Teach() {
               />
               <label
                 htmlFor="course-thumbnail-upload"
-                className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-4 border-dashed px-4 py-4 text-sm text-[#5b2b86] shadow-[0_10px_24px_rgba(140,82,255,0.08)] transition duration-150 active:scale-[0.99] ${
+                className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-2 border-dashed px-4 py-4 text-sm text-white shadow-[0_10px_24px_rgba(5,5,28,0.12)] transition duration-150 active:scale-[0.99] ${
                   !uploadingThumbnail && !isSubmitting
-                    ? 'border-[#7ce8ff] bg-white/90 hover:border-[#00c2ff] hover:bg-[#f5fdff]'
-                    : 'border-white bg-white/80 cursor-not-allowed opacity-75'
+                    ? 'border-[#7ce8ff]/70 bg-white/10 hover:border-[#00c2ff] hover:bg-white/14'
+                    : 'border-white/18 bg-white/10 cursor-not-allowed opacity-75'
                 }`}
               >
                 <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
                   Choose file
                 </span>
-                <span className="flex-1 truncate text-[#7b6d8a]">{selectedThumbnailFile?.name || 'No file chosen'}</span>
+                <span className="flex-1 truncate text-white/64">{selectedThumbnailFile?.name || 'No file chosen'}</span>
               </label>
-              <span className="mt-1 block text-xs text-[#7b6d8a]">
+              <span className="mt-1 block text-xs text-white/62">
                 {isSubmitting && selectedThumbnailFile && !uploadingThumbnail
                   ? 'Preparing your draft and cover image upload…'
                   : uploadingThumbnail
@@ -280,7 +283,7 @@ export default function Teach() {
                     : 'Optional. Choose a PNG, JPG, WEBP, or GIF image. Large images are optimized before upload.'}
               </span>
               {uploadingThumbnail && (
-                <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/80">
+                <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/12">
                   <div
                     className="h-full rounded-full bg-[linear-gradient(90deg,#00c2ff_0%,#8c52ff_60%,#ffd84d_100%)] transition-[width] duration-200"
                     style={{ width: `${thumbnailUploadProgress}%` }}
@@ -289,15 +292,15 @@ export default function Teach() {
               )}
             </label>
             {form.thumbnailUrl && (
-              <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
-                <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Current cover image</p>
+              <div className="rounded-[1.5rem] border border-white/18 bg-white/10 p-3">
+                <p className="text-xs font-black uppercase tracking-wide text-[#5fe7ff]">Current cover image</p>
                 <img src={resolveApiUrl(form.thumbnailUrl)} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
               </div>
             )}
             {!form.thumbnailUrl && selectedThumbnailFile && (
-              <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
-                <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Selected cover image</p>
-                <p className="mt-3 text-sm text-[#5b5872]">
+              <div className="rounded-[1.5rem] border border-white/18 bg-white/10 p-3">
+                <p className="text-xs font-black uppercase tracking-wide text-[#5fe7ff]">Selected cover image</p>
+                <p className="mt-3 text-sm text-white/74">
                   {selectedThumbnailFile.name} ({formatFileSize(selectedThumbnailFile.size)})
                 </p>
               </div>
@@ -320,15 +323,18 @@ export default function Teach() {
 
         <div className="mt-8 space-y-3">
           {courses?.map((course) => (
-            <div key={course.id} className="flex flex-col gap-4 rounded-[2rem] border-4 border-white/70 bg-white/70 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div
+              key={course.id}
+              className="flex flex-col gap-4 rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.82)_0%,rgba(10,42,85,0.76)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.2)] sm:flex-row sm:items-center sm:justify-between"
+            >
               <div className="min-w-0">
                 <div className="flex items-center gap-2.5">
-                  <h3 className="font-display text-xl text-[#5b2b86] break-words">{course.title}</h3>
+                  <h3 className="font-display text-xl text-white break-words">{course.title}</h3>
                   <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide ${course.status === 'PUBLISHED' ? 'bg-[#dff7ff] text-[#007e8c]' : 'bg-[#fff1a8] text-[#8a4b00]'}`}>
                     {course.status}
                   </span>
                 </div>
-                <p className="mt-1 text-xs text-[#5b5872]">{course.enrolledCount} kids joined</p>
+                <p className="mt-1 text-xs text-white/68">{course.enrolledCount} kids joined</p>
               </div>
               <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
                 <button
@@ -349,7 +355,7 @@ export default function Teach() {
             </div>
           ))}
 
-          {courses && courses.length === 0 && !showCreate && <p className="text-sm text-[#5b5872]">You haven&apos;t created any Rockidz activities yet.</p>}
+          {courses && courses.length === 0 && !showCreate && <p className="text-sm text-white/72">You haven&apos;t created any Rockidz activities yet.</p>}
         </div>
       </div>
     </ThemedPage>

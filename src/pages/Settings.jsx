@@ -78,18 +78,21 @@ export default function Settings() {
   return (
     <ThemedPage variant="settings">
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-rock-gold">Settings</p>
-        <h1 className="mt-2 text-4xl font-display sm:text-5xl">Your profile</h1>
-        <p className="mt-3 text-sm text-rock-muted">Keep your account details up to date.</p>
+        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#ffd233]">Explorer passport</p>
+        <h1 className="mt-2 text-4xl font-display text-white sm:text-5xl">Your profile</h1>
+        <p className="mt-3 text-sm text-white/72">Keep your account details up to date.</p>
 
-        <div className="mt-6 rounded-2xl border border-rock-border bg-rock-panel p-5">
-          <p className="text-xs uppercase tracking-wide text-rock-muted">Signed in as</p>
-          <p className="mt-2 text-sm text-rock-cream">{user?.displayName}</p>
-          <p className="text-sm text-rock-muted">{user?.email}</p>
-          <p className="mt-2 text-xs uppercase tracking-wide text-rock-goldlight">Role: {roleLabel}</p>
+        <div className="mt-6 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.82)_0%,rgba(10,42,85,0.74)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.2)]">
+          <p className="text-xs uppercase tracking-wide text-white/58">Signed in as</p>
+          <p className="mt-2 text-sm text-white">{user?.displayName}</p>
+          <p className="text-sm text-white/70">{user?.email}</p>
+          <p className="mt-2 text-xs uppercase tracking-wide text-[#ffd233]">Role: {roleLabel}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-5 rounded-2xl border border-rock-border bg-rock-panel p-5 sm:p-6">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-6 space-y-5 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(24,12,76,0.84)_0%,rgba(9,41,84,0.76)_100%)] p-5 text-white shadow-[0_18px_40px_rgba(4,4,28,0.22)] sm:p-6"
+        >
           <FormField
             label="Display name"
             value={form.displayName}
@@ -108,7 +111,7 @@ export default function Settings() {
           />
 
           <div className="pt-2">
-            <p className="text-xs font-bold uppercase tracking-wide text-rock-gold">Change password (optional)</p>
+            <p className="text-xs font-bold uppercase tracking-wide text-[#ffd233]">Change password (optional)</p>
           </div>
 
           <FormField
@@ -139,8 +142,8 @@ export default function Settings() {
             allowReveal
           />
 
-          {error && <p className="text-sm text-rock-ember">{error}</p>}
-          {success && <p className="text-sm text-rock-goldlight">{success}</p>}
+          {error && <p className="text-sm text-[#ff8bc3]">{error}</p>}
+          {success && <p className="text-sm text-[#5fe7ff]">{success}</p>}
 
           <button
             type="submit"
