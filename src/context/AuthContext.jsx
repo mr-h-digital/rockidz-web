@@ -5,12 +5,14 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
+  const [hasToken, setHasToken] = useState(() => !!localStorage.getItem('rockidz_token'))
   const [loading, setLoading] = useState(true)
 
   function clearAuthState() {
     localStorage.removeItem('rockidz_token')
     localStorage.removeItem('rockidz_user')
     setUser(null)
+    setHasToken(false)
   }
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export function AuthProvider({ children }) {
 
   function persist(authResponse) {
     localStorage.setItem('rockidz_token', authResponse.token)
+    setHasToken(true)
     persistUser({
       id: authResponse.userId,
       email: authResponse.email,
@@ -91,7 +94,7 @@ export function AuthProvider({ children }) {
   const isEducator = user?.role === 'EDUCATOR' || user?.role === 'ADMIN'
 
   return (
-    <AuthContext.Provider value={{ user, loading, signup, login, updateProfile, logout, isAdmin, isEducator }}>
+    <AuthContext.Provider value={{ user, hasToken, loading, signup, login, updateProfile, logout, isAdmin, isEducator }}>
       {children}
     </AuthContext.Provider>
   )

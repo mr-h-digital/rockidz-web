@@ -2,9 +2,8 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function ProtectedRoute({ children, requireEducator = false, requireAdmin = false }) {
-  const { user, loading, isAdmin, isEducator } = useAuth()
+  const { user, hasToken, loading, isAdmin, isEducator } = useAuth()
   const location = useLocation()
-  const hasToken = !!localStorage.getItem('rockidz_token')
 
   if (loading) return null
 
