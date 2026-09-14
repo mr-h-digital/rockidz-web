@@ -233,6 +233,7 @@ export default function Teach() {
             <label className="block">
               <span className="text-sm font-semibold text-[#5b2b86]">Activity cover image</span>
               <input
+                id="course-thumbnail-upload"
                 type="file"
                 accept="image/png,image/jpeg,image/webp,image/gif"
                 onChange={async (e) => {
@@ -252,12 +253,21 @@ export default function Teach() {
                   }
                 }}
                 disabled={uploadingThumbnail || isSubmitting}
-                className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
-                  !uploadingThumbnail && !isSubmitting
-                    ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
-                    : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
-                }`}
+                className="sr-only"
               />
+              <label
+                htmlFor="course-thumbnail-upload"
+                className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-4 border-dashed px-4 py-4 text-sm text-[#5b2b86] shadow-[0_10px_24px_rgba(140,82,255,0.08)] transition duration-150 active:scale-[0.99] ${
+                  !uploadingThumbnail && !isSubmitting
+                    ? 'border-[#7ce8ff] bg-white/90 hover:border-[#00c2ff] hover:bg-[#f5fdff]'
+                    : 'border-white bg-white/80 cursor-not-allowed opacity-75'
+                }`}
+              >
+                <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
+                  Choose file
+                </span>
+                <span className="flex-1 truncate text-[#7b6d8a]">{selectedThumbnailFile?.name || 'No file chosen'}</span>
+              </label>
               <span className="mt-1 block text-xs text-[#7b6d8a]">
                 {isSubmitting && selectedThumbnailFile && !uploadingThumbnail
                   ? 'Preparing your draft and cover image upload…'

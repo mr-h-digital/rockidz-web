@@ -275,7 +275,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
     if (!form.title.trim()) return 'Please enter an activity title.'
     if (form.contentType === 'VIDEO' && !form.videoRef.trim()) return 'Please enter a YouTube video ID for a video step.'
     if (form.contentType === 'DOWNLOAD' && !form.downloadUrl.trim()) return 'Please enter a download URL for a download step.'
-    if (form.contentType === 'COLOURING_PAGE' && !form.assetUrl.trim() && !form.downloadUrl.trim()) {
+    if (form.contentType === 'COLOURING_PAGE' && !form.assetUrl.trim() && !selectedAssetFile && !form.downloadUrl.trim()) {
       return 'Please add an image URL, a printable download URL, or both for a colouring page.'
     }
     if (form.contentType === 'GAME') {
@@ -379,7 +379,11 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
         onProgress: setAssetUploadProgress,
       })
       setSelectedAssetFile(null)
-      setLessonForm((current) => ({ ...current, assetUrl: uploaded?.url || current.assetUrl }))
+      setLessonForm((current) => ({
+        ...current,
+        assetUrl: uploaded?.url || current.assetUrl,
+        downloadUrl: current.downloadUrl || uploaded?.url || '',
+      }))
       await onChanged()
     } catch (err) {
       setError(err.message)
@@ -479,6 +483,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   <label className="block">
                     <span className="text-sm font-semibold text-[#5b2b86]">Upload colouring image</span>
                     <input
+                      id={`lesson-asset-upload-${lesson.id}`}
                       type="file"
                       accept="image/png,image/jpeg,image/webp,image/gif"
                       onChange={async (e) => {
@@ -498,12 +503,21 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                         }
                       }}
                       disabled={uploadingAsset}
-                      className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
-                        !uploadingAsset
-                          ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
-                          : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
-                      }`}
+                      className="sr-only"
                     />
+                    <label
+                      htmlFor={`lesson-asset-upload-${lesson.id}`}
+                      className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-4 border-dashed px-4 py-4 text-sm text-[#5b2b86] shadow-[0_10px_24px_rgba(140,82,255,0.08)] transition duration-150 active:scale-[0.99] ${
+                        !uploadingAsset
+                          ? 'border-[#7ce8ff] bg-white/90 hover:border-[#00c2ff] hover:bg-[#f5fdff]'
+                          : 'border-white bg-white/80 cursor-not-allowed opacity-75'
+                      }`}
+                    >
+                      <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
+                        Choose file
+                      </span>
+                      <span className="flex-1 truncate text-[#7b6d8a]">{selectedAssetFile?.name || 'No file chosen'}</span>
+                    </label>
                     <span className="mt-1 block text-xs text-[#7b6d8a]">
                       {uploadingAsset
                         ? `Uploading and optimizing image… ${assetUploadProgress}%`
@@ -707,6 +721,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             <label className="block">
               <span className="text-sm font-semibold text-[#5b2b86]">Upload colouring image</span>
               <input
+                id={`new-lesson-asset-upload-${module.id}`}
                 type="file"
                 accept="image/png,image/jpeg,image/webp,image/gif"
                 onChange={async (e) => {
@@ -723,12 +738,21 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   }
                 }}
                 disabled={adding || uploadingAsset}
-                className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
-                  !adding && !uploadingAsset
-                    ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
-                    : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
-                }`}
+                className="sr-only"
               />
+              <label
+                htmlFor={`new-lesson-asset-upload-${module.id}`}
+                className={`mt-1.5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border-4 border-dashed px-4 py-4 text-sm text-[#5b2b86] shadow-[0_10px_24px_rgba(140,82,255,0.08)] transition duration-150 active:scale-[0.99] ${
+                  !adding && !uploadingAsset
+                    ? 'border-[#7ce8ff] bg-white/90 hover:border-[#00c2ff] hover:bg-[#f5fdff]'
+                    : 'border-white bg-white/80 cursor-not-allowed opacity-75'
+                }`}
+              >
+                <span className="rounded-full bg-[#00c2ff] px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-[0_12px_22px_rgba(0,194,255,0.24)] transition duration-150 active:translate-y-px">
+                  Choose file
+                </span>
+                <span className="flex-1 truncate text-[#7b6d8a]">{selectedAssetFile?.name || 'No file chosen'}</span>
+              </label>
               <span className="mt-1 block text-xs text-[#7b6d8a]">
                 {selectedAssetFile
                   ? 'Your selected colouring page image will be uploaded after you add this lesson.'
