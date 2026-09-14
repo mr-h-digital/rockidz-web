@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { api } from '../api/client'
+import { api, resolveApiUrl } from '../api/client'
 import FormField from '../components/FormField'
 import ThemedPage from '../components/ThemedPage'
 import { formatFileSize, optimizeImageForUpload } from '../lib/imageUpload'
@@ -277,7 +277,7 @@ export default function Teach() {
             {form.thumbnailUrl && (
               <div className="rounded-[1.5rem] border-4 border-white/70 bg-white/70 p-3">
                 <p className="text-xs font-black uppercase tracking-wide text-[#00a8b5]">Current cover image</p>
-                <img src={form.thumbnailUrl} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
+                <img src={resolveApiUrl(form.thumbnailUrl)} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
               </div>
             )}
             {!form.thumbnailUrl && selectedThumbnailFile && (

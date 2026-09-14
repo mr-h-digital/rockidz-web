@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { resolveApiUrl } from '../api/client'
 
 const davidCoverUrl = `${import.meta.env.BASE_URL}david-and-goliath-program-cover-image.webp`
 
@@ -15,7 +16,7 @@ export default function CourseCard({ course }) {
           Bible fun
         </div>
         {course.thumbnailUrl ? (
-          <img src={course.thumbnailUrl} alt="" className="relative z-[1] h-full w-full object-cover" />
+          <img src={resolveApiUrl(course.thumbnailUrl)} alt="" className="relative z-[1] h-full w-full object-cover" />
         ) : useProvidedArtwork ? (
           <img src={davidCoverUrl} alt="" className="relative z-[1] h-full w-full object-cover" />
         ) : (
