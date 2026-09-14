@@ -16,12 +16,14 @@ function slugify(text) {
 
 function buildCoursePayload(form) {
   const thumbnailUrl = form.thumbnailUrl.trim()
+  const persistedThumbnailUrl =
+    thumbnailUrl && /^\/api\/courses\/\d+\/thumbnail$/i.test(thumbnailUrl) ? '' : thumbnailUrl
 
   return {
     title: form.title.trim(),
     slug: form.slug.trim(),
     description: form.description.trim(),
-    thumbnailUrl: thumbnailUrl || null,
+    thumbnailUrl: persistedThumbnailUrl || null,
   }
 }
 
