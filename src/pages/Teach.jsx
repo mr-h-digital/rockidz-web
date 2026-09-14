@@ -51,7 +51,9 @@ export default function Teach() {
     })
   }
 
-  useEffect(loadCourses, [])
+  useEffect(() => {
+    loadCourses()
+  }, [])
 
   function handleTitleChange(title) {
     setForm((current) => ({ ...current, title, slug: slugTouched ? current.slug : slugify(title) }))
