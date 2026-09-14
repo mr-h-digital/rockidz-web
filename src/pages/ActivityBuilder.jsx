@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { api } from '../api/client'
+import { api, resolveApiUrl } from '../api/client'
 import FormField from '../components/FormField'
 import ThemedPage from '../components/ThemedPage'
+import { formatFileSize, optimizeImageForUpload } from '../lib/imageUpload'
 
 const EMPTY_LESSON_FORM = {
   title: '',
@@ -218,6 +219,9 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
   const [editingLessonId, setEditingLessonId] = useState(null)
   const [adding, setAdding] = useState(false)
   const [error, setError] = useState(null)
+  const [uploadingAsset, setUploadingAsset] = useState(false)
+  const [assetUploadProgress, setAssetUploadProgress] = useState(0)
+  const [selectedAssetFile, setSelectedAssetFile] = useState(null)
 
   function buildLessonPayload(form) {
     const payload = {
@@ -310,9 +314,13 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
     setAdding(true)
     setError(null)
     try {
-      await api.post(`/api/modules/${module.id}/lessons`, buildLessonPayload(lessonForm))
+      const createdLesson = await api.post(`/api/modules/${module.id}/lessons`, buildLessonPayload(lessonForm))
+      if (selectedAssetFile && lessonForm.contentType === 'COLOURING_PAGE') {
+        await handleLessonAssetUpload(selectedAssetFile, createdLesson.id)
+      }
       setLessonForm(EMPTY_LESSON_FORM)
       setShowAddLesson(false)
+      setSelectedAssetFile(null)
       onChanged()
     } catch (err) {
       setError(err.message)
@@ -340,11 +348,44 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
     try {
       setError(null)
       await api.patch(`/api/modules/${module.id}/lessons/${lessonId}`, buildLessonPayload(lessonForm))
+      if (selectedAssetFile && lessonForm.contentType === 'COLOURING_PAGE') {
+        await handleLessonAssetUpload(selectedAssetFile, lessonId)
+      }
       setEditingLessonId(null)
       setLessonForm(EMPTY_LESSON_FORM)
+      setSelectedAssetFile(null)
       onChanged()
     } catch (err) {
       setError(err.message)
+    }
+  }
+
+  async function prepareAssetFile(file) {
+    if (!file) return null
+
+    const optimizedFile = await optimizeImageForUpload(file)
+    setSelectedAssetFile(optimizedFile)
+    return optimizedFile
+  }
+
+  async function handleLessonAssetUpload(file, lessonId) {
+    if (!file || !lessonId) return
+
+    setError(null)
+    setUploadingAsset(true)
+    setAssetUploadProgress(0)
+    try {
+      const uploaded = await api.upload(`/api/modules/${module.id}/lessons/${lessonId}/asset`, file, 'file', {
+        onProgress: setAssetUploadProgress,
+      })
+      setSelectedAssetFile(null)
+      setLessonForm((current) => ({ ...current, assetUrl: uploaded?.url || current.assetUrl }))
+      await onChanged()
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setUploadingAsset(false)
+      setAssetUploadProgress(0)
     }
   }
 
@@ -434,6 +475,58 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                   placeholder="Activity or colouring image URL"
                   className="rounded-full border-4 border-[#f3ecff] bg-white px-4 py-2 text-sm text-[#5b2b86] outline-none"
                 />
+                {lessonForm.contentType === 'COLOURING_PAGE' && (
+                  <label className="block">
+                    <span className="text-sm font-semibold text-[#5b2b86]">Upload colouring image</span>
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp,image/gif"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        e.target.value = ''
+                        if (!file) return
+
+                        try {
+                          setError(null)
+                          const optimizedFile = await prepareAssetFile(file)
+                          if (optimizedFile && editingLessonId === lesson.id) {
+                            handleLessonAssetUpload(optimizedFile, lesson.id)
+                          }
+                        } catch (err) {
+                          setSelectedAssetFile(null)
+                          setError(err.message)
+                        }
+                      }}
+                      disabled={uploadingAsset}
+                      className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
+                        !uploadingAsset
+                          ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
+                          : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
+                      }`}
+                    />
+                    <span className="mt-1 block text-xs text-[#7b6d8a]">
+                      {uploadingAsset
+                        ? `Uploading and optimizing image… ${assetUploadProgress}%`
+                        : 'PNG, JPG, WEBP, or GIF. This uploads the colouring page image and saves its lesson asset URL for you.'}
+                    </span>
+                    {uploadingAsset && (
+                      <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/80">
+                        <div
+                          className="h-full rounded-full bg-[linear-gradient(90deg,#00c2ff_0%,#8c52ff_60%,#ffd84d_100%)] transition-[width] duration-200"
+                          style={{ width: `${assetUploadProgress}%` }}
+                        />
+                      </div>
+                    )}
+                    {lessonForm.assetUrl && (
+                      <img src={resolveApiUrl(lessonForm.assetUrl)} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
+                    )}
+                    {!lessonForm.assetUrl && selectedAssetFile && (
+                      <p className="mt-3 text-sm text-[#5b5872]">
+                        {selectedAssetFile.name} ({formatFileSize(selectedAssetFile.size)})
+                      </p>
+                    )}
+                  </label>
+                )}
                 <input
                   value={lessonForm.downloadUrl}
                   onChange={(e) => setLessonForm((current) => ({ ...current, downloadUrl: e.target.value }))}
@@ -508,6 +601,7 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
                     onClick={() => {
                       setEditingLessonId(null)
                       setLessonForm(EMPTY_LESSON_FORM)
+                      setSelectedAssetFile(null)
                     }}
                     className="text-xs font-black uppercase tracking-wide text-[#8a4b00] hover:underline"
                   >
@@ -609,6 +703,47 @@ function ModuleEditor({ module, index, onChanged, onDelete }) {
             />
           </label>
           <FormField label="Asset image URL" value={lessonForm.assetUrl} onChange={(value) => setLessonForm((current) => ({ ...current, assetUrl: value }))} hint="Use for colouring pages or illustrated activities" />
+          {lessonForm.contentType === 'COLOURING_PAGE' && (
+            <label className="block">
+              <span className="text-sm font-semibold text-[#5b2b86]">Upload colouring image</span>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0]
+                  e.target.value = ''
+                  if (!file) return
+
+                  try {
+                    setError(null)
+                    await prepareAssetFile(file)
+                  } catch (err) {
+                    setSelectedAssetFile(null)
+                    setError(err.message)
+                  }
+                }}
+                disabled={adding || uploadingAsset}
+                className={`mt-1.5 block w-full rounded-2xl border-4 border-dashed px-4 py-3 text-sm text-[#5b2b86] file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-white ${
+                  !adding && !uploadingAsset
+                    ? 'border-[#7ce8ff] bg-white/90 file:bg-[#00c2ff] file:shadow-[0_12px_22px_rgba(0,194,255,0.24)]'
+                    : 'border-white bg-white/80 file:bg-[#9ddff0] disabled:cursor-not-allowed disabled:opacity-75'
+                }`}
+              />
+              <span className="mt-1 block text-xs text-[#7b6d8a]">
+                {selectedAssetFile
+                  ? 'Your selected colouring page image will be uploaded after you add this lesson.'
+                  : 'Optional. Choose a colouring page image to prefill the lesson asset URL after the lesson is created.'}
+              </span>
+              {!lessonForm.assetUrl && selectedAssetFile && (
+                <p className="mt-3 text-sm text-[#5b5872]">
+                  {selectedAssetFile.name} ({formatFileSize(selectedAssetFile.size)})
+                </p>
+              )}
+              {lessonForm.assetUrl && (
+                <img src={resolveApiUrl(lessonForm.assetUrl)} alt="" className="mt-3 h-40 w-full rounded-[1.25rem] object-cover" />
+              )}
+            </label>
+          )}
           <FormField label="Download URL" value={lessonForm.downloadUrl} onChange={(value) => setLessonForm((current) => ({ ...current, downloadUrl: value }))} hint="Optional printable or worksheet link" />
           {lessonForm.contentType === 'GAME' && (
             <>
